@@ -3,6 +3,8 @@ package client;
 import client.impl.IndixApiClientFactory;
 import exception.*;
 import httpClient.HttpClient;
+import org.apache.http.HttpStatus;
+import org.junit.Assert;
 import org.junit.Test;
 import query.QueryFactory;
 import query.SearchQuery;
@@ -16,7 +18,7 @@ public class IndixApiClientHandleExceptionsTest {
     public void handleUnauthorizedException() throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
             public String GET(URI uri) throws IOException, IndixApiException {
-                throw new UnauthorizedException("unauthorized");
+                throw new UnauthorizedException("unauthorized exception");
             }
 
             public void close() throws IOException { }
@@ -27,6 +29,10 @@ public class IndixApiClientHandleExceptionsTest {
         try {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
             indixApiClient.getProductsSummary(searchQuery);
+        } catch (UnauthorizedException ue) {
+            Assert.assertEquals(HttpStatus.SC_UNAUTHORIZED, ue.getErrorCode());
+            Assert.assertEquals("unauthorized exception", ue.getMessage());
+            throw ue;
         } finally {
             indixApiClient.close();
         }
@@ -36,7 +42,7 @@ public class IndixApiClientHandleExceptionsTest {
     public void handleTooManyRequestsException() throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
             public String GET(URI uri) throws IOException, IndixApiException {
-                throw new TooManyRequestsException("too many requests");
+                throw new TooManyRequestsException("too many requests exception");
             }
 
             public void close() throws IOException { }
@@ -47,6 +53,10 @@ public class IndixApiClientHandleExceptionsTest {
         try {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
             indixApiClient.getProductsSummary(searchQuery);
+        } catch (TooManyRequestsException tmr) {
+            Assert.assertEquals(429, tmr.getErrorCode());
+            Assert.assertEquals("too many requests exception", tmr.getMessage());
+            throw tmr;
         } finally {
             indixApiClient.close();
         }
@@ -56,7 +66,7 @@ public class IndixApiClientHandleExceptionsTest {
     public void handlePaymentRequiredException() throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
             public String GET(URI uri) throws IOException, IndixApiException {
-                throw new PaymentRequiredException("payment required");
+                throw new PaymentRequiredException("payment required exception");
             }
 
             public void close() throws IOException { }
@@ -67,6 +77,10 @@ public class IndixApiClientHandleExceptionsTest {
         try {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
             indixApiClient.getProductsSummary(searchQuery);
+        } catch (PaymentRequiredException pre) {
+            Assert.assertEquals(HttpStatus.SC_PAYMENT_REQUIRED, pre.getErrorCode());
+            Assert.assertEquals("payment required exception", pre.getMessage());
+            throw pre;
         } finally {
             indixApiClient.close();
         }
@@ -87,6 +101,10 @@ public class IndixApiClientHandleExceptionsTest {
         try {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
             indixApiClient.getProductsSummary(searchQuery);
+        } catch (IndixApiException iae) {
+            Assert.assertEquals(999, iae.getErrorCode());
+            Assert.assertEquals("some unknown error code", iae.getMessage());
+            throw iae;
         } finally {
             indixApiClient.close();
         }
@@ -107,6 +125,10 @@ public class IndixApiClientHandleExceptionsTest {
         try {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
             indixApiClient.getProductsSummary(searchQuery);
+        } catch (InternalServerException ise) {
+            Assert.assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR, ise.getErrorCode());
+            Assert.assertEquals("internal server exception", ise.getMessage());
+            throw ise;
         } finally {
             indixApiClient.close();
         }
@@ -127,6 +149,10 @@ public class IndixApiClientHandleExceptionsTest {
         try {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
             indixApiClient.getProductsSummary(searchQuery);
+        } catch (BadRequestException bre) {
+            Assert.assertEquals(HttpStatus.SC_BAD_REQUEST, bre.getErrorCode());
+            Assert.assertEquals("bad request exception", bre.getMessage());
+            throw bre;
         } finally {
             indixApiClient.close();
         }

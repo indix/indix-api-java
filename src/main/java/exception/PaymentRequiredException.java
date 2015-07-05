@@ -12,6 +12,6 @@ public class PaymentRequiredException extends IndixApiException {
     }
 
     public PaymentRequiredException(String message) {
-        super(HttpStatus.SC_BAD_REQUEST, message);
+        super(HttpStatus.SC_PAYMENT_REQUIRED, message);
     }
 }

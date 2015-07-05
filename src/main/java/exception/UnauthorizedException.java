@@ -12,6 +12,6 @@ public class UnauthorizedException extends IndixApiException {
     }
 
     public UnauthorizedException(String message) {
-        super(HttpStatus.SC_BAD_REQUEST, message);
+        super(HttpStatus.SC_UNAUTHORIZED, message);
     }
 }
