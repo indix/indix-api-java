@@ -6,7 +6,6 @@ import exception.IndixApiException;
 import exception.InternalServerException;
 import httpClient.HttpClient;
 import models.searchResponse.searchResult.*;
-import org.apache.http.client.ClientProtocolException;
 import org.junit.Assert;
 import org.junit.Test;
 import query.Query;
@@ -15,15 +14,14 @@ import query.SearchQuery;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Arrays;
 
 public class IndixApiClientSearchTest {
 
     @Test
-    public void getProductsUniversal() throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+    public void getProductsUniversal() throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/universalSearchResponse.json");
             }
 
@@ -51,9 +49,9 @@ public class IndixApiClientSearchTest {
     }
 
     @Test
-    public void getProductsOffersPremium() throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+    public void getProductsOffersPremium() throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/offersPremiumSearchResponse.json");
             }
 
@@ -81,9 +79,9 @@ public class IndixApiClientSearchTest {
     }
 
     @Test
-    public void getProductsOffersStandard() throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+    public void getProductsOffersStandard() throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/offersStandardSearchResponse.json");
             }
 
@@ -112,9 +110,9 @@ public class IndixApiClientSearchTest {
     }
 
     @Test
-    public void getProductsCatalogStandard() throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+    public void getProductsCatalogStandard() throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogStandardSearchResponse.json");
             }
 
@@ -142,9 +140,9 @@ public class IndixApiClientSearchTest {
     }
 
     @Test
-    public void getProductsCatalogPremium() throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+    public void getProductsCatalogPremium() throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogPremiumSearchResponse.json");
             }
 
@@ -172,9 +170,9 @@ public class IndixApiClientSearchTest {
     }
 
     @Test
-    public void getProductsSummary() throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+    public void getProductsSummary() throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/summarySearchResponse.json");
             }
 
@@ -203,9 +201,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected= InternalServerException.class)
     public void getProductsCatalogPremiumFailsIfInputResponseIsMalformed0()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/universalSearchResponse.json");
             }
 
@@ -231,9 +229,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsCatalogPremiumFailsIfInputResponseIsMalformed1()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/offersPremiumSearchResponse.json");
             }
 
@@ -259,9 +257,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsCatalogPremiumFailsIfInputResponseIsMalformed2()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/offersStandardSearchResponse.json");
             }
 
@@ -287,9 +285,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsCatalogStandardFailsIfInputResponseIsMalformed0()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/universalSearchResponse.json");
             }
 
@@ -315,9 +313,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsCatalogStandardFailsIfInputResponseIsMalformed1()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogPremiumSearchResponse.json");
             }
 
@@ -343,9 +341,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsCatalogStandardFailsIfInputResponseIsMalformed2()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/offersPremiumSearchResponse.json");
             }
 
@@ -371,9 +369,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsCatalogStandardFailsIfInputResponseIsMalformed3()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/offersStandardSearchResponse.json");
             }
 
@@ -399,9 +397,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsOffersPremiumFailsIfInputResponseIsMalformed0()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/universalSearchResponse.json");
             }
 
@@ -427,9 +425,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsOffersPremiumFailsIfInputResponseIsMalformed1()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogPremiumSearchResponse.json");
             }
 
@@ -455,9 +453,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsOffersPremiumFailsIfInputResponseIsMalformed2()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogStandardSearchResponse.json");
             }
 
@@ -483,9 +481,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsOffersStandardFailsIfInputResponseIsMalformed0()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/universalSearchResponse.json");
             }
 
@@ -511,9 +509,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsOffersStandardFailsIfInputResponseIsMalformed1()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogPremiumSearchResponse.json");
             }
 
@@ -539,9 +537,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsOffersStandardFailsIfInputResponseIsMalformed2()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogStandardSearchResponse.json");
             }
 
@@ -567,9 +565,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsSummaryFailsIfInputResponseIsMalformed0()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/universalSearchResponse.json");
             }
 
@@ -595,9 +593,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsSummaryFailsIfInputResponseIsMalformed1()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogPremiumSearchResponse.json");
             }
 
@@ -623,9 +621,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsSummaryFailsIfInputResponseIsMalformed2()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogStandardSearchResponse.json");
             }
 
@@ -651,9 +649,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsSummaryFailsIfInputResponseIsMalformed3()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/offersPremiumSearchResponse.json");
             }
 
@@ -679,9 +677,9 @@ public class IndixApiClientSearchTest {
 
     @Test(expected=InternalServerException.class)
     public void getProductsSummaryFailsIfInputResponseIsMalformed4()
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+            throws IOException, IndixApiException {
         HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+            public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/offersStandardSearchResponse.json");
             }
 

@@ -11,15 +11,15 @@ public interface MetadataApi {
     /*
      * Search for stores
      */
-    StoresResult searchStores(Query query) throws IndixApiException;
+    StoresResult getStores(Query query) throws IndixApiException;
 
     /*
      * Search for brands
      */
-    BrandsResult searchBrands(Query query) throws IndixApiException;
+    BrandsResult getBrands(Query query) throws IndixApiException;
 
     /*
      * Export categories dump
      */
-    CategoriesResult exportCategories(Query query) throws IndixApiException;
+    CategoriesResult getCategories(Query query) throws IndixApiException;
 }

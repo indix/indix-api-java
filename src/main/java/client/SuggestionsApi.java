@@ -9,5 +9,5 @@ public interface SuggestionsApi {
     /*
      * Search for product title suggestions
      */
-    SuggestionsResult searchSuggestions(Query query) throws IndixApiException;
+    SuggestionsResult getSuggestions(Query query) throws IndixApiException;
 }

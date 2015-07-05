@@ -18,7 +18,6 @@ import models.searchResponse.*;
 import models.searchResponse.searchResult.*;
 import models.suggestions.SuggestionsResponse;
 import models.suggestions.SuggestionsResult;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.utils.URIBuilder;
 import query.ProductDetailsQuery;
 import query.Query;
@@ -57,8 +56,7 @@ class IndixApiClientImpl implements IndixApiClient {
         return new ObjectMapper();
     }
 
-    private String execute(String resource, Query searchQuery)
-            throws URISyntaxException, ClientProtocolException, IOException, IndixApiException {
+    private String execute(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
         URI uri = new URIBuilder()
                 .setScheme(IndixApiConstants.SCHEME)
                 .setHost(IndixApiConstants.HOST)
@@ -73,6 +71,8 @@ class IndixApiClientImpl implements IndixApiClient {
             String content = execute(IndixApiConstants.SUMMARY_PRODUCTS_RESOURCE, query);
             SummarySearchResponse searchResponse = jsonMapper.readValue(content, SummarySearchResponse.class);
             return searchResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
         } catch (Exception e) {
             System.out.println("getProductsSummary failed: " + e.getMessage());
             throw new InternalServerException(e);
@@ -84,6 +84,8 @@ class IndixApiClientImpl implements IndixApiClient {
             String content = execute(IndixApiConstants.OFFERS_STANDARD_PRODUCTS_RESOURCE, query);
             OffersSearchResponse searchResponse = jsonMapper.readValue(content, OffersSearchResponse.class);
             return searchResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
         } catch (Exception e) {
             System.out.println("getProductsOffersStandard failed: " + e.getMessage());
             throw new InternalServerException(e);
@@ -95,6 +97,8 @@ class IndixApiClientImpl implements IndixApiClient {
             String content = execute(IndixApiConstants.OFFERS_PREMIUM_PRODUCTS_RESOURCE, query);
             OffersSearchResponse searchResponse = jsonMapper.readValue(content, OffersSearchResponse.class);
             return searchResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
         } catch (Exception e) {
             System.out.println("getProductsOffersPremium failed: " + e.getMessage());
             throw new InternalServerException(e);
@@ -106,6 +110,8 @@ class IndixApiClientImpl implements IndixApiClient {
             String content = execute(IndixApiConstants.CATALOG_STANDARD_PRODUCTS_RESOURCE, query);
             CatalogStandardSearchResponse searchResponse = jsonMapper.readValue(content, CatalogStandardSearchResponse.class);
             return searchResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
         } catch (Exception e) {
             System.out.println("getProductsCatalogStandard failed: " + e.getMessage());
             throw new InternalServerException(e);
@@ -117,6 +123,8 @@ class IndixApiClientImpl implements IndixApiClient {
             String content = execute(IndixApiConstants.CATALOG_PREMIUM_PRODUCTS_RESOURCE, query);
             CatalogPremiumSearchResponse searchResponse = jsonMapper.readValue(content, CatalogPremiumSearchResponse.class);
             return searchResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
         } catch (Exception e) {
             System.out.println("getProductsCatalogPremium failed: " + e.getMessage());
             throw new InternalServerException(e);
@@ -128,6 +136,8 @@ class IndixApiClientImpl implements IndixApiClient {
             String content = execute(IndixApiConstants.UNIVERSAL_PRODUCTS_RESOURCE, query);
             UniversalSearchResponse searchResponse = jsonMapper.readValue(content, UniversalSearchResponse.class);
             return searchResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
         } catch (Exception e) {
             System.out.println("getProductsUniversal failed: " + e.getMessage());
             throw new InternalServerException(e);
@@ -148,6 +158,8 @@ class IndixApiClientImpl implements IndixApiClient {
                     SummaryProductDetailsResponse.class
             );
             return productDetailsResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
         } catch (Exception e) {
             System.out.println("getProductDetailsSummary failed: " + e.getMessage());
             throw new InternalServerException(e);
@@ -168,6 +180,8 @@ class IndixApiClientImpl implements IndixApiClient {
                     OffersProductDetailsResponse.class
             );
             return productDetailsResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
         } catch (Exception e) {
             System.out.println("getProductDetailsOffersStandard failed: " + e.getMessage());
             throw new InternalServerException(e);
@@ -189,6 +203,8 @@ class IndixApiClientImpl implements IndixApiClient {
                     OffersProductDetailsResponse.class
             );
             return productDetailsResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
         } catch (Exception e) {
             System.out.println("getProductDetailsOffersPremium failed: " + e.getMessage());
             throw new InternalServerException(e);
@@ -210,6 +226,8 @@ class IndixApiClientImpl implements IndixApiClient {
                     CatalogStandardProductDetailsResponse.class
             );
             return productDetailsResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
         } catch (Exception e) {
             System.out.println("getProductDetailsCatalogStandard failed: " + e.getMessage());
             throw new InternalServerException(e);
@@ -231,6 +249,8 @@ class IndixApiClientImpl implements IndixApiClient {
                     CatalogPremiumProductDetailsResponse.class
             );
             return productDetailsResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
         } catch (Exception e) {
             System.out.println("getProductDetailsCatalogPremium failed: " + e.getMessage());
             throw new InternalServerException(e);
@@ -251,56 +271,66 @@ class IndixApiClientImpl implements IndixApiClient {
                     UniversalProductDetailsResponse.class
             );
             return productDetailsResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
         } catch (Exception e) {
             System.out.println("getProductDetailsUniversal failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
 
-    public StoresResult searchStores(Query query) throws IndixApiException {
+    public StoresResult getStores(Query query) throws IndixApiException {
 
         try {
             String content = execute(IndixApiConstants.STORES_RESOURCE, query);
             StoresResponse storesResponse = jsonMapper.readValue(content, StoresResponse.class);
             return storesResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
         } catch (Exception e) {
-            System.out.println("searchStores failed: " + e.getMessage());
+            System.out.println("getStores failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
 
-    public BrandsResult searchBrands(Query query) throws IndixApiException {
+    public BrandsResult getBrands(Query query) throws IndixApiException {
 
         try {
             String content = execute(IndixApiConstants.BRANDS_RESOURCE, query);
             BrandsResponse brandsResponse = jsonMapper.readValue(content, BrandsResponse.class);
             return brandsResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
         } catch (Exception e) {
-            System.out.println("searchBrands failed: " + e.getMessage());
+            System.out.println("getBrands failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
 
-    public CategoriesResult exportCategories(Query query) throws IndixApiException {
+    public CategoriesResult getCategories(Query query) throws IndixApiException {
 
         try {
             String content = execute(IndixApiConstants.CATEGORIES_RESOURCE, query);
             CategoriesResponse categoriesResponse = jsonMapper.readValue(content, CategoriesResponse.class);
             return categoriesResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
         } catch (Exception e) {
-            System.out.println("exportCategories failed: " + e.getMessage());
+            System.out.println("getCategories failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
 
-    public SuggestionsResult searchSuggestions(Query query) throws IndixApiException {
+    public SuggestionsResult getSuggestions(Query query) throws IndixApiException {
 
         try {
             String content = execute(IndixApiConstants.SUGGESTIONS_RESOURCE, query);
             SuggestionsResponse suggestionsResponse = jsonMapper.readValue(content, SuggestionsResponse.class);
             return suggestionsResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
         } catch (Exception e) {
-            System.out.println("searchSuggestions failed: " + e.getMessage());
+            System.out.println("getSuggestions failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }

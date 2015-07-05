@@ -4,7 +4,6 @@ import exception.*;
 import httpClient.HttpClient;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -24,7 +23,7 @@ class HttpClientImpl implements HttpClient {
         closeableHttpClient = HttpClients.createDefault();
     }
 
-    public String GET(URI uri) throws ClientProtocolException, IOException, IndixApiException {
+    public String GET(URI uri) throws IOException, IndixApiException {
 
         HttpGet httpGet = new HttpGet(uri);
         CloseableHttpResponse response = closeableHttpClient.execute(httpGet);
