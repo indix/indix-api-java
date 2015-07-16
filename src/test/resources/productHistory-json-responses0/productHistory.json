@@ -1,0 +1,33 @@
+{
+  "message": "ok",
+  "result": {
+    "product": {
+      "stores": {
+        "111": {
+          "offers": [
+            {
+              "timestampHistory": [
+                1436918399999,
+                1436399999999,
+                1434585599999
+              ],
+              "pid": "pid1",
+              "salePriceHistory": [
+                8.99,
+                8.99,
+                8.99
+              ],
+              "listPriceHistory": [
+                14.99,
+                14.99,
+                14.99
+              ]
+            }
+          ],
+          "storeId": "111",
+          "storeName": "storeName"
+        }
+      }
+    }
+  }
+}

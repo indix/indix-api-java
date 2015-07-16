@@ -14,12 +14,15 @@ import models.metadataResponse.metadataResult.CategoriesResult;
 import models.metadataResponse.metadataResult.StoresResult;
 import models.productDetailsResponse.*;
 import models.productDetailsResponse.productDetailsResult.*;
+import models.productHistoryResponse.ProductHistoryResponse;
+import models.productHistoryResponse.ProductHistoryResult;
 import models.searchResponse.*;
 import models.searchResponse.searchResult.*;
 import models.suggestions.SuggestionsResponse;
 import models.suggestions.SuggestionsResult;
 import org.apache.http.client.utils.URIBuilder;
 import query.ProductDetailsQuery;
+import query.ProductHistoryQuery;
 import query.Query;
 
 import java.io.IOException;
@@ -331,6 +334,20 @@ class IndixApiClientImpl implements IndixApiClient {
             throw iae;
         } catch (Exception e) {
             System.out.println("getSuggestions failed: " + e.getMessage());
+            throw new InternalServerException(e);
+        }
+    }
+
+    public ProductHistoryResult getProductHistory(ProductHistoryQuery query) throws IndixApiException{
+
+        try {
+            String content = execute(IndixApiConstants.PRODUCT_HISTORY_RESOURCE , query);
+            ProductHistoryResponse productHistoryResponse = jsonMapper.readValue(content, ProductHistoryResponse.class);
+            return productHistoryResponse.getResult();
+        } catch (IndixApiException iae) {
+            throw iae;
+        } catch (Exception e) {
+            System.out.println("getProductHistory failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
