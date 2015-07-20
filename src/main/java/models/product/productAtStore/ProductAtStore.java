@@ -5,9 +5,6 @@ public class ProductAtStore {
     private String storeName;
     private String title;
 
-    public ProductAtStore() {
-    }
-
     public int getStoreId() {
         return storeId;
     }

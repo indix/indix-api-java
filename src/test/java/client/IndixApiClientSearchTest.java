@@ -6,7 +6,6 @@ import exception.IndixApiException;
 import exception.InternalServerException;
 import httpClient.HttpClient;
 import models.searchResponse.searchResult.*;
-import org.junit.Assert;
 import org.junit.Test;
 import query.Query;
 import query.QueryFactory;
@@ -15,6 +14,8 @@ import query.SearchQuery;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
 
 public class IndixApiClientSearchTest {
 
@@ -39,10 +40,10 @@ public class IndixApiClientSearchTest {
                     .withAppKey("123");
 
             UniversalSearchResult sr = indixApiClient.getProductsUniversal(searchQuery);
-            Assert.assertEquals(18672, sr.getCount());
-            Assert.assertEquals(10, sr.getProducts().size());
-            Assert.assertEquals(0, sr.getFacets().size());
-            Assert.assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
+            assertEquals(18672, sr.getCount());
+            assertEquals(10, sr.getProducts().size());
+            assertEquals(0, sr.getFacets().size());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }
@@ -69,10 +70,10 @@ public class IndixApiClientSearchTest {
                     .withAppKey("123");
 
             OffersSearchResult sr = indixApiClient.getProductsOffersPremium(searchQuery);
-            Assert.assertEquals(18672, sr.getCount());
-            Assert.assertEquals(10, sr.getProducts().size());
-            Assert.assertEquals(0, sr.getFacets().size());
-            Assert.assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
+            assertEquals(18672, sr.getCount());
+            assertEquals(10, sr.getProducts().size());
+            assertEquals(0, sr.getFacets().size());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }
@@ -100,10 +101,10 @@ public class IndixApiClientSearchTest {
                     .withAppKey("123");
 
             OffersSearchResult sr = indixApiClient.getProductsOffersStandard(searchQuery);
-            Assert.assertEquals(11624, sr.getCount());
-            Assert.assertEquals(10, sr.getProducts().size());
-            Assert.assertEquals(0, sr.getFacets().size());
-            Assert.assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
+            assertEquals(11624, sr.getCount());
+            assertEquals(10, sr.getProducts().size());
+            assertEquals(0, sr.getFacets().size());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }
@@ -130,10 +131,10 @@ public class IndixApiClientSearchTest {
                     .withAppKey("123");
 
             CatalogStandardSearchResult sr = indixApiClient.getProductsCatalogStandard(searchQuery);
-            Assert.assertEquals(18672, sr.getCount());
-            Assert.assertEquals(10, sr.getProducts().size());
-            Assert.assertEquals(0, sr.getFacets().size());
-            Assert.assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
+            assertEquals(18672, sr.getCount());
+            assertEquals(10, sr.getProducts().size());
+            assertEquals(0, sr.getFacets().size());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }
@@ -160,10 +161,10 @@ public class IndixApiClientSearchTest {
                     .withAppKey("123");
 
             CatalogPremiumSearchResult sr = indixApiClient.getProductsCatalogPremium(searchQuery);
-            Assert.assertEquals(18672, sr.getCount());
-            Assert.assertEquals(10, sr.getProducts().size());
-            Assert.assertEquals(0, sr.getFacets().size());
-            Assert.assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
+            assertEquals(18672, sr.getCount());
+            assertEquals(10, sr.getProducts().size());
+            assertEquals(0, sr.getFacets().size());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }
@@ -190,10 +191,10 @@ public class IndixApiClientSearchTest {
                     .withAppKey("123");
 
             SummarySearchResult sr = indixApiClient.getProductsSummary(searchQuery);
-            Assert.assertEquals(18672, sr.getCount());
-            Assert.assertEquals(10, sr.getProducts().size());
-            Assert.assertEquals(0, sr.getFacets().size());
-            Assert.assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
+            assertEquals(18672, sr.getCount());
+            assertEquals(10, sr.getProducts().size());
+            assertEquals(0, sr.getFacets().size());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }

@@ -5,13 +5,14 @@ import common.ResourceUtils;
 import exception.IndixApiException;
 import httpClient.HttpClient;
 import models.suggestions.SuggestionsResult;
-import org.junit.Assert;
 import org.junit.Test;
 import query.QueryFactory;
 import query.SuggestionsQuery;
 
 import java.io.IOException;
 import java.net.URI;
+
+import static org.junit.Assert.assertEquals;
 
 public class IndixApiClientSuggestionsTest {
 
@@ -35,8 +36,8 @@ public class IndixApiClientSuggestionsTest {
                     .withQ("ni");
             SuggestionsResult sr = indixApiClient.getSuggestions(suggestionsQuery);
 
-            Assert.assertEquals(32, sr.getSuggestions().size());
-            Assert.assertEquals("nickel", sr.getSuggestions().get(0).getSuggestion());
+            assertEquals(32, sr.getSuggestions().size());
+            assertEquals("nickel", sr.getSuggestions().get(0).getSuggestion());
         } finally {
             indixApiClient.close();
         }

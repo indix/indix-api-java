@@ -7,9 +7,6 @@ import java.util.List;
 public class UniversalProductAtStore extends ProductAtStore {
     private List<ProductOfferUniversal> offers;
 
-    public UniversalProductAtStore() {
-    }
-
     public List<ProductOfferUniversal> getOffers() {
         return offers;
     }

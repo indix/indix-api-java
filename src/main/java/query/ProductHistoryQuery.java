@@ -10,30 +10,32 @@ public class ProductHistoryQuery extends QueryBase{
         mpid = "";
     }
 
-    public ProductHistoryQuery withAppId(String _app_id) {
-        parameters.add(new BasicNameValuePair("app_id", _app_id));
+    public ProductHistoryQuery withAppId(String app_id) {
+        parameters.add(new BasicNameValuePair("app_id", app_id));
         return this;
     }
 
-    public ProductHistoryQuery withAppKey(String _app_key) {
-        parameters.add(new BasicNameValuePair("app_key", _app_key));
+    public ProductHistoryQuery withAppKey(String app_key) {
+        parameters.add(new BasicNameValuePair("app_key", app_key));
         return this;
     }
 
-    public ProductHistoryQuery withCountryCode(String _cc) {
-        parameters.add(new BasicNameValuePair("countryCode", _cc));
+    public ProductHistoryQuery withCountryCode(String cc) {
+        parameters.add(new BasicNameValuePair("countryCode", cc));
         return this;
     }
 
-    public ProductHistoryQuery withMpid(String _mpid) {
-        parameters.add(new BasicNameValuePair("mpid", _mpid));
+    public ProductHistoryQuery withMpid(String mpid) {
+        this.mpid = mpid;
         return this;
     }
 
-    public ProductHistoryQuery withStoreId(int _storeId) {
-        parameters.add(new BasicNameValuePair("storeId", String.valueOf(_storeId)));
+    public ProductHistoryQuery withStoreId(int storeId) {
+        parameters.add(new BasicNameValuePair("storeId", String.valueOf(storeId)));
         return this;
     }
+
+    public String getMpid() { return mpid; }
 
 
 }

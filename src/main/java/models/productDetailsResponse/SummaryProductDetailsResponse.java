@@ -6,9 +6,6 @@ import models.productDetailsResponse.productDetailsResult.SummaryProductDetailsR
 public class SummaryProductDetailsResponse extends ResponseBase {
     private SummaryProductDetailsResult result;
 
-    public SummaryProductDetailsResponse() {
-    }
-
     public SummaryProductDetailsResult getResult() {
         return result;
     }

@@ -339,9 +339,12 @@ class IndixApiClientImpl implements IndixApiClient {
     }
 
     public ProductHistoryResult getProductHistory(ProductHistoryQuery query) throws IndixApiException{
-
+        String resource = IndixApiConstants.buildProductDetailsPath(
+                IndixApiConstants.PRODUCT_HISTORY_RESOURCE,
+                query.getMpid()
+        );
         try {
-            String content = execute(IndixApiConstants.PRODUCT_HISTORY_RESOURCE , query);
+            String content = execute(resource , query);
             ProductHistoryResponse productHistoryResponse = jsonMapper.readValue(content, ProductHistoryResponse.class);
             return productHistoryResponse.getResult();
         } catch (IndixApiException iae) {

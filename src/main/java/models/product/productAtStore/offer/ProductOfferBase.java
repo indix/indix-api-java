@@ -24,9 +24,6 @@ public class ProductOfferBase {
     //
     private Map<String, List<String>> privateAttributes;
 
-    public ProductOfferBase() {
-    }
-
     public String getPid() {
         return pid;
     }

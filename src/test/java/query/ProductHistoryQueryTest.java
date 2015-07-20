@@ -2,11 +2,12 @@ package query;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class ProductHistoryQueryTest {
 
@@ -17,16 +18,16 @@ public class ProductHistoryQueryTest {
         expectedValue.add(new BasicNameValuePair("app_key", "111"));
         expectedValue.add(new BasicNameValuePair("countryCode", "US"));
         expectedValue.add(new BasicNameValuePair("storeId", "2345"));
-        expectedValue.add(new BasicNameValuePair("mpid", "mpid1"));
 
-        ProductHistoryQuery query = QueryFactory.newProductHistoryQuery()
+        ProductHistoryQuery productHistoryQuery = QueryFactory.newProductHistoryQuery()
                 .withAppId("111")
                 .withAppKey("111")
                 .withCountryCode("US")
                 .withStoreId(2345)
                 .withMpid("mpid1");
-        List<NameValuePair> actualParameters = query.getParameters();
+        List<NameValuePair> actualParameters = productHistoryQuery.getParameters();
 
-        Assert.assertEquals(expectedValue, actualParameters);
+        assertEquals(expectedValue, actualParameters);
+        assertEquals("mpid1", productHistoryQuery.getMpid());
     }
 }

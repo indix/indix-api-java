@@ -2,11 +2,12 @@ package query;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class ProductDetailsQueryTest {
     @Test
@@ -27,7 +28,7 @@ public class ProductDetailsQueryTest {
                 .withPageNumber(5);
         List<NameValuePair> actualParameters = productDetailsQuery.getParameters();
 
-        Assert.assertEquals("mpid1", productDetailsQuery.getMpid());
-        Assert.assertEquals(expectedValue, actualParameters);
+        assertEquals("mpid1", productDetailsQuery.getMpid());
+        assertEquals(expectedValue, actualParameters);
     }
 }

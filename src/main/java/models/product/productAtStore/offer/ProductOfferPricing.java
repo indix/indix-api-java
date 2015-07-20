@@ -21,8 +21,6 @@ public class ProductOfferPricing extends ProductOfferBase {
     private int maxRating;
     private int salesRank;
 
-    public ProductOfferPricing() {
-    }
 
     public double getSalePrice() {
         return salePrice;

@@ -8,10 +8,6 @@ public class ProductHistory {
 
     private Map<String, ProductHistoryAtStore> stores;
 
-
-    public ProductHistory(){
-    }
-
     public Map<String, ProductHistoryAtStore> getStores() {
         return stores;
     }

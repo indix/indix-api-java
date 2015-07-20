@@ -13,7 +13,6 @@ public class ProductOfferHistory {
         return pid;
     }
 
-
     public List<Long> getTimestampHistory(){
         return timestampHistory;
     }

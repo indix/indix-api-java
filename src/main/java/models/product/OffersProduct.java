@@ -7,10 +7,7 @@ import java.util.Map;
 public class OffersProduct extends SummaryProduct {
     private Map<String, OffersProductAtStore> stores;
 
-    public OffersProduct() {
-    }
-
-    public Map<String, OffersProductAtStore> getStores() {
+     public Map<String, OffersProductAtStore> getStores() {
         return stores;
     }
 }

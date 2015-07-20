@@ -4,13 +4,14 @@ import client.impl.IndixApiClientFactory;
 import exception.*;
 import httpClient.HttpClient;
 import org.apache.http.HttpStatus;
-import org.junit.Assert;
 import org.junit.Test;
 import query.QueryFactory;
 import query.SearchQuery;
 
 import java.io.IOException;
 import java.net.URI;
+
+import static org.junit.Assert.assertEquals;
 
 public class IndixApiClientHandleExceptionsTest {
 
@@ -30,8 +31,8 @@ public class IndixApiClientHandleExceptionsTest {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
             indixApiClient.getProductsSummary(searchQuery);
         } catch (UnauthorizedException ue) {
-            Assert.assertEquals(HttpStatus.SC_UNAUTHORIZED, ue.getErrorCode());
-            Assert.assertEquals("unauthorized exception", ue.getMessage());
+            assertEquals(HttpStatus.SC_UNAUTHORIZED, ue.getErrorCode());
+            assertEquals("unauthorized exception", ue.getMessage());
             throw ue;
         } finally {
             indixApiClient.close();
@@ -54,8 +55,8 @@ public class IndixApiClientHandleExceptionsTest {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
             indixApiClient.getProductsSummary(searchQuery);
         } catch (TooManyRequestsException tmr) {
-            Assert.assertEquals(429, tmr.getErrorCode());
-            Assert.assertEquals("too many requests exception", tmr.getMessage());
+            assertEquals(429, tmr.getErrorCode());
+            assertEquals("too many requests exception", tmr.getMessage());
             throw tmr;
         } finally {
             indixApiClient.close();
@@ -78,8 +79,8 @@ public class IndixApiClientHandleExceptionsTest {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
             indixApiClient.getProductsSummary(searchQuery);
         } catch (PaymentRequiredException pre) {
-            Assert.assertEquals(HttpStatus.SC_PAYMENT_REQUIRED, pre.getErrorCode());
-            Assert.assertEquals("payment required exception", pre.getMessage());
+            assertEquals(HttpStatus.SC_PAYMENT_REQUIRED, pre.getErrorCode());
+            assertEquals("payment required exception", pre.getMessage());
             throw pre;
         } finally {
             indixApiClient.close();
@@ -102,8 +103,8 @@ public class IndixApiClientHandleExceptionsTest {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
             indixApiClient.getProductsSummary(searchQuery);
         } catch (IndixApiException iae) {
-            Assert.assertEquals(999, iae.getErrorCode());
-            Assert.assertEquals("some unknown error code", iae.getMessage());
+            assertEquals(999, iae.getErrorCode());
+            assertEquals("some unknown error code", iae.getMessage());
             throw iae;
         } finally {
             indixApiClient.close();
@@ -126,8 +127,8 @@ public class IndixApiClientHandleExceptionsTest {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
             indixApiClient.getProductsSummary(searchQuery);
         } catch (InternalServerException ise) {
-            Assert.assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR, ise.getErrorCode());
-            Assert.assertEquals("internal server exception", ise.getMessage());
+            assertEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR, ise.getErrorCode());
+            assertEquals("internal server exception", ise.getMessage());
             throw ise;
         } finally {
             indixApiClient.close();
@@ -150,8 +151,8 @@ public class IndixApiClientHandleExceptionsTest {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
             indixApiClient.getProductsSummary(searchQuery);
         } catch (BadRequestException bre) {
-            Assert.assertEquals(HttpStatus.SC_BAD_REQUEST, bre.getErrorCode());
-            Assert.assertEquals("bad request exception", bre.getMessage());
+            assertEquals(HttpStatus.SC_BAD_REQUEST, bre.getErrorCode());
+            assertEquals("bad request exception", bre.getMessage());
             throw bre;
         } finally {
             indixApiClient.close();

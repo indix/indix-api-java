@@ -6,13 +6,14 @@ import exception.IndixApiException;
 import exception.InternalServerException;
 import httpClient.HttpClient;
 import models.productDetailsResponse.productDetailsResult.*;
-import org.junit.Assert;
 import org.junit.Test;
 import query.ProductDetailsQuery;
 import query.QueryFactory;
 
 import java.io.IOException;
 import java.net.URI;
+
+import static org.junit.Assert.assertEquals;
 
 public class IndixApiClientProductDetailsTest {
 
@@ -40,8 +41,8 @@ public class IndixApiClientProductDetailsTest {
                     .withAppKey("123");
             SummaryProductDetailsResult sr = indixApiClient.getProductDetailsSummary(productDetailsQuery);
 
-            Assert.assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
-            Assert.assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
+            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
+            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
         } finally {
             indixApiClient.close();
         }
@@ -72,8 +73,8 @@ public class IndixApiClientProductDetailsTest {
                     .withAppKey("123");
             OffersProductDetailsResult sr = indixApiClient.getProductDetailsOffersStandard(productDetailsQuery);
 
-            Assert.assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
-            Assert.assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
+            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
+            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
         } finally {
             indixApiClient.close();
         }
@@ -103,8 +104,8 @@ public class IndixApiClientProductDetailsTest {
                     .withAppKey("123");
             OffersProductDetailsResult sr = indixApiClient.getProductDetailsOffersPremium(productDetailsQuery);
 
-            Assert.assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
-            Assert.assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
+            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
+            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
         } finally {
             indixApiClient.close();
         }
@@ -134,8 +135,8 @@ public class IndixApiClientProductDetailsTest {
                     .withAppKey("123");
             CatalogStandardProductDetailsResult sr = indixApiClient.getProductDetailsCatalogStandard(productDetailsQuery);
 
-            Assert.assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
-            Assert.assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
+            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
+            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
         } finally {
             indixApiClient.close();
         }
@@ -165,8 +166,8 @@ public class IndixApiClientProductDetailsTest {
                     .withAppKey("123");
             CatalogPremiumProductDetailsResult sr = indixApiClient.getProductDetailsCatalogPremium(productDetailsQuery);
 
-            Assert.assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
-            Assert.assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
+            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
+            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
         } finally {
             indixApiClient.close();
         }
@@ -196,8 +197,8 @@ public class IndixApiClientProductDetailsTest {
                     .withAppKey("123");
             UniversalProductDetailsResult sr = indixApiClient.getProductDetailsUniversal(productDetailsQuery);
 
-            Assert.assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
-            Assert.assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
+            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
+            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
         } finally {
             indixApiClient.close();
         }

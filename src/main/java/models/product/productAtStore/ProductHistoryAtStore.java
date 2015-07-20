@@ -11,8 +11,6 @@ public class ProductHistoryAtStore {
     private int storeId;
     private String storeName;
 
-    public ProductHistoryAtStore() {
-    }
 
     public List<ProductOfferHistory> getOffers() {
         return offers;
