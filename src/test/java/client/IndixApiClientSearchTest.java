@@ -2,6 +2,7 @@ package client;
 
 import client.impl.IndixApiClientFactory;
 import common.ResourceUtils;
+import exception.BadRequestException;
 import exception.IndixApiException;
 import exception.InternalServerException;
 import httpClient.HttpClient;
@@ -11,6 +12,7 @@ import query.Query;
 import query.QueryFactory;
 import query.SearchQuery;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
@@ -25,7 +27,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/universalSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -55,7 +62,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/offersPremiumSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -85,7 +97,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/offersStandardSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -116,7 +133,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogStandardSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -146,7 +168,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogPremiumSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -176,7 +203,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/summarySearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -207,7 +239,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/universalSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -235,7 +272,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/offersPremiumSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -263,7 +305,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/offersStandardSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -291,7 +338,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/universalSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -319,7 +371,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogPremiumSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -347,7 +404,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/offersPremiumSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -375,7 +437,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/offersStandardSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -403,7 +470,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/universalSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -431,7 +503,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogPremiumSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -459,7 +536,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogStandardSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -487,7 +569,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/universalSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -515,7 +602,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogPremiumSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -543,7 +635,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogStandardSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -571,7 +668,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/universalSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -599,7 +701,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogPremiumSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -627,7 +734,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/catalogStandardSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -655,7 +767,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/offersPremiumSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -683,7 +800,12 @@ public class IndixApiClientSearchTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "search-json-responses0/offersStandardSearchResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 

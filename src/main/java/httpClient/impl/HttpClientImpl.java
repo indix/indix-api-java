@@ -6,10 +6,16 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 
@@ -23,10 +29,8 @@ class HttpClientImpl implements HttpClient {
         closeableHttpClient = HttpClients.createDefault();
     }
 
-    public String GET(URI uri) throws IOException, IndixApiException {
-
-        HttpGet httpGet = new HttpGet(uri);
-        CloseableHttpResponse response = closeableHttpClient.execute(httpGet);
+    public String getResponse(HttpRequestBase httpRequest) throws IndixApiException,IOException {
+        CloseableHttpResponse response = closeableHttpClient.execute(httpRequest);
 
         try {
             String message = response.getStatusLine().getReasonPhrase();
@@ -53,6 +57,30 @@ class HttpClientImpl implements HttpClient {
         } finally {
             response.close();
         }
+    }
+
+    public String GET(URI uri) throws IOException, IndixApiException {
+
+        HttpGet httpGet = new HttpGet(uri);
+        return getResponse(httpGet);
+    }
+
+    public String POST(URI uri) throws IndixApiException, IOException{
+
+        HttpPost httpPost = new HttpPost(uri);
+        return getResponse(httpPost);
+    }
+
+    public String POST(URI uri, File file) throws IOException, IndixApiException{
+
+        HttpPost httpPost = new HttpPost(uri);
+        MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        FileBody fileBody = new FileBody(file);
+        builder.addPart("file", fileBody);
+        HttpEntity multipart = builder.build();
+        httpPost.setEntity(multipart);
+        return getResponse(httpPost);
     }
 
     public void close() throws IOException {

@@ -2,6 +2,7 @@ package client;
 
 import client.impl.IndixApiClientFactory;
 import common.ResourceUtils;
+import exception.BadRequestException;
 import exception.IndixApiException;
 import exception.InternalServerException;
 import httpClient.HttpClient;
@@ -10,6 +11,7 @@ import org.junit.Test;
 import query.ProductDetailsQuery;
 import query.QueryFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 
@@ -26,7 +28,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/summaryProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -57,7 +64,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/offersStandardProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -89,7 +101,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/offersPremiumProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -120,7 +137,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/catalogStandardProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -151,7 +173,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -182,7 +209,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/universalProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -213,7 +245,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/offersStandardProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -243,7 +280,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/offersPremiumProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -273,7 +315,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/catalogStandardProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -303,7 +350,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -333,7 +385,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/universalProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -363,7 +420,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/catalogStandardProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -394,7 +456,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -425,7 +492,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/universalProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -456,7 +528,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/catalogStandardProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -486,7 +563,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -515,7 +597,12 @@ public class IndixApiClientProductDetailsTest {
                         getClass().getClassLoader(),
                         "productDetails-json-responses0/universalProductDetailsResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -545,7 +632,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/offersStandardProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -575,7 +667,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/offersPremiumProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -605,7 +702,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -635,7 +737,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/universalProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -665,7 +772,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/offersStandardProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -695,7 +807,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/offersPremiumProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };
@@ -725,7 +842,12 @@ public class IndixApiClientProductDetailsTest {
                         "productDetails-json-responses0/universalProductDetailsResponse.json"
                 );
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException {
             }
         };

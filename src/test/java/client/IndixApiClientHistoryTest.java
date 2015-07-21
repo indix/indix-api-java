@@ -11,6 +11,7 @@ import org.junit.Test;
 import query.ProductHistoryQuery;
 import query.QueryFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 
@@ -26,6 +27,14 @@ public class IndixApiClientHistoryTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "productHistory-json-responses0/productHistory.json");
             }
+
+            public String POST(URI uri) throws IOException, IndixApiException {
+                return ResourceUtils.getTestResource(getClass().getClassLoader(),"bulkQuery-json-responses0/bulkQueryResponse.json");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
+
 
             public void close() throws IOException {
             }

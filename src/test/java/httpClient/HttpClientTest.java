@@ -18,4 +18,5 @@ public class HttpClientTest {
         String content = httpClient.GET(uri);
         System.out.println(content.length());
     }
+
 }

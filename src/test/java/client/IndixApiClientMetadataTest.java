@@ -2,6 +2,7 @@ package client;
 
 import client.impl.IndixApiClientFactory;
 import common.ResourceUtils;
+import exception.BadRequestException;
 import exception.IndixApiException;
 import httpClient.HttpClient;
 import models.metadataResponse.metadataResult.BrandsResult;
@@ -11,6 +12,7 @@ import org.junit.Test;
 import query.MetadataQuery;
 import query.QueryFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 
@@ -24,7 +26,12 @@ public class IndixApiClientMetadataTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "metadata-json-responses0/storesResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -51,7 +58,12 @@ public class IndixApiClientMetadataTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "metadata-json-responses0/brandsResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -77,7 +89,12 @@ public class IndixApiClientMetadataTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), "metadata-json-responses0/categoriesResponse.json");
             }
-
+            public String POST(URI uri) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 

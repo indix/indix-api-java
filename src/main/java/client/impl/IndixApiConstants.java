@@ -5,6 +5,7 @@ class IndixApiConstants {
     static final String SCHEME   = "https";
     static final String HOST     = "api.indix.com";
     static final String VERSION  = "v2";
+    static final String BULK     = "bulk";
 
     static final String SUMMARY_VIEW             = "summary";
     static final String OFFERS_STANDARD_VIEW     = "offersStandard";
@@ -12,6 +13,9 @@ class IndixApiConstants {
     static final String CATALOG_STANDARD_VIEW    = "catalogStandard";
     static final String CATALOG_PREMIUM_VIEW     = "catalogPremium";
     static final String UNIVERSAL_VIEW           = "universal";
+    static final String JOB_VIEW                 = "jobs";
+    static final String DOWNLOAD_FILE            = "download";
+    static final String LOOKUP_VIEW              = "lookup";
     static final String HISTORY_VIEW             = "history";
 
     static final String PRODUCTS_RESOURCE       = "products";
@@ -34,7 +38,11 @@ class IndixApiConstants {
     public static final String CATALOG_PREMIUM_PRODUCT_DETAILS_RESOURCE    = buildPath(VERSION, CATALOG_PREMIUM_VIEW, PRODUCTS_RESOURCE);
     public static final String UNIVERSAL_PRODUCT_DETAILS_RESOURCE          = buildPath(VERSION, UNIVERSAL_VIEW, PRODUCTS_RESOURCE);
 
+    public static final String BULK_QUERY_RESOURCE   = buildPath(VERSION, SUMMARY_VIEW, BULK, PRODUCTS_RESOURCE);
+    public static final String BULK_JOB_RESOURCE     = buildPath(VERSION, BULK, JOB_VIEW);
+
     public static final String PRODUCT_HISTORY_RESOURCE                    = buildPath(VERSION, HISTORY_VIEW, PRODUCTS_RESOURCE);
+    public static final String BULK_LOOKUP_RESOURCE  = buildPath(VERSION, SUMMARY_VIEW, BULK, LOOKUP_VIEW );
 
     private static String buildPath(String ... pathFragements) {
         StringBuilder sb = new StringBuilder();
@@ -48,5 +56,13 @@ class IndixApiConstants {
 
     public static String buildProductDetailsPath(String resource, String mpid) {
         return buildPath(resource, mpid);
+    }
+
+    public static String buildBulkJobPath(String resource, String jobid) {
+        return buildPath(resource,jobid);
+    }
+
+    public static String buildBulkJobPath(String resource, String jobid , String download) {
+        return buildPath(resource,jobid,DOWNLOAD_FILE);
     }
 }
