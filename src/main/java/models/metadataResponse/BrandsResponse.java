@@ -6,9 +6,6 @@ import models.metadataResponse.metadataResult.BrandsResult;
 public class BrandsResponse extends ResponseBase {
     private BrandsResult result;
 
-    public BrandsResponse() {
-    }
-
     public BrandsResult getResult() {
         return result;
     }

@@ -6,9 +6,6 @@ import models.productDetailsResponse.productDetailsResult.UniversalProductDetail
 public class UniversalProductDetailsResponse extends ResponseBase {
     private UniversalProductDetailsResult result;
 
-    public UniversalProductDetailsResponse() {
-    }
-
     public UniversalProductDetailsResult getResult() {
         return result;
     }

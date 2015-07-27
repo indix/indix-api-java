@@ -23,8 +23,6 @@ public class SummaryProduct {
     private double minSalePrice;
     private double maxSalePrice;
 
-    public SummaryProduct() {
-    }
 
     public String getMpid() {
         return mpid;

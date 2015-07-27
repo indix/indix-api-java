@@ -12,6 +12,7 @@ class IndixApiConstants {
     static final String CATALOG_STANDARD_VIEW    = "catalogStandard";
     static final String CATALOG_PREMIUM_VIEW     = "catalogPremium";
     static final String UNIVERSAL_VIEW           = "universal";
+    static final String HISTORY_VIEW             = "history";
 
     static final String PRODUCTS_RESOURCE       = "products";
     static final String STORES_RESOURCE         = buildPath(VERSION, "stores");
@@ -32,6 +33,8 @@ class IndixApiConstants {
     public static final String CATALOG_STANDARD_PRODUCT_DETAILS_RESOURCE   = buildPath(VERSION, CATALOG_STANDARD_VIEW, PRODUCTS_RESOURCE);
     public static final String CATALOG_PREMIUM_PRODUCT_DETAILS_RESOURCE    = buildPath(VERSION, CATALOG_PREMIUM_VIEW, PRODUCTS_RESOURCE);
     public static final String UNIVERSAL_PRODUCT_DETAILS_RESOURCE          = buildPath(VERSION, UNIVERSAL_VIEW, PRODUCTS_RESOURCE);
+
+    public static final String PRODUCT_HISTORY_RESOURCE                    = buildPath(VERSION, HISTORY_VIEW, PRODUCTS_RESOURCE);
 
     private static String buildPath(String ... pathFragements) {
         StringBuilder sb = new StringBuilder();

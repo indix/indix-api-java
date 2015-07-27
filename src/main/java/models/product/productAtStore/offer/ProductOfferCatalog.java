@@ -8,9 +8,6 @@ public class ProductOfferCatalog extends ProductOfferBase {
     private List<String> tags;
     private Map<String, List<String>> facetAttributes;
 
-    public ProductOfferCatalog() {
-    }
-
     public Map<String, List<String>> getAttributes() {
         return null;
     }

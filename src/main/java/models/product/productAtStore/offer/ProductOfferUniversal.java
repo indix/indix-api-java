@@ -8,9 +8,6 @@ public class ProductOfferUniversal extends ProductOfferPricing {
     private List<String> tags;
     private Map<String, List<String>> facetAttributes;
 
-    public ProductOfferUniversal() {
-    }
-
     public Map<String, List<String>> getAttributes() {
         return attributes;
     }

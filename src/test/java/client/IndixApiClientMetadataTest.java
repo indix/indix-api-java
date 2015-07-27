@@ -7,13 +7,14 @@ import httpClient.HttpClient;
 import models.metadataResponse.metadataResult.BrandsResult;
 import models.metadataResponse.metadataResult.CategoriesResult;
 import models.metadataResponse.metadataResult.StoresResult;
-import org.junit.Assert;
 import org.junit.Test;
 import query.MetadataQuery;
 import query.QueryFactory;
 
 import java.io.IOException;
 import java.net.URI;
+
+import static org.junit.Assert.assertEquals;
 
 public class IndixApiClientMetadataTest {
 
@@ -36,9 +37,9 @@ public class IndixApiClientMetadataTest {
                     .withQ("ama");
             StoresResult sr = indixApiClient.getStores(metadataQuery);
 
-            Assert.assertEquals("US", sr.getStores().get(0).getCountryCode());
-            Assert.assertEquals(3341, sr.getStores().get(0).getId());
-            Assert.assertEquals("CPO Delta", sr.getStores().get(0).getName());
+            assertEquals("US", sr.getStores().get(0).getCountryCode());
+            assertEquals(3341, sr.getStores().get(0).getId());
+            assertEquals("CPO Delta", sr.getStores().get(0).getName());
         } finally {
             indixApiClient.close();
         }
@@ -63,8 +64,8 @@ public class IndixApiClientMetadataTest {
                     .withQ("ama");
             BrandsResult sr = indixApiClient.getBrands(metadataQuery);
 
-            Assert.assertEquals(73, sr.getBrands().get(0).getId());
-            Assert.assertEquals("Amanda Uprichard", sr.getBrands().get(0).getName());
+            assertEquals(73, sr.getBrands().get(0).getId());
+            assertEquals("Amanda Uprichard", sr.getBrands().get(0).getName());
         } finally {
             indixApiClient.close();
         }
@@ -88,8 +89,8 @@ public class IndixApiClientMetadataTest {
                     .withAppKey("123");
             CategoriesResult sr = indixApiClient.getCategories(metadataQuery);
 
-            Assert.assertEquals(10161, sr.getCategories().get(0).getId());
-            Assert.assertEquals("Computers & Accessories", sr.getCategories().get(0).getName());
+            assertEquals(10161, sr.getCategories().get(0).getId());
+            assertEquals("Computers & Accessories", sr.getCategories().get(0).getName());
         } finally {
             indixApiClient.close();
         }

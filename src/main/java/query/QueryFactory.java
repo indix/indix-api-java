@@ -17,4 +17,8 @@ public class QueryFactory {
     public static SuggestionsQuery newSuggestionsQuery() {
         return new SuggestionsQuery();
     }
+
+    public static ProductHistoryQuery newProductHistoryQuery() {
+        return new ProductHistoryQuery();
+    }
 }

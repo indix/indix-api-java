@@ -8,9 +8,6 @@ public class CatalogStandardProduct extends SummaryProduct {
     private List<String> tags;
     private Map<String, List<String>> facetAttributes;
 
-    public CatalogStandardProduct() {
-    }
-
     public Map<String, List<String>> getAttributes() {
         return attributes;
     }
