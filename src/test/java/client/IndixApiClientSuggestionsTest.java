@@ -1,8 +1,6 @@
 package client;
 
 import client.impl.IndixApiClientFactory;
-import common.ResourceUtils;
-import exception.BadRequestException;
 import exception.IndixApiException;
 import httpClient.HttpClient;
 import models.suggestions.SuggestionsResult;
@@ -10,9 +8,7 @@ import org.junit.Test;
 import query.QueryFactory;
 import query.SuggestionsQuery;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 
 import static org.junit.Assert.assertEquals;
 
@@ -20,19 +16,8 @@ public class IndixApiClientSuggestionsTest {
 
     @Test
     public void getSuggestions() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(getClass().getClassLoader(), "suggestions-json-responses0/suggestionsResponse.json");
-            }
-            public String POST(URI uri) throws IOException, IndixApiException {
-                throw new BadRequestException("bad request exception");
-            }
-            public String POST(URI uri, File file) throws IOException, IndixApiException {
-                return null;
-            }
-            public void close() throws IOException { }
-        };
-
+        MockHttpCLient mockHttpClientInstance = new MockHttpCLient();
+        HttpClient mockHttpClient = mockHttpClientInstance.mockGetClient("suggestions-json-responses0/suggestionsResponse.json");
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
         try {

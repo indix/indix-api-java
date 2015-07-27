@@ -2,8 +2,11 @@ package httpClient.impl;
 
 import exception.*;
 import httpClient.HttpClient;
+import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -17,7 +20,9 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
+import java.util.List;
 
 /*
  * Wrapper over apache http client
@@ -29,9 +34,10 @@ class HttpClientImpl implements HttpClient {
         closeableHttpClient = HttpClients.createDefault();
     }
 
-    public String getResponse(HttpRequestBase httpRequest) throws IndixApiException,IOException {
-        CloseableHttpResponse response = closeableHttpClient.execute(httpRequest);
+    public HttpEntity getResponse(HttpRequestBase httpRequest) throws IndixApiException, IOException {
 
+        CloseableHttpResponse response = closeableHttpClient.execute(httpRequest);
+        System.out.print(response);
         try {
             String message = response.getStatusLine().getReasonPhrase();
             int status = response.getStatusLine().getStatusCode();
@@ -52,8 +58,8 @@ class HttpClientImpl implements HttpClient {
                 }
             }
 
-            HttpEntity httpEntity = response.getEntity();
-            return EntityUtils.toString(httpEntity);
+            return response.getEntity();
+
         } finally {
             response.close();
         }
@@ -62,25 +68,44 @@ class HttpClientImpl implements HttpClient {
     public String GET(URI uri) throws IOException, IndixApiException {
 
         HttpGet httpGet = new HttpGet(uri);
-        return getResponse(httpGet);
+        return EntityUtils.toString(getResponse(httpGet));
     }
 
-    public String POST(URI uri) throws IndixApiException, IOException{
+    public InputStream GETStream(URI uri) throws IOException, IndixApiException {
 
-        HttpPost httpPost = new HttpPost(uri);
-        return getResponse(httpPost);
+        HttpGet httpGet = new HttpGet(uri);
+        System.out.print(httpGet);
+        HttpEntity httpEntity = getResponse(httpGet);
+        System.out.print(httpEntity);
+        return httpEntity.getContent();
     }
 
-    public String POST(URI uri, File file) throws IOException, IndixApiException{
+    public String POST(URI uri, List<NameValuePair> params) throws IndixApiException, IOException {
 
         HttpPost httpPost = new HttpPost(uri);
+        httpPost.setEntity(new UrlEncodedFormEntity(params, Consts.UTF_8));
+        return EntityUtils.toString(getResponse(httpPost));
+    }
+
+    public String POST(URI uri, List<NameValuePair> params, File file) throws IOException, IndixApiException {
+
+        // build multi-part entity
+        //
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         FileBody fileBody = new FileBody(file);
         builder.addPart("file", fileBody);
-        HttpEntity multipart = builder.build();
-        httpPost.setEntity(multipart);
-        return getResponse(httpPost);
+        for (NameValuePair param : params) {
+            builder.addTextBody(param.getName(), param.getValue());
+        }
+
+        // create http post request, set above multi-part entity
+        HttpEntity multiPartEntiity = builder.build();
+        HttpPost httpPost = new HttpPost(uri);
+        httpPost.setEntity(multiPartEntiity);
+
+        // process request
+        return EntityUtils.toString(getResponse(httpPost));
     }
 
     public void close() throws IOException {
@@ -88,3 +113,5 @@ class HttpClientImpl implements HttpClient {
     }
 
 }
+
+

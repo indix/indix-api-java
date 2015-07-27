@@ -5,9 +5,9 @@ import org.apache.http.message.BasicNameValuePair;
 import java.io.File;
 import java.io.IOException;
 
-public class BulkLookupQuery extends QueryBase{
+public class BulkLookupQuery extends QueryBase {
 
-    private File jsonfile;
+    private File inputFile;
 
     public BulkLookupQuery withAppId(String app_id) {
         parameters.add(new BasicNameValuePair("app_id", app_id));
@@ -19,8 +19,8 @@ public class BulkLookupQuery extends QueryBase{
         return this;
     }
 
-    public BulkLookupQuery withJsonFile(File file) throws IOException {
-        this.jsonfile = file;
+    public BulkLookupQuery withInputFile(File file) throws IOException {
+        this.inputFile = file;
         return this;
     }
 
@@ -29,5 +29,7 @@ public class BulkLookupQuery extends QueryBase{
         return this;
     }
 
-    public File getJsonfile(){ return jsonfile; }
+    public File getInputFile() {
+        return inputFile;
+    }
 }

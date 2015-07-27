@@ -22,6 +22,6 @@ public class MetadataQueryTest {
                 .withQ("ni");
         List<NameValuePair> actualParameters = productDetailsQuery.getParameters();
 
-        Assert.assertEquals(expectedValue, actualParameters);
+        Assert.assertTrue(actualParameters.containsAll(expectedValue));
     }
 }

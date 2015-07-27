@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ProductHistoryQueryTest {
 
     @Test
-    public void testBasicQuery(){
+    public void testBasicQuery() {
         List<NameValuePair> expectedValue = new ArrayList<NameValuePair>();
         expectedValue.add(new BasicNameValuePair("app_id", "111"));
         expectedValue.add(new BasicNameValuePair("app_key", "111"));
@@ -27,7 +28,7 @@ public class ProductHistoryQueryTest {
                 .withMpid("mpid1");
         List<NameValuePair> actualParameters = productHistoryQuery.getParameters();
 
-        assertEquals(expectedValue, actualParameters);
+        assertTrue(actualParameters.containsAll(expectedValue));
         assertEquals("mpid1", productHistoryQuery.getMpid());
     }
 }

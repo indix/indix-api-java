@@ -2,12 +2,13 @@ package query;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 public class SearchQueryTest {
 
@@ -46,18 +47,22 @@ public class SearchQueryTest {
         expectedValue.add(new BasicNameValuePair("pageSize", "55"));
 
         Query searchQuery = QueryFactory.newSearchQuery()
-                .withAppId("123")
-                .withAppKey("123")
-                .withCountryCode("US")
                 .withQ("nike")
-                .withStoreId(Arrays.asList(270, 275))
-                .withAlsoSoldAt(Arrays.asList(24))
-                .withBrandId(Arrays.asList(5575))
-                .withCategoryId(Arrays.asList(10003, 99999, 123456))
                 .withUrl("url1")
                 .withUpc("upc1")
                 .withMpn("mpn1")
                 .withSku("sku1")
+                .withSortBy(SearchQuery.SortBy.PRICE_HIGH_TO_LOW)
+                .withFacetBy(Arrays.asList("storeId", "brandId"))
+                .withPageNumber(5)
+                .withPageSize(55)
+                .withAppId("123")
+                .withAppKey("123")
+                .withCountryCode("US")
+                .withStoreId(Arrays.asList(270, 275))
+                .withAlsoSoldAt(Arrays.asList(24))
+                .withBrandId(Arrays.asList(5575))
+                .withCategoryId(Arrays.asList(10003, 99999, 123456))
                 .withStartPrice(23.45)
                 .withEndPrice(112.55)
                 .withAvailability(SearchQuery.Availability.IN_STOCK)
@@ -67,13 +72,9 @@ public class SearchQueryTest {
                 .withLastRecordedIn(16)
                 .withStoresCount(3)
                 .withApplyFilterTo(SearchQuery.ApplyFiltersTo.storeIdOrAlsoSoldAt)
-                .withSelectOffersFrom(SearchQuery.SelectOffersFrom.storeIdAndAlsoSoldAt)
-                .withSortBy(SearchQuery.SortBy.PRICE_HIGH_TO_LOW)
-                .withFacetBy(Arrays.asList("storeId", "brandId"))
-                .withPageNumber(5)
-                .withPageSize(55);
+                .withSelectOffersFrom(SearchQuery.SelectOffersFrom.storeIdAndAlsoSoldAt);
         List<NameValuePair> actualParameters = searchQuery.getParameters();
 
-        Assert.assertEquals(expectedValue, actualParameters);
+        assertTrue(actualParameters.containsAll(expectedValue));
     }
 }

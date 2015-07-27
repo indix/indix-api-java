@@ -1,21 +1,20 @@
 package client;
 
 import exception.IndixApiException;
-import models.jobs.jobsResult.JobsResult;
-import models.jobs.jobsResult.JobsStatusResult;
+import models.jobs.JobInfo;
 import query.BulkLookupQuery;
-import query.BulkSearchQuery;
+import query.BulkProductsQuery;
 import query.JobStatusQuery;
 
-import java.io.File;
+import java.io.InputStream;
 
 public interface BulkQueryApi {
 
-    JobsResult getBulkJob(BulkSearchQuery query) throws IndixApiException;
+    JobInfo postBulkJob(BulkProductsQuery query) throws IndixApiException;
 
-    JobsResult getBulkJob(BulkLookupQuery query) throws IndixApiException;
+    JobInfo postBulkJob(BulkLookupQuery query) throws IndixApiException;
 
-    JobsStatusResult getBulkJobStatus(JobStatusQuery query) throws IndixApiException;
+    JobInfo getBulkJobStatus(JobStatusQuery query) throws IndixApiException;
 
-    File getBulkJobOutput(JobStatusQuery query) throws IndixApiException;
+    InputStream getBulkJobOutput(JobStatusQuery query) throws IndixApiException;
 }

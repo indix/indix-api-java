@@ -1,56 +1,45 @@
 package client;
 
 import client.impl.IndixApiClientFactory;
-import common.ResourceUtils;
-import exception.BadRequestException;
 import exception.IndixApiException;
 import httpClient.HttpClient;
-import models.jobs.jobs.Job;
-import models.jobs.jobs.JobStatus;
-import org.junit.Assert;
+import models.jobs.JobInfo;
 import org.junit.Test;
 import query.BulkLookupQuery;
-import query.BulkSearchQuery;
+import query.BulkProductsQuery;
 import query.JobStatusQuery;
 import query.QueryFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class IndixApiClientBulkQueryTest {
 
     @Test
     public void getBulkJobId() throws IOException, IndixApiException{
-        HttpClient mockhttpclient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                throw new BadRequestException("bad request exception");
-            }
-            public String POST(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(getClass().getClassLoader(),"bulkQuery-json-responses0/bulkQueryResponse.json");
-            }
-            public String POST(URI uri, File file) throws IOException, IndixApiException {
-                return null;
-            }
-            @Override
-            public void close() throws IOException {
 
-            }
-        };
+        MockHttpCLient mockHttpClientInstance = new MockHttpCLient();
+        HttpClient mockHttpClient = mockHttpClientInstance.mockPostFormEncodedClient("bulkQuery-json-responses0/bulkQueryResponse.json");
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockhttpclient);
-
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        List<Integer> intList = new ArrayList<Integer>();
+        intList.add(68);
         try{
-            BulkSearchQuery bulkQuery = QueryFactory.newBulkQuery()
-                    .withAppId("123")
-                    .withAppKey("123")
-                    .withCountryCode("US");
-            Job sr = indixApiClient.getBulkJob(bulkQuery).getJob();
+            BulkProductsQuery bulkQuery = QueryFactory.newBulkQuery()
+                    .withAppId("cb7e91b3")
+                    .withAppKey("7367fd8ed2856c6d44c4f30303963b9c")
+                    .withCountryCode("US")
+                    .withStoreId(intList);
 
-            assertEquals(112, sr.getId());
-            assertEquals("SUBMITTED", sr.getStatus());
+            JobInfo jr = indixApiClient.postBulkJob(bulkQuery);
+            assertEquals(1941, jr.getId());
+            assertEquals("SUBMITTED", jr.getStatus());
         }
         finally{
             indixApiClient.close();
@@ -59,100 +48,65 @@ public class IndixApiClientBulkQueryTest {
 
     @Test
     public void getBulkLookupJobId() throws IOException, IndixApiException{
-        HttpClient mockhttpclient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return null;
-            }
-            public String POST(URI uri) throws IOException, IndixApiException {
-                return null;
-            }
-            public String POST(URI uri, File file) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(getClass().getClassLoader(), "bulkQuery-json-responses0/bulkQueryResponse.json");
-            }
-            public void close() throws IOException {
 
-            }
-        };
+        MockHttpCLient mockHttpClientInstance = new MockHttpCLient();
+        HttpClient mockHttpClient = mockHttpClientInstance.mockPostMultipartClient("bulkQuery-json-responses0/bulkQueryResponse.json");
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockhttpclient);
+        IndixApiClient indixApiClient1 = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
         try{
             File file =new File("/home/indix/Desktop/repos/scarlet-client/src/test/resources/bulkQuery-json-responses0/bulkLookupInput.jsonl");
             BulkLookupQuery bulkLookupQuery = QueryFactory.newBulkLookupQuery()
-                    .withAppId("123")
-                    .withAppKey("123")
+                    .withAppId("cb7e91b3")
+                    .withAppKey("7367fd8ed2856c6d44c4f30303963b9c")
                     .withCountryCode("US")
-                    .withJsonFile(file);
-            Job sr = indixApiClient.getBulkJob(bulkLookupQuery).getJob();
+                    .withInputFile(file);
+            JobInfo job1 = indixApiClient1.postBulkJob(bulkLookupQuery);
 
-            assertEquals(true,bulkLookupQuery.getJsonfile().exists());
-            assertEquals("SUBMITTED", sr.getStatus());
-            assertEquals(112, sr.getId());
+            assertEquals(true,bulkLookupQuery.getInputFile().exists());
+            assertEquals("SUBMITTED", job1.getStatus());
+            assertEquals(1941, job1.getId());
+
+
         }
         finally{
-            indixApiClient.close();
+            indixApiClient1.close();
         }
 
     }
 
     @Test
     public void getBulkJobStatus() throws IOException, IndixApiException{
-        HttpClient mockhttpclient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                throw new BadRequestException("bad request exception");
-            }
-            @Override
-            public String POST(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(getClass().getClassLoader(),"bulkQuery-json-responses0/bulkQueryJobStatus.json");
-            }
-            @Override
-            public String POST(URI uri, File file) throws IOException, IndixApiException {
-                return null;
-            }
-            public void close() throws IOException {
 
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockhttpclient);
-
+        MockHttpCLient mockHttpClientInstance = new MockHttpCLient();
+        HttpClient mockHttpClient = mockHttpClientInstance.mockGetClient("bulkQuery-json-responses0/bulkQueryJobStatus.json");
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
         try{
             JobStatusQuery jobStatusQuery = QueryFactory.newJobStatusQuery()
-                    .withJobId(1234);
-            JobStatus sr = indixApiClient.getBulkJobStatus(jobStatusQuery).getJob();
+                    .withJobId(1941);
+            JobInfo job = indixApiClient.getBulkJobStatus(jobStatusQuery);
 
-            assertEquals(jobStatusQuery.getJobId(), sr.getId());
-            assertEquals("SUBMITTED", sr.getStatus());
-            assertEquals(11,sr.getCount());
+            assertEquals(jobStatusQuery.getJobId(), job.getId());
+            assertEquals("SUBMITTED", job.getStatus());
+            assertEquals(11, job.getCount());
         }
         finally{
             indixApiClient.close();
         }
+
     }
 
     @Test
     public void getBulkJobFile() throws IOException, IndixApiException{
-        HttpClient mockhttpclient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(getClass().getClassLoader(), "bulkQuery-json-responses0/bulkQueryJobOutput.json");
-            }
-            public String POST(URI uri) throws IOException, IndixApiException {
-                return null;
-            }
-            public String POST(URI uri, File file) throws IOException, IndixApiException {
-                return null;
-            }
-            public void close() throws IOException {
 
-            }
-        };
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockhttpclient);
+        MockHttpCLient mockHttpClientInstance = new MockHttpCLient();
+        HttpClient mockHttpClient = mockHttpClientInstance.mockGetStreamClient("bulkQuery-json-responses0/bulkQueryJobOutput.json");
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
         try{
             JobStatusQuery jobStatusQuery = QueryFactory.newJobStatusQuery()
                     .withJobId(123);
-            File file = indixApiClient.getBulkJobOutput(jobStatusQuery);
-            Assert.assertTrue(file.exists());
-            assertEquals(file.getName(),"output123.jsonl");
+            InputStream stream = indixApiClient.getBulkJobOutput(jobStatusQuery);
+            assertNotNull(stream.available());
         }
         finally{
             indixApiClient.close();
@@ -160,7 +114,6 @@ public class IndixApiClientBulkQueryTest {
 
     }
 
-
-
-
 }
+
+

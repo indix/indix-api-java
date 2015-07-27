@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ProductDetailsQueryTest {
     @Test
@@ -29,6 +30,6 @@ public class ProductDetailsQueryTest {
         List<NameValuePair> actualParameters = productDetailsQuery.getParameters();
 
         assertEquals("mpid1", productDetailsQuery.getMpid());
-        assertEquals(expectedValue, actualParameters);
+        assertTrue(actualParameters.containsAll(expectedValue));
     }
 }

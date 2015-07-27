@@ -6,10 +6,7 @@ import exception.IndixApiException;
 import exception.InternalServerException;
 import httpClient.HttpClient;
 import httpClient.impl.HttpClientFactory;
-import models.jobs.JobsResponse;
-import models.jobs.JobsStatusResponse;
-import models.jobs.jobsResult.JobsResult;
-import models.jobs.jobsResult.JobsStatusResult;
+import models.jobs.JobInfo;
 import models.metadataResponse.BrandsResponse;
 import models.metadataResponse.CategoriesResponse;
 import models.metadataResponse.StoresResponse;
@@ -27,7 +24,9 @@ import models.suggestions.SuggestionsResult;
 import org.apache.http.client.utils.URIBuilder;
 import query.*;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -62,28 +61,32 @@ class IndixApiClientImpl implements IndixApiClient {
     }
 
     private URI URIbuilder(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
-        URI uri = new URIBuilder()
+        return new URIBuilder()
                 .setScheme(IndixApiConstants.SCHEME)
                 .setHost(IndixApiConstants.HOST)
                 .setPath(resource)
                 .setParameters(searchQuery.getParameters())
                 .build();
-        return uri;
     }
 
     private String executeGET(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
-        URI uri = URIbuilder(resource,searchQuery);
+        URI uri = URIbuilder(resource, searchQuery);
         return httpClient.GET(uri);
     }
 
+    private InputStream executeGETStream(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
+        URI uri = URIbuilder(resource, searchQuery);
+        return httpClient.GETStream(uri);
+    }
+
     private String executePOST(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
-        URI uri = URIbuilder(resource,searchQuery);
-        return httpClient.POST(uri);
+        URI uri = URIbuilder(resource, searchQuery);
+        return httpClient.POST(uri, searchQuery.getParameters());
     }
 
     private String executePOST(String resource, Query searchQuery, File file) throws URISyntaxException, IOException, IndixApiException {
         URI uri = URIbuilder(resource, searchQuery);
-        return httpClient.POST(uri,file);
+        return httpClient.POST(uri, searchQuery.getParameters(), file);
     }
 
     public SummarySearchResult getProductsSummary(Query query) throws IndixApiException {
@@ -170,7 +173,7 @@ class IndixApiClientImpl implements IndixApiClient {
                 IndixApiConstants.SUMMARY_PRODUCT_DETAILS_RESOURCE,
                 query.getMpid()
         );
-        
+
         try {
             String content = executeGET(resource, query);
             SummaryProductDetailsResponse productDetailsResponse = jsonMapper.readValue(
@@ -192,7 +195,7 @@ class IndixApiClientImpl implements IndixApiClient {
                 IndixApiConstants.OFFERS_STANDARD_PRODUCT_DETAILS_RESOURCE,
                 query.getMpid()
         );
-        
+
         try {
             String content = executeGET(resource, query);
             OffersProductDetailsResponse productDetailsResponse = jsonMapper.readValue(
@@ -215,7 +218,7 @@ class IndixApiClientImpl implements IndixApiClient {
                 IndixApiConstants.OFFERS_PREMIUM_PRODUCT_DETAILS_RESOURCE,
                 query.getMpid()
         );
-        
+
         try {
             String content = executeGET(resource, query);
             OffersProductDetailsResponse productDetailsResponse = jsonMapper.readValue(
@@ -238,7 +241,7 @@ class IndixApiClientImpl implements IndixApiClient {
                 IndixApiConstants.CATALOG_STANDARD_PRODUCT_DETAILS_RESOURCE,
                 query.getMpid()
         );
-        
+
         try {
             String content = executeGET(resource, query);
             CatalogStandardProductDetailsResponse productDetailsResponse = jsonMapper.readValue(
@@ -261,7 +264,7 @@ class IndixApiClientImpl implements IndixApiClient {
                 IndixApiConstants.CATALOG_PREMIUM_PRODUCT_DETAILS_RESOURCE,
                 query.getMpid()
         );
-        
+
         try {
             String content = executeGET(resource, query);
             CatalogPremiumProductDetailsResponse productDetailsResponse = jsonMapper.readValue(
@@ -283,7 +286,7 @@ class IndixApiClientImpl implements IndixApiClient {
                 IndixApiConstants.UNIVERSAL_PRODUCT_DETAILS_RESOURCE,
                 query.getMpid()
         );
-        
+
         try {
             String content = executeGET(resource, query);
             UniversalProductDetailsResponse productDetailsResponse = jsonMapper.readValue(
@@ -355,7 +358,7 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
-    public ProductHistoryResult getProductHistory(ProductHistoryQuery query) throws IndixApiException{
+    public ProductHistoryResult getProductHistory(ProductHistoryQuery query) throws IndixApiException {
         String resource = IndixApiConstants.buildProductDetailsPath(
                 IndixApiConstants.PRODUCT_HISTORY_RESOURCE,
                 query.getMpid()
@@ -372,11 +375,11 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
-    public JobsResult getBulkJob(BulkSearchQuery query) throws IndixApiException {
+    public JobInfo postBulkJob(BulkProductsQuery query) throws IndixApiException {
         try {
-            String content = executePOST(IndixApiConstants.BULK_QUERY_RESOURCE, query);
-            JobsResponse jobsResponse = jsonMapper.readValue(content, JobsResponse.class);
-            return jobsResponse.getResult();
+            String content = executePOST(IndixApiConstants.BULK_PRODUCT_RESOURCE, query);
+            JobInfo job = jsonMapper.readValue(content, JobInfo.class);
+            return job;
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
@@ -386,11 +389,11 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
-    public JobsResult getBulkJob(BulkLookupQuery query) throws IndixApiException{
+    public JobInfo postBulkJob(BulkLookupQuery query) throws IndixApiException {
         try {
-            String content = executePOST(IndixApiConstants.BULK_LOOKUP_RESOURCE, query, query.getJsonfile());
-            JobsResponse jobsResponse = jsonMapper.readValue(content, JobsResponse.class);
-            return jobsResponse.getResult();
+            String content = executePOST(IndixApiConstants.BULK_LOOKUP_RESOURCE, query, query.getInputFile());
+            JobInfo job = jsonMapper.readValue(content, JobInfo.class);
+            return job;
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
@@ -400,49 +403,40 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
-    public JobsStatusResult getBulkJobStatus(JobStatusQuery query) throws IndixApiException {
+    public JobInfo getBulkJobStatus(JobStatusQuery query) throws IndixApiException {
 
-        String resource = IndixApiConstants.buildBulkJobPath(
+        String resource = IndixApiConstants.buildBulkJobStatusPath(
                 IndixApiConstants.BULK_JOB_RESOURCE,
                 String.valueOf(query.getJobId())
         );
-        try{
-            String content = executePOST(resource, query);
-            JobsStatusResponse jobsStatusResponse = jsonMapper.readValue(content, JobsStatusResponse.class);
-            return jobsStatusResponse.getResult();
-        } catch(IndixApiException iae) {
-            throw iae;
-        } catch(Exception e) {
-            System.out.println("getJobStatus failed: " + e.getMessage());
-            throw new InternalServerException(e);
-        }
-
-    }
-
-    public File getBulkJobOutput(JobStatusQuery query) throws IndixApiException {
-
-        String resource = IndixApiConstants.buildBulkJobPath(
-                IndixApiConstants.BULK_JOB_RESOURCE,
-                String.valueOf(query.getJobId()),
-                "download"
-        );
-        try{
+        try {
             String content = executeGET(resource, query);
-            File file = new File("output"+query.getJobId()+".jsonl");
-            FileWriter fw = new FileWriter(file);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(content);
-            bw.close();
-            fw.close();
-            return file;
-        } catch(IndixApiException iae) {
+            JobInfo jobStatus = jsonMapper.readValue(content, JobInfo.class);
+            return jobStatus;
+        } catch (IndixApiException iae) {
             throw iae;
-        } catch(Exception e) {
+        } catch (Exception e) {
+            System.out.println("getJobStatus failed: " + e.getMessage());
+            throw new InternalServerException(e);
+        }
+
+    }
+
+    public InputStream getBulkJobOutput(JobStatusQuery query) throws IndixApiException {
+
+        String resource = IndixApiConstants.buildBulkJobDownloadPath(
+                IndixApiConstants.BULK_JOB_RESOURCE,
+                String.valueOf(query.getJobId())
+        );
+        try {
+            return executeGETStream(resource, query);
+        } catch (IndixApiException iae) {
+            throw iae;
+        } catch (Exception e) {
             System.out.println("getJobStatus failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
-
 
 
     public void close() throws IOException {
