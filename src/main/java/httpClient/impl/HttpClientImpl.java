@@ -74,9 +74,7 @@ class HttpClientImpl implements HttpClient {
     public InputStream GETStream(URI uri) throws IOException, IndixApiException {
 
         HttpGet httpGet = new HttpGet(uri);
-        System.out.print(httpGet);
         HttpEntity httpEntity = getResponse(httpGet);
-        System.out.print(httpEntity);
         return httpEntity.getContent();
     }
 
@@ -100,18 +98,19 @@ class HttpClientImpl implements HttpClient {
         }
 
         // create http post request, set above multi-part entity
+        //
         HttpEntity multiPartEntiity = builder.build();
         HttpPost httpPost = new HttpPost(uri);
         httpPost.setEntity(multiPartEntiity);
 
         // process request
+        //
         return EntityUtils.toString(getResponse(httpPost));
     }
 
     public void close() throws IOException {
         closeableHttpClient.close();
     }
-
 }
 
 

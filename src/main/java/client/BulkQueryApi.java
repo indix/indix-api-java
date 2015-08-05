@@ -10,11 +10,23 @@ import java.io.InputStream;
 
 public interface BulkQueryApi {
 
+    /*
+     * Retrieve response for a bulk search query
+     */
     JobInfo postBulkJob(BulkProductsQuery query) throws IndixApiException;
 
+    /*
+     * Retrieve response for a bulk lookup query
+     */
     JobInfo postBulkJob(BulkLookupQuery query) throws IndixApiException;
 
+    /*
+     * Retrieve job status for any bulk query
+     */
     JobInfo getBulkJobStatus(JobStatusQuery query) throws IndixApiException;
 
+    /*
+     * Retrieve output file for a bulk job
+     */
     InputStream getBulkJobOutput(JobStatusQuery query) throws IndixApiException;
 }

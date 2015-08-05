@@ -60,7 +60,7 @@ class IndixApiClientImpl implements IndixApiClient {
         return new ObjectMapper();
     }
 
-    private URI URIbuilder(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
+    private URI uriBuilder(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
         return new URIBuilder()
                 .setScheme(IndixApiConstants.SCHEME)
                 .setHost(IndixApiConstants.HOST)
@@ -70,22 +70,22 @@ class IndixApiClientImpl implements IndixApiClient {
     }
 
     private String executeGET(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
-        URI uri = URIbuilder(resource, searchQuery);
+        URI uri = uriBuilder(resource, searchQuery);
         return httpClient.GET(uri);
     }
 
     private InputStream executeGETStream(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
-        URI uri = URIbuilder(resource, searchQuery);
+        URI uri = uriBuilder(resource, searchQuery);
         return httpClient.GETStream(uri);
     }
 
     private String executePOST(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
-        URI uri = URIbuilder(resource, searchQuery);
+        URI uri = uriBuilder(resource, searchQuery);
         return httpClient.POST(uri, searchQuery.getParameters());
     }
 
     private String executePOST(String resource, Query searchQuery, File file) throws URISyntaxException, IOException, IndixApiException {
-        URI uri = URIbuilder(resource, searchQuery);
+        URI uri = uriBuilder(resource, searchQuery);
         return httpClient.POST(uri, searchQuery.getParameters(), file);
     }
 
@@ -399,7 +399,6 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (Exception e) {
             System.out.println("getBulkQueryJob failed: " + e.getMessage());
             throw new InternalServerException(e);
-
         }
     }
 

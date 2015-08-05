@@ -10,13 +10,13 @@ public class JobStatusQuery extends QueryBase {
         super();
     }
 
-    public JobStatusQuery withAppId(String app_id) {
-        parameters.add(new BasicNameValuePair("app_id", app_id));
+    public JobStatusQuery withAppId(String appId) {
+        parameters.add(new BasicNameValuePair("app_id", appId));
         return this;
     }
 
-    public JobStatusQuery withAppKey(String app_key) {
-        parameters.add(new BasicNameValuePair("app_key", app_key));
+    public JobStatusQuery withAppKey(String appKey) {
+        parameters.add(new BasicNameValuePair("app_key", appKey));
         return this;
     }
 
@@ -28,5 +28,4 @@ public class JobStatusQuery extends QueryBase {
     public int getJobId() {
         return jobId;
     }
-
 }

@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 public class IndixApiClientProductDetailsTest {
 
     public HttpClient getMockHttpClient(String resource) throws IOException, IndixApiException {
-        MockHttpCLient mockHttpClientInstance = new MockHttpCLient();
+        MockHttpClient mockHttpClientInstance = new MockHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.mockGetClient(resource);
         return mockHttpClient;
     }

@@ -1,12 +1,11 @@
 package query;
 
+import common.ResourceUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -66,7 +65,8 @@ public class BulkQueryTest {
     @Test
     public void testBasicBulkLookupQuery() throws IOException {
 
-        File file = new File("src/test/resources/bulkQuery-json-responses0/bulkLookupInput.jsonl");
+        System.out.println();
+        File file = ResourceUtils.getTestFile(getClass().getClassLoader(), "bulkQuery-json-responses0/bulkLookupInput.jsonl");
         FileInputStream inputStream = new FileInputStream(file);
         StringBuilder builder = new StringBuilder();
         int ch;

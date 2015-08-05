@@ -1,6 +1,5 @@
 package models.product.productAtStore;
 
-
 import models.product.productAtStore.offer.ProductOfferHistory;
 
 import java.util.List;

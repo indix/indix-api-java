@@ -19,5 +19,4 @@ public class ProductOfferUniversal extends ProductOfferPricing {
     public Map<String, List<String>> getFacetAttributes() {
         return facetAttributes;
     }
-
 }

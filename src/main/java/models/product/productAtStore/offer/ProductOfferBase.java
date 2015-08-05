@@ -75,5 +75,4 @@ public class ProductOfferBase {
     public Map<String, List<String>> getPrivateAttributes() {
         return privateAttributes;
     }
-
 }

@@ -20,9 +20,9 @@ public interface BulkProductsQuery extends Query {
         storeId, alsoSoldAt, storeIdAndAlsoSoldAt, all
     }
 
-    public SearchQuery withAppId(String app_id);
+    public SearchQuery withAppId(String appId);
 
-    public SearchQuery withAppKey(String app_key);
+    public SearchQuery withAppKey(String appKey);
 
     public SearchQuery withStoreId(List<Integer> storeId);
 
@@ -53,6 +53,4 @@ public interface BulkProductsQuery extends Query {
     public SearchQuery withSelectOffersFrom(SelectOffersFrom selectOffersFrom);
 
     public SearchQuery withCountryCode(String countryCode);
-
-
 }

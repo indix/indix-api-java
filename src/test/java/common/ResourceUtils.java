@@ -2,9 +2,11 @@ package common;
 
 import org.apache.commons.io.IOUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.net.URL;
 
 public class ResourceUtils {
 
@@ -26,4 +28,13 @@ public class ResourceUtils {
         }
         return sw.toString();
     }
+
+    public static File getTestFile(ClassLoader classLoader, String pathToResource) throws IOException{
+        URL url= classLoader.getResource(pathToResource);
+        String fileName = url.getFile();
+        File file = new File(fileName) ;
+        return file;
+    }
+
+
 }

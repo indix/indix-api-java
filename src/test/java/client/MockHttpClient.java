@@ -15,7 +15,7 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-public class MockHttpCLient {
+public class MockHttpClient {
 
     public HttpClient mockGetClient(String resource) throws IOException, IndixApiException {
         final String name = resource;

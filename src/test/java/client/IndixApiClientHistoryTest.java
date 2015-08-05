@@ -21,7 +21,7 @@ public class IndixApiClientHistoryTest {
     @Test
     public void getProductHistory() throws IOException, IndixApiException {
 
-        MockHttpCLient mockHttpClientInstance = new MockHttpCLient();
+        MockHttpClient mockHttpClientInstance = new MockHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.mockGetClient("productHistory-json-responses0/productHistory.json");
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);

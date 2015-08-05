@@ -38,6 +38,4 @@ public class ProductHistoryQuery extends QueryBase {
     public String getMpid() {
         return mpid;
     }
-
-
 }

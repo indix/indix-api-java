@@ -14,13 +14,13 @@ public class SearchQuery extends QueryBase implements BulkProductsQuery {
         PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, MOST_RECENT
     }
 
-    public SearchQuery withAppId(String app_id) {
-        parameters.add(new BasicNameValuePair("app_id", app_id));
+    public SearchQuery withAppId(String appId) {
+        parameters.add(new BasicNameValuePair("app_id", appId));
         return this;
     }
 
-    public SearchQuery withAppKey(String app_key) {
-        parameters.add(new BasicNameValuePair("app_key", app_key));
+    public SearchQuery withAppKey(String appKey) {
+        parameters.add(new BasicNameValuePair("app_key", appKey));
         return this;
     }
 

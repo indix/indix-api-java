@@ -85,5 +85,4 @@ public class ProductOfferPricing extends ProductOfferBase {
     public int getSalesRank() {
         return salesRank;
     }
-
 }
