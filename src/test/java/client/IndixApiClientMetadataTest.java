@@ -1,7 +1,6 @@
 package client;
 
 import client.impl.IndixApiClientFactory;
-import common.ResourceUtils;
 import exception.IndixApiException;
 import httpClient.HttpClient;
 import models.metadataResponse.metadataResult.BrandsResult;
@@ -12,28 +11,27 @@ import query.MetadataQuery;
 import query.QueryFactory;
 
 import java.io.IOException;
-import java.net.URI;
 
 import static org.junit.Assert.assertEquals;
 
 public class IndixApiClientMetadataTest {
 
+    public HttpClient getMockHttpClient(String resource) throws IOException, IndixApiException {
+        MockHttpClient mockHttpClientInstance = new MockHttpClient();
+        HttpClient mockHttpClient = mockHttpClientInstance.mockGetClient(resource);
+        return mockHttpClient;
+    }
+
     @Test
     public void getStores() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(getClass().getClassLoader(), "metadata-json-responses0/storesResponse.json");
-            }
 
-            public void close() throws IOException { }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("metadata-json-responses0/storesResponse.json"));
 
         try {
             MetadataQuery metadataQuery = QueryFactory.newMetadataQuery()
-                    .withAppId("123")
-                    .withAppKey("123")
+                    .withAppId("cb7e91b3")
+                    .withAppKey("7367fd8ed2856c6d44c4f30303963b9c")
                     .withQ("ama");
             StoresResult sr = indixApiClient.getStores(metadataQuery);
 
@@ -47,15 +45,9 @@ public class IndixApiClientMetadataTest {
 
     @Test
     public void getBrands() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(getClass().getClassLoader(), "metadata-json-responses0/brandsResponse.json");
-            }
 
-            public void close() throws IOException { }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("metadata-json-responses0/brandsResponse.json"));
 
         try {
             MetadataQuery metadataQuery = QueryFactory.newMetadataQuery()
@@ -73,15 +65,9 @@ public class IndixApiClientMetadataTest {
 
     @Test
     public void getCategories() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(getClass().getClassLoader(), "metadata-json-responses0/categoriesResponse.json");
-            }
 
-            public void close() throws IOException { }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("metadata-json-responses0/categoriesResponse.json"));
 
         try {
             MetadataQuery metadataQuery = QueryFactory.newMetadataQuery()

@@ -2,10 +2,10 @@ package query;
 
 import org.apache.http.message.BasicNameValuePair;
 
-public class ProductHistoryQuery extends QueryBase{
+public class ProductHistoryQuery extends QueryBase {
     String mpid;
 
-    public ProductHistoryQuery(){
+    public ProductHistoryQuery() {
         super();
         mpid = "";
     }
@@ -35,7 +35,7 @@ public class ProductHistoryQuery extends QueryBase{
         return this;
     }
 
-    public String getMpid() { return mpid; }
-
-
+    public String getMpid() {
+        return mpid;
+    }
 }

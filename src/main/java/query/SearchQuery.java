@@ -4,80 +4,106 @@ import org.apache.http.message.BasicNameValuePair;
 
 import java.util.List;
 
-/**
- * Index SearchQuery
- */
-public class SearchQuery extends QueryBase {
+public class SearchQuery extends QueryBase implements BulkProductsQuery {
 
-    enum Availability {
-        IN_STOCK, OUT_OF_STOCK
+    public SearchQuery() {
+        super();
     }
 
     enum SortBy {
         PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, MOST_RECENT
     }
 
-    enum PriceChange {
-        PRICE_INCREASED, PRICE_DECREASED, EITHER
-    }
-
-    enum ApplyFiltersTo {
-        storeId, alsoSoldAt, storeIdOrAlsoSoldAt, any
-    }
-
-    enum SelectOffersFrom {
-        storeId, alsoSoldAt, storeIdAndAlsoSoldAt, all
-    }
-
-    public SearchQuery() {
-        super();
-    }
-    
-    public SearchQuery withAppId(String _app_id) {
-        parameters.add(new BasicNameValuePair("app_id", _app_id));
+    public SearchQuery withAppId(String appId) {
+        parameters.add(new BasicNameValuePair("app_id", appId));
         return this;
     }
 
-    public SearchQuery withAppKey(String _app_key) {
-        parameters.add(new BasicNameValuePair("app_key", _app_key));
+    public SearchQuery withAppKey(String appKey) {
+        parameters.add(new BasicNameValuePair("app_key", appKey));
         return this;
     }
 
-    public SearchQuery withCountryCode(String _cc) {
-        parameters.add(new BasicNameValuePair("countryCode", _cc));
-        return this;
-    }
-
-    public SearchQuery withQ(String _q) {
-        parameters.add(new BasicNameValuePair("q", _q));
-        return this;
-    }
-
-    public SearchQuery withStoreId(List<Integer> _storeId) {
-        for (Integer _sid : _storeId) {
-            parameters.add(new BasicNameValuePair("storeId", _sid.toString()));
+    public SearchQuery withStoreId(List<Integer> storeId) {
+        for (Integer sid : storeId) {
+            parameters.add(new BasicNameValuePair("storeId", sid.toString()));
         }
         return this;
     }
 
-    public SearchQuery withAlsoSoldAt(List<Integer> _alsoSoldAt) {
-        for (Integer _asa : _alsoSoldAt) {
-            parameters.add(new BasicNameValuePair("alsoSoldAt", _asa.toString()));
+    public SearchQuery withAlsoSoldAt(List<Integer> alsoSoldAt) {
+        for (Integer asa : alsoSoldAt) {
+            parameters.add(new BasicNameValuePair("alsoSoldAt", asa.toString()));
         }
         return this;
     }
 
-    public SearchQuery withBrandId(List<Integer> _brandId) {
-        for (Integer _bid : _brandId) {
-            parameters.add(new BasicNameValuePair("brandId", _bid.toString()));
+    public SearchQuery withBrandId(List<Integer> brandId) {
+        for (Integer bid : brandId) {
+            parameters.add(new BasicNameValuePair("brandId", bid.toString()));
         }
         return this;
     }
 
-    public SearchQuery withCategoryId(List<Integer> _categoryId) {
-        for (Integer _cid : _categoryId) {
-            parameters.add(new BasicNameValuePair("categoryId", _cid.toString()));
+    public SearchQuery withCategoryId(List<Integer> categoryId) {
+        for (Integer cid : categoryId) {
+            parameters.add(new BasicNameValuePair("categoryId", cid.toString()));
         }
+        return this;
+    }
+
+    public SearchQuery withStartPrice(double startPrice) {
+        parameters.add(new BasicNameValuePair("startPrice", String.valueOf(startPrice)));
+        return this;
+    }
+
+    public SearchQuery withEndPrice(double endPrice) {
+        parameters.add(new BasicNameValuePair("endPrice", String.valueOf(endPrice)));
+        return this;
+    }
+
+    public SearchQuery withAvailability(Availability availability) {
+        parameters.add(new BasicNameValuePair("availability", availability.name()));
+        return this;
+    }
+
+    public SearchQuery withPriceHistoryAvailable(boolean priceHistoryAvailable) {
+        parameters.add(new BasicNameValuePair("priceHistoryAvailable", String.valueOf(priceHistoryAvailable)));
+        return this;
+    }
+
+    public SearchQuery withOnPromotion(boolean onPromotion) {
+        parameters.add(new BasicNameValuePair("onPromotion", String.valueOf(onPromotion)));
+        return this;
+    }
+
+    public SearchQuery withLastRecordedIn(int lastRecordedIn) {
+        parameters.add(new BasicNameValuePair("lastRecordedIn", String.valueOf(lastRecordedIn)));
+        return this;
+    }
+
+    public SearchQuery withStoresCount(int storesCount) {
+        parameters.add(new BasicNameValuePair("storesCount", String.valueOf(storesCount)));
+        return this;
+    }
+
+    public SearchQuery withPriceChange(PriceChange priceChange) {
+        parameters.add(new BasicNameValuePair("priceChange", priceChange.name()));
+        return this;
+    }
+
+    public SearchQuery withApplyFilterTo(ApplyFiltersTo applyFiltersTo) {
+        parameters.add(new BasicNameValuePair("applyFiltersTo", applyFiltersTo.name()));
+        return this;
+    }
+
+    public SearchQuery withSelectOffersFrom(SelectOffersFrom selectOffersFrom) {
+        parameters.add(new BasicNameValuePair("selectOffersFrom", selectOffersFrom.name()));
+        return this;
+    }
+
+    public SearchQuery withCountryCode(String countryCode) {
+        parameters.add(new BasicNameValuePair("countryCode", countryCode));
         return this;
     }
 
@@ -101,53 +127,8 @@ public class SearchQuery extends QueryBase {
         return this;
     }
 
-    public SearchQuery withStartPrice(double _startPrice) {
-        parameters.add(new BasicNameValuePair("startPrice", String.valueOf(_startPrice)));
-        return this;
-    }
-
-    public SearchQuery withEndPrice(double _endPrice) {
-        parameters.add(new BasicNameValuePair("endPrice", String.valueOf(_endPrice)));
-        return this;
-    }
-
-    public SearchQuery withAvailability(Availability _availability) {
-        parameters.add(new BasicNameValuePair("availability", _availability.name()));
-        return this;
-    }
-
-    public SearchQuery withPriceHistoryAvailable(boolean _priceHistoryAvailable) {
-        parameters.add(new BasicNameValuePair("priceHistoryAvailable", String.valueOf(_priceHistoryAvailable)));
-        return this;
-    }
-
-    public SearchQuery withPriceChange(PriceChange _priceChange) {
-        parameters.add(new BasicNameValuePair("priceChange", _priceChange.name()));
-        return this;
-    }
-
-    public SearchQuery withOnPromotion(boolean _onPromotion) {
-        parameters.add(new BasicNameValuePair("onPromotion", String.valueOf(_onPromotion)));
-        return this;
-    }
-
-    public SearchQuery withLastRecordedIn(int _lastRecordedIn) {
-        parameters.add(new BasicNameValuePair("lastRecordedIn", String.valueOf(_lastRecordedIn)));
-        return this;
-    }
-
-    public SearchQuery withStoresCount(int _storesCount) {
-        parameters.add(new BasicNameValuePair("storesCount", String.valueOf(_storesCount)));
-        return this;
-    }
-
-    public SearchQuery withApplyFilterTo(ApplyFiltersTo _applyFiltersTo) {
-        parameters.add(new BasicNameValuePair("applyFiltersTo", _applyFiltersTo.name()));
-        return this;
-    }
-
-    public SearchQuery withSelectOffersFrom(SelectOffersFrom _selectOffersFrom) {
-        parameters.add(new BasicNameValuePair("selectOffersFrom", _selectOffersFrom.name()));
+    public SearchQuery withQ(String _q) {
+        parameters.add(new BasicNameValuePair("q", _q));
         return this;
     }
 

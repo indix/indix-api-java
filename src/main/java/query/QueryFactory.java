@@ -18,7 +18,19 @@ public class QueryFactory {
         return new SuggestionsQuery();
     }
 
+    public static BulkProductsQuery newBulkQuery() {
+        return new SearchQuery();
+    }
+
     public static ProductHistoryQuery newProductHistoryQuery() {
         return new ProductHistoryQuery();
+    }
+
+    public static BulkLookupQuery newBulkLookupQuery() {
+        return new BulkLookupQuery();
+    }
+
+    public static JobStatusQuery newJobStatusQuery() {
+        return new JobStatusQuery();
     }
 }

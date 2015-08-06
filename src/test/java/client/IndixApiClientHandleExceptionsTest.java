@@ -4,12 +4,16 @@ import client.impl.IndixApiClientFactory;
 import exception.*;
 import httpClient.HttpClient;
 import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
 import org.junit.Test;
 import query.QueryFactory;
 import query.SearchQuery;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,7 +25,15 @@ public class IndixApiClientHandleExceptionsTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 throw new UnauthorizedException("unauthorized exception");
             }
-
+            public InputStream GETStream(URI uri) throws IOException, IndixApiException {
+                throw new UnauthorizedException("unauthorized exception");
+            }
+            public String POST(URI uri, List<NameValuePair> nameValuePair) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, List<NameValuePair> nameValuePair, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -45,7 +57,15 @@ public class IndixApiClientHandleExceptionsTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 throw new TooManyRequestsException("too many requests exception");
             }
-
+            public InputStream GETStream(URI uri) throws IOException, IndixApiException {
+                throw new UnauthorizedException("unauthorized exception");
+            }
+            public String POST(URI uri, List<NameValuePair> nameValuePair) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, List<NameValuePair> nameValuePair, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -69,7 +89,15 @@ public class IndixApiClientHandleExceptionsTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 throw new PaymentRequiredException("payment required exception");
             }
-
+            public InputStream GETStream(URI uri) throws IOException, IndixApiException {
+                throw new UnauthorizedException("unauthorized exception");
+            }
+            public String POST(URI uri, List<NameValuePair> nameValuePair) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, List<NameValuePair> nameValuePair, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -93,7 +121,15 @@ public class IndixApiClientHandleExceptionsTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 throw new IndixApiException(999, "some unknown error code");
             }
-
+            public InputStream GETStream(URI uri) throws IOException, IndixApiException {
+                throw new UnauthorizedException("unauthorized exception");
+            }
+            public String POST(URI uri, List<NameValuePair> nameValuePair) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, List<NameValuePair> nameValuePair, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -117,7 +153,15 @@ public class IndixApiClientHandleExceptionsTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 throw new InternalServerException("internal server exception");
             }
-
+            public InputStream GETStream(URI uri) throws IOException, IndixApiException {
+                throw new UnauthorizedException("unauthorized exception");
+            }
+            public String POST(URI uri, List<NameValuePair> nameValuePair) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, List<NameValuePair> nameValuePair, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 
@@ -141,7 +185,15 @@ public class IndixApiClientHandleExceptionsTest {
             public String GET(URI uri) throws IOException, IndixApiException {
                 throw new BadRequestException("bad request exception");
             }
-
+            public InputStream GETStream(URI uri) throws IOException, IndixApiException {
+                throw new UnauthorizedException("unauthorized exception");
+            }
+            public String POST(URI uri, List<NameValuePair> nameValuePair) throws IOException, IndixApiException {
+                throw new BadRequestException("bad request exception");
+            }
+            public String POST(URI uri, List<NameValuePair> nameValuePair, File file) throws IOException, IndixApiException {
+                return null;
+            }
             public void close() throws IOException { }
         };
 

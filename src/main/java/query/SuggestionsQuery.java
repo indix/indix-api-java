@@ -27,5 +27,4 @@ public class SuggestionsQuery extends QueryBase {
         parameters.add(new BasicNameValuePair("countryCode", _cc));
         return this;
     }
-
 }

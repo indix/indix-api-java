@@ -2,7 +2,6 @@ package client;
 
 
 import client.impl.IndixApiClientFactory;
-import common.ResourceUtils;
 import exception.IndixApiException;
 import httpClient.HttpClient;
 import models.product.productAtStore.ProductHistoryAtStore;
@@ -12,7 +11,6 @@ import query.ProductHistoryQuery;
 import query.QueryFactory;
 
 import java.io.IOException;
-import java.net.URI;
 
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
@@ -22,14 +20,9 @@ public class IndixApiClientHistoryTest {
 
     @Test
     public void getProductHistory() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(getClass().getClassLoader(), "productHistory-json-responses0/productHistory.json");
-            }
 
-            public void close() throws IOException {
-            }
-        };
+        MockHttpClient mockHttpClientInstance = new MockHttpClient();
+        HttpClient mockHttpClient = mockHttpClientInstance.mockGetClient("productHistory-json-responses0/productHistory.json");
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
@@ -46,7 +39,7 @@ public class IndixApiClientHistoryTest {
             assertThat(productOfferHistory.getSalePriceHistory(), hasItems(8.99, 9.99, 12.99));
             assertThat(productOfferHistory.getListPriceHistory(), hasItems(9.99, 10.99, 13.99));
             assertThat(productOfferHistory.getPid(), is("pid1"));
-            assertThat(productOfferHistory.getTimestampHistory(),hasItems(1436918399999L,1436399999999L,1434585599999L));
+            assertThat(productOfferHistory.getTimestampHistory(), hasItems(1436918399999L, 1436399999999L, 1434585599999L));
 
             assertThat(productHistoryRecord.getStoreId(), is(111));
             assertThat(productHistoryRecord.getStoreName(), is("storeName"));

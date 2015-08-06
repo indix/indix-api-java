@@ -11,5 +11,4 @@ public class Metadata {
     public String getName() {
         return name;
     }
-
 }

@@ -1,7 +1,6 @@
 package client;
 
 import client.impl.IndixApiClientFactory;
-import common.ResourceUtils;
 import exception.IndixApiException;
 import exception.InternalServerException;
 import httpClient.HttpClient;
@@ -11,27 +10,22 @@ import query.ProductDetailsQuery;
 import query.QueryFactory;
 
 import java.io.IOException;
-import java.net.URI;
 
 import static org.junit.Assert.assertEquals;
 
 public class IndixApiClientProductDetailsTest {
 
+    public HttpClient getMockHttpClient(String resource) throws IOException, IndixApiException {
+        MockHttpClient mockHttpClientInstance = new MockHttpClient();
+        HttpClient mockHttpClient = mockHttpClientInstance.mockGetClient(resource);
+        return mockHttpClient;
+    }
+
     @Test
     public void getProductDetailsSummary() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/summaryProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/summaryProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -50,19 +44,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test
     public void getProductDetailsOffersStandard() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/offersStandardProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/offersStandardProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -82,19 +66,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test
     public void getProductDetailsOffersPremium() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/offersPremiumProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/offersPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -113,19 +87,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test
     public void getProductDetailsCatalogStandard() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/catalogStandardProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/catalogStandardProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -144,19 +108,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test
     public void getProductDetailsCatalogPremium() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -175,19 +129,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test
     public void getProductDetailsUniversal() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/universalProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -206,19 +150,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsSummaryFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/offersStandardProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/offersStandardProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -236,19 +170,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsSummaryFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/offersPremiumProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/offersPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -266,19 +190,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsSummaryFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/catalogStandardProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/catalogStandardProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -296,19 +210,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsSummaryFailsIfInputResponseIsMalformed3() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -326,19 +230,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsSummaryFailsIfInputResponseIsMalformed4() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/universalProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -356,19 +250,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsOffersStandardFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/catalogStandardProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/catalogStandardProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -387,19 +271,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsOffersStandardFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -418,19 +292,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsOffersStandardFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/universalProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -449,19 +313,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsOffersPremiumFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/catalogStandardProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient( "productDetails-json-responses0/catalogStandardProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -479,19 +333,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsOffersPremiumFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -509,18 +353,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsOffersPremiumFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/universalProductDetailsResponse.json");
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -538,19 +373,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsCatalogStandardFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/offersStandardProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                getMockHttpClient("productDetails-json-responses0/offersStandardProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -568,19 +393,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsCatalogStandardFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/offersPremiumProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/offersPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -598,19 +413,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsCatalogStandardFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -628,19 +433,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsCatalogStandardFailsIfInputResponseIsMalformed3() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/universalProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient( "productDetails-json-responses0/universalProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -658,19 +453,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsCatalogPremiumFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/offersStandardProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/offersStandardProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -688,19 +473,10 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsCatalogPremiumFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/offersPremiumProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/offersPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -718,19 +494,9 @@ public class IndixApiClientProductDetailsTest {
 
     @Test(expected = InternalServerException.class)
     public void getProductDetailsCatalogPremiumFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                return ResourceUtils.getTestResource(
-                        getClass().getClassLoader(),
-                        "productDetails-json-responses0/universalProductDetailsResponse.json"
-                );
-            }
 
-            public void close() throws IOException {
-            }
-        };
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
+                                            getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
