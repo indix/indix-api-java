@@ -65,7 +65,6 @@ public class BulkQueryTest {
     @Test
     public void testBasicBulkLookupQuery() throws IOException {
 
-        System.out.println();
         File file = ResourceUtils.getTestFile(getClass().getClassLoader(), "bulkQuery-json-responses0/bulkLookupInput.jsonl");
         FileInputStream inputStream = new FileInputStream(file);
         StringBuilder builder = new StringBuilder();

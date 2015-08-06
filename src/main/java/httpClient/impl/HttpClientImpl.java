@@ -2,10 +2,7 @@ package httpClient.impl;
 
 import exception.*;
 import httpClient.HttpClient;
-import org.apache.http.Consts;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
+import org.apache.http.*;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -34,55 +31,63 @@ class HttpClientImpl implements HttpClient {
         closeableHttpClient = HttpClients.createDefault();
     }
 
-    public HttpEntity getResponse(HttpRequestBase httpRequest) throws IndixApiException, IOException {
+    private CloseableHttpResponse getResponse(HttpRequestBase httpRequest) throws IndixApiException, IOException {
 
         CloseableHttpResponse response = closeableHttpClient.execute(httpRequest);
-        System.out.print(response);
-        try {
-            String message = response.getStatusLine().getReasonPhrase();
-            int status = response.getStatusLine().getStatusCode();
-            if (HttpStatus.SC_OK != status) {
-                switch (status) {
-                    case HttpStatus.SC_BAD_REQUEST:
-                        throw new BadRequestException(message);
-                    case HttpStatus.SC_INTERNAL_SERVER_ERROR:
-                        throw new InternalServerException(message);
-                    case HttpStatus.SC_UNAUTHORIZED:
-                        throw new UnauthorizedException(message);
-                    case HttpStatus.SC_PAYMENT_REQUIRED:
-                        throw new PaymentRequiredException(message);
-                    case 429: // too many requests - rate limited error
-                        throw new TooManyRequestsException(message);
-                    default:
-                        throw new IndixApiException(status, message);
-                }
-            }
 
-            return response.getEntity();
+        String message = response.getStatusLine().getReasonPhrase();
+        int status = response.getStatusLine().getStatusCode();
 
-        } finally {
+        if (HttpStatus.SC_OK != status) {
+
+            // we need to close the resources before we throw an exception
+            //
             response.close();
+
+            switch (status) {
+                case HttpStatus.SC_BAD_REQUEST:
+                    throw new BadRequestException(message);
+                case HttpStatus.SC_INTERNAL_SERVER_ERROR:
+                    throw new InternalServerException(message);
+                case HttpStatus.SC_UNAUTHORIZED:
+                    throw new UnauthorizedException(message);
+                case HttpStatus.SC_PAYMENT_REQUIRED:
+                    throw new PaymentRequiredException(message);
+                case 429: // too many requests - rate limited error
+                    throw new TooManyRequestsException(message);
+                default:
+                    throw new IndixApiException(status, message);
+            }
         }
+
+        return response;
     }
 
     public String GET(URI uri) throws IOException, IndixApiException {
 
         HttpGet httpGet = new HttpGet(uri);
-        return EntityUtils.toString(getResponse(httpGet));
+
+        try(CloseableHttpResponse response = getResponse(httpGet)) {
+            return EntityUtils.toString(response.getEntity());
+        }
     }
 
     public InputStream GETStream(URI uri) throws IOException, IndixApiException {
 
         HttpGet httpGet = new HttpGet(uri);
-        HttpEntity httpEntity = getResponse(httpGet);
-        return httpEntity.getContent();
+
+        try(CloseableHttpResponse response = getResponse(httpGet)) {
+            return response.getEntity().getContent();
+        }
     }
 
     public String POST(URI uri, List<NameValuePair> params) throws IndixApiException, IOException {
 
         HttpPost httpPost = new HttpPost(uri);
         httpPost.setEntity(new UrlEncodedFormEntity(params, Consts.UTF_8));
-        return EntityUtils.toString(getResponse(httpPost));
+        try(CloseableHttpResponse response = getResponse(httpPost)) {
+            return EntityUtils.toString(response.getEntity());
+        }
     }
 
     public String POST(URI uri, List<NameValuePair> params, File file) throws IOException, IndixApiException {
@@ -105,7 +110,9 @@ class HttpClientImpl implements HttpClient {
 
         // process request
         //
-        return EntityUtils.toString(getResponse(httpPost));
+        try(CloseableHttpResponse response = getResponse(httpPost)) {
+            return EntityUtils.toString(response.getEntity());
+        }
     }
 
     public void close() throws IOException {
