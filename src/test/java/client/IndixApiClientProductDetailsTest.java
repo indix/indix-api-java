@@ -25,7 +25,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsSummary() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/summaryProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/summaryProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -46,7 +46,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsOffersStandard() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/offersStandardProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/offersStandardProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -68,7 +68,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsOffersPremium() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/offersPremiumProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/offersPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -89,7 +89,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsCatalogStandard() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/catalogStandardProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/catalogStandardProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -110,7 +110,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsCatalogPremium() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -131,7 +131,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsUniversal() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -152,7 +152,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsSummaryFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/offersStandardProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/offersStandardProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -160,9 +160,9 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf")
                     .withAppId("123")
                     .withAppKey("123");
-            SummaryProductDetailsResult sr = indixApiClient.getProductDetailsSummary(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsSummary(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }
@@ -172,7 +172,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsSummaryFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/offersPremiumProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/offersPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -182,7 +182,7 @@ public class IndixApiClientProductDetailsTest {
                     .withAppKey("123");
             SummaryProductDetailsResult sr = indixApiClient.getProductDetailsSummary(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+
         } finally {
             indixApiClient.close();
         }
@@ -192,7 +192,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsSummaryFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/catalogStandardProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/catalogStandardProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -200,9 +200,9 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf")
                     .withAppId("123")
                     .withAppKey("123");
-            SummaryProductDetailsResult sr = indixApiClient.getProductDetailsSummary(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsSummary(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }
@@ -212,7 +212,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsSummaryFailsIfInputResponseIsMalformed3() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -220,9 +220,9 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf")
                     .withAppId("123")
                     .withAppKey("123");
-            SummaryProductDetailsResult sr = indixApiClient.getProductDetailsSummary(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsSummary(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }
@@ -232,7 +232,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsSummaryFailsIfInputResponseIsMalformed4() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -240,9 +240,9 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf")
                     .withAppId("123")
                     .withAppKey("123");
-            SummaryProductDetailsResult sr = indixApiClient.getProductDetailsSummary(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsSummary(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }
@@ -252,7 +252,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsOffersStandardFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/catalogStandardProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/catalogStandardProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -261,9 +261,9 @@ public class IndixApiClientProductDetailsTest {
                     .withStoreId(2817)
                     .withAppId("123")
                     .withAppKey("123");
-            OffersProductDetailsResult sr = indixApiClient.getProductDetailsOffersStandard(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsOffersStandard(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }
@@ -282,9 +282,9 @@ public class IndixApiClientProductDetailsTest {
                     .withStoreId(2817)
                     .withAppId("123")
                     .withAppKey("123");
-            OffersProductDetailsResult sr = indixApiClient.getProductDetailsOffersStandard(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsOffersStandard(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }
@@ -294,7 +294,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsOffersStandardFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -303,9 +303,9 @@ public class IndixApiClientProductDetailsTest {
                     .withStoreId(2817)
                     .withAppId("123")
                     .withAppKey("123");
-            OffersProductDetailsResult sr = indixApiClient.getProductDetailsOffersStandard(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsOffersStandard(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }
@@ -315,7 +315,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsOffersPremiumFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient( "productDetails-json-responses0/catalogStandardProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/catalogStandardProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -323,9 +323,9 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf")
                     .withAppId("123")
                     .withAppKey("123");
-            OffersProductDetailsResult sr = indixApiClient.getProductDetailsOffersPremium(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsOffersPremium(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }
@@ -335,7 +335,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsOffersPremiumFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -343,9 +343,9 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf")
                     .withAppId("123")
                     .withAppKey("123");
-            OffersProductDetailsResult sr = indixApiClient.getProductDetailsOffersPremium(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsOffersPremium(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }
@@ -355,7 +355,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsOffersPremiumFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -363,9 +363,9 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf")
                     .withAppId("123")
                     .withAppKey("123");
-            OffersProductDetailsResult sr = indixApiClient.getProductDetailsOffersPremium(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsOffersPremium(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }
@@ -383,9 +383,9 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf")
                     .withAppId("123")
                     .withAppKey("123");
-            CatalogStandardProductDetailsResult sr = indixApiClient.getProductDetailsCatalogStandard(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsCatalogStandard(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }
@@ -395,7 +395,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsCatalogStandardFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/offersPremiumProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/offersPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -403,9 +403,9 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf")
                     .withAppId("123")
                     .withAppKey("123");
-            CatalogStandardProductDetailsResult sr = indixApiClient.getProductDetailsCatalogStandard(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsCatalogStandard(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }
@@ -415,7 +415,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsCatalogStandardFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -423,9 +423,9 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf")
                     .withAppId("123")
                     .withAppKey("123");
-            CatalogStandardProductDetailsResult sr = indixApiClient.getProductDetailsCatalogStandard(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsCatalogStandard(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }
@@ -435,7 +435,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsCatalogStandardFailsIfInputResponseIsMalformed3() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient( "productDetails-json-responses0/universalProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -443,9 +443,9 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf")
                     .withAppId("123")
                     .withAppKey("123");
-            CatalogStandardProductDetailsResult sr = indixApiClient.getProductDetailsCatalogStandard(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsCatalogStandard(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }
@@ -455,7 +455,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsCatalogPremiumFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/offersStandardProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/offersStandardProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -463,9 +463,9 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf")
                     .withAppId("123")
                     .withAppKey("123");
-            CatalogPremiumProductDetailsResult sr = indixApiClient.getProductDetailsCatalogPremium(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsCatalogPremium(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }
@@ -476,7 +476,7 @@ public class IndixApiClientProductDetailsTest {
 
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/offersPremiumProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/offersPremiumProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -484,9 +484,9 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf")
                     .withAppId("123")
                     .withAppKey("123");
-            CatalogPremiumProductDetailsResult sr = indixApiClient.getProductDetailsCatalogPremium(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsCatalogPremium(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }
@@ -496,7 +496,7 @@ public class IndixApiClientProductDetailsTest {
     public void getProductDetailsCatalogPremiumFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
+                getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
 
         try {
             ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
@@ -504,9 +504,9 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf")
                     .withAppId("123")
                     .withAppKey("123");
-            CatalogPremiumProductDetailsResult sr = indixApiClient.getProductDetailsCatalogPremium(productDetailsQuery);
 
-            System.out.println(sr.getProduct().getMpid());
+            indixApiClient.getProductDetailsCatalogPremium(productDetailsQuery);
+
         } finally {
             indixApiClient.close();
         }

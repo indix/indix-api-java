@@ -6,6 +6,8 @@ import exception.InternalServerException;
 import httpClient.HttpClient;
 import models.searchResponse.searchResult.*;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import query.Query;
 import query.QueryFactory;
 
@@ -15,6 +17,8 @@ import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 
 public class IndixApiClientSearchTest {
+
+    final static Logger logger = LoggerFactory.getLogger(IndixApiClientSearchTest.class);
 
     public HttpClient getMockHttpClient(String resource) throws IOException, IndixApiException {
         MockHttpClient mockHttpClientInstance = new MockHttpClient();
@@ -74,7 +78,7 @@ public class IndixApiClientSearchTest {
     public void getProductsOffersStandard() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                                    getMockHttpClient("search-json-responses0/offersStandardSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/offersStandardSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -99,7 +103,7 @@ public class IndixApiClientSearchTest {
     public void getProductsCatalogStandard() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/catalogStandardSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/catalogStandardSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -123,7 +127,7 @@ public class IndixApiClientSearchTest {
     public void getProductsCatalogPremium() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/catalogPremiumSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/catalogPremiumSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -147,7 +151,7 @@ public class IndixApiClientSearchTest {
     public void getProductsSummary() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/summarySearchResponse.json"));
+                getMockHttpClient("search-json-responses0/summarySearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -167,11 +171,11 @@ public class IndixApiClientSearchTest {
         }
     }
 
-    @Test(expected= InternalServerException.class)
+    @Test(expected = InternalServerException.class)
     public void getProductsCatalogPremiumFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
                     .withQ("nike")
@@ -180,18 +184,18 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            CatalogPremiumSearchResult sr = indixApiClient.getProductsCatalogPremium(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsCatalogPremium(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
-    public void getProductsCatalogPremiumFailsIfInputResponseIsMalformed1()throws IOException, IndixApiException {
+    @Test(expected = InternalServerException.class)
+    public void getProductsCatalogPremiumFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                                getMockHttpClient("search-json-responses0/offersPremiumSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/offersPremiumSearchResponse.json"));
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
                     .withQ("nike")
@@ -200,18 +204,18 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            CatalogPremiumSearchResult sr = indixApiClient.getProductsCatalogPremium(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsCatalogPremium(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
-    public void getProductsCatalogPremiumFailsIfInputResponseIsMalformed2()throws IOException, IndixApiException {
+    @Test(expected = InternalServerException.class)
+    public void getProductsCatalogPremiumFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/offersStandardSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/offersStandardSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -221,18 +225,18 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            CatalogPremiumSearchResult sr = indixApiClient.getProductsCatalogPremium(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsCatalogPremium(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
-    public void getProductsCatalogStandardFailsIfInputResponseIsMalformed0()throws IOException, IndixApiException {
+    @Test(expected = InternalServerException.class)
+    public void getProductsCatalogStandardFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -242,15 +246,15 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            CatalogStandardSearchResult sr = indixApiClient.getProductsCatalogStandard(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsCatalogStandard(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
-    public void getProductsCatalogStandardFailsIfInputResponseIsMalformed1()throws IOException, IndixApiException {
+    @Test(expected = InternalServerException.class)
+    public void getProductsCatalogStandardFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
                 getMockHttpClient("search-json-responses0/catalogPremiumSearchResponse.json"));
@@ -263,18 +267,18 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            CatalogStandardSearchResult sr = indixApiClient.getProductsCatalogStandard(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsCatalogStandard(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
-    public void getProductsCatalogStandardFailsIfInputResponseIsMalformed2()throws IOException, IndixApiException {
+    @Test(expected = InternalServerException.class)
+    public void getProductsCatalogStandardFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/offersPremiumSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/offersPremiumSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -284,18 +288,18 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            CatalogStandardSearchResult sr = indixApiClient.getProductsCatalogStandard(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsCatalogStandard(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
-    public void getProductsCatalogStandardFailsIfInputResponseIsMalformed3()throws IOException, IndixApiException {
+    @Test(expected = InternalServerException.class)
+    public void getProductsCatalogStandardFailsIfInputResponseIsMalformed3() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/offersStandardSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/offersStandardSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -305,18 +309,18 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            CatalogStandardSearchResult sr = indixApiClient.getProductsCatalogStandard(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsCatalogStandard(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
-    public void getProductsOffersPremiumFailsIfInputResponseIsMalformed0()throws IOException, IndixApiException {
+    @Test(expected = InternalServerException.class)
+    public void getProductsOffersPremiumFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -326,18 +330,18 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            OffersSearchResult sr = indixApiClient.getProductsOffersPremium(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsOffersPremium(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
-    public void getProductsOffersPremiumFailsIfInputResponseIsMalformed1()throws IOException, IndixApiException {
+    @Test(expected = InternalServerException.class)
+    public void getProductsOffersPremiumFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/catalogPremiumSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/catalogPremiumSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -347,18 +351,18 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            OffersSearchResult sr = indixApiClient.getProductsOffersPremium(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsOffersPremium(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
-    public void getProductsOffersPremiumFailsIfInputResponseIsMalformed2()throws IOException, IndixApiException {
+    @Test(expected = InternalServerException.class)
+    public void getProductsOffersPremiumFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/catalogStandardSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/catalogStandardSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -368,18 +372,18 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            OffersSearchResult sr = indixApiClient.getProductsOffersPremium(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsOffersPremium(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
+    @Test(expected = InternalServerException.class)
     public void getProductsOffersStandardFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -389,18 +393,18 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            OffersSearchResult sr = indixApiClient.getProductsOffersStandard(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsOffersStandard(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
-    public void getProductsOffersStandardFailsIfInputResponseIsMalformed1()throws IOException, IndixApiException {
+    @Test(expected = InternalServerException.class)
+    public void getProductsOffersStandardFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/catalogPremiumSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/catalogPremiumSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -410,18 +414,18 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            OffersSearchResult sr = indixApiClient.getProductsOffersStandard(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsOffersStandard(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
-    public void getProductsOffersStandardFailsIfInputResponseIsMalformed2()throws IOException, IndixApiException {
+    @Test(expected = InternalServerException.class)
+    public void getProductsOffersStandardFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/catalogStandardSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/catalogStandardSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -431,18 +435,18 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            OffersSearchResult sr = indixApiClient.getProductsOffersStandard(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsOffersStandard(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
-    public void getProductsSummaryFailsIfInputResponseIsMalformed0()throws IOException, IndixApiException {
+    @Test(expected = InternalServerException.class)
+    public void getProductsSummaryFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -452,18 +456,18 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            SummarySearchResult sr = indixApiClient.getProductsSummary(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsSummary(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
-    public void getProductsSummaryFailsIfInputResponseIsMalformed1()throws IOException, IndixApiException {
+    @Test(expected = InternalServerException.class)
+    public void getProductsSummaryFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/catalogPremiumSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/catalogPremiumSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -473,18 +477,18 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            SummarySearchResult sr = indixApiClient.getProductsSummary(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsSummary(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
-    public void getProductsSummaryFailsIfInputResponseIsMalformed2()throws IOException, IndixApiException {
+    @Test(expected = InternalServerException.class)
+    public void getProductsSummaryFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/catalogStandardSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/catalogStandardSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -494,18 +498,18 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            SummarySearchResult sr = indixApiClient.getProductsSummary(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsSummary(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
-    public void getProductsSummaryFailsIfInputResponseIsMalformed3()throws IOException, IndixApiException {
+    @Test(expected = InternalServerException.class)
+    public void getProductsSummaryFailsIfInputResponseIsMalformed3() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/offersPremiumSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/offersPremiumSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -515,18 +519,18 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            SummarySearchResult sr = indixApiClient.getProductsSummary(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsSummary(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected=InternalServerException.class)
-    public void getProductsSummaryFailsIfInputResponseIsMalformed4()throws IOException, IndixApiException {
+    @Test(expected = InternalServerException.class)
+    public void getProductsSummaryFailsIfInputResponseIsMalformed4() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("search-json-responses0/offersStandardSearchResponse.json"));
+                getMockHttpClient("search-json-responses0/offersStandardSearchResponse.json"));
 
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -536,8 +540,8 @@ public class IndixApiClientSearchTest {
                     .withAppId("123")
                     .withAppKey("123");
 
-            SummarySearchResult sr = indixApiClient.getProductsSummary(searchQuery);
-            System.out.println(sr.getCount());
+            indixApiClient.getProductsSummary(searchQuery);
+
         } finally {
             indixApiClient.close();
         }
