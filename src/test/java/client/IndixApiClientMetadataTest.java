@@ -17,8 +17,8 @@ import static org.junit.Assert.assertEquals;
 public class IndixApiClientMetadataTest {
 
     public HttpClient getMockHttpClient(String resource) throws IOException, IndixApiException {
-        MockHttpClient mockHttpClientInstance = new MockHttpClient();
-        HttpClient mockHttpClient = mockHttpClientInstance.mockGetClient(resource);
+        MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
+        HttpClient mockHttpClient = mockHttpClientInstance.getMockClient(resource);
         return mockHttpClient;
     }
 

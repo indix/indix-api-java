@@ -16,8 +16,8 @@ public class IndixApiClientSuggestionsTest {
 
     @Test
     public void getSuggestions() throws IOException, IndixApiException {
-        MockHttpClient mockHttpClientInstance = new MockHttpClient();
-        HttpClient mockHttpClient = mockHttpClientInstance.mockGetClient("suggestions-json-responses0/suggestionsResponse.json");
+        MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
+        HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("suggestions-json-responses0/suggestionsResponse.json");
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
         try {
