@@ -10,10 +10,6 @@ public class SearchQuery extends QueryBase implements BulkProductsQuery {
         super();
     }
 
-    enum SortBy {
-        PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, MOST_RECENT
-    }
-
     public SearchQuery withAppId(String appId) {
         parameters.add(new BasicNameValuePair("app_id", appId));
         return this;

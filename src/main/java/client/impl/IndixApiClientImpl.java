@@ -154,7 +154,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            logger.info("getProductsCatalogPremium failed: " + e.getMessage());
+            logger.error("getProductsCatalogPremium failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
