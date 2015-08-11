@@ -4,38 +4,21 @@ import client.impl.IndixApiClientFactory;
 import exception.*;
 import httpClient.HttpClient;
 import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
 import org.junit.Test;
 import query.QueryFactory;
 import query.SearchQuery;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.util.List;
+
 
 import static org.junit.Assert.assertEquals;
 
 public class IndixApiClientHandleExceptionsTest {
 
-    @Test(expected= UnauthorizedException.class)
+    @Test(expected = UnauthorizedException.class)
     public void handleUnauthorizedException() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                throw new UnauthorizedException("unauthorized exception");
-            }
-            public InputStream GETStream(URI uri) throws IOException, IndixApiException {
-                throw new UnauthorizedException("unauthorized exception");
-            }
-            public String POST(URI uri, List<NameValuePair> nameValuePair) throws IOException, IndixApiException {
-                throw new BadRequestException("bad request exception");
-            }
-            public String POST(URI uri, List<NameValuePair> nameValuePair, File file) throws IOException, IndixApiException {
-                return null;
-            }
-            public void close() throws IOException { }
-        };
+        MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
+        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.exception_name.UNAUTHORIZED);
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
@@ -51,23 +34,10 @@ public class IndixApiClientHandleExceptionsTest {
         }
     }
 
-    @Test(expected= TooManyRequestsException.class)
+    @Test(expected = TooManyRequestsException.class)
     public void handleTooManyRequestsException() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                throw new TooManyRequestsException("too many requests exception");
-            }
-            public InputStream GETStream(URI uri) throws IOException, IndixApiException {
-                throw new UnauthorizedException("unauthorized exception");
-            }
-            public String POST(URI uri, List<NameValuePair> nameValuePair) throws IOException, IndixApiException {
-                throw new BadRequestException("bad request exception");
-            }
-            public String POST(URI uri, List<NameValuePair> nameValuePair, File file) throws IOException, IndixApiException {
-                return null;
-            }
-            public void close() throws IOException { }
-        };
+        MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
+        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.exception_name.TOO_MANY_REQUESTS);
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
@@ -83,23 +53,10 @@ public class IndixApiClientHandleExceptionsTest {
         }
     }
 
-    @Test(expected= PaymentRequiredException.class)
+    @Test(expected = PaymentRequiredException.class)
     public void handlePaymentRequiredException() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                throw new PaymentRequiredException("payment required exception");
-            }
-            public InputStream GETStream(URI uri) throws IOException, IndixApiException {
-                throw new UnauthorizedException("unauthorized exception");
-            }
-            public String POST(URI uri, List<NameValuePair> nameValuePair) throws IOException, IndixApiException {
-                throw new BadRequestException("bad request exception");
-            }
-            public String POST(URI uri, List<NameValuePair> nameValuePair, File file) throws IOException, IndixApiException {
-                return null;
-            }
-            public void close() throws IOException { }
-        };
+        MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
+        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.exception_name.PAYMENT_REQUIRED);
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
@@ -115,23 +72,10 @@ public class IndixApiClientHandleExceptionsTest {
         }
     }
 
-    @Test(expected= IndixApiException.class)
+    @Test(expected = IndixApiException.class)
     public void handleIndixApiException() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                throw new IndixApiException(999, "some unknown error code");
-            }
-            public InputStream GETStream(URI uri) throws IOException, IndixApiException {
-                throw new UnauthorizedException("unauthorized exception");
-            }
-            public String POST(URI uri, List<NameValuePair> nameValuePair) throws IOException, IndixApiException {
-                throw new BadRequestException("bad request exception");
-            }
-            public String POST(URI uri, List<NameValuePair> nameValuePair, File file) throws IOException, IndixApiException {
-                return null;
-            }
-            public void close() throws IOException { }
-        };
+        MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
+        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.exception_name.INDIX_API);
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
@@ -147,23 +91,10 @@ public class IndixApiClientHandleExceptionsTest {
         }
     }
 
-    @Test(expected= InternalServerException.class)
+    @Test(expected = InternalServerException.class)
     public void handleInternalServerException() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                throw new InternalServerException("internal server exception");
-            }
-            public InputStream GETStream(URI uri) throws IOException, IndixApiException {
-                throw new UnauthorizedException("unauthorized exception");
-            }
-            public String POST(URI uri, List<NameValuePair> nameValuePair) throws IOException, IndixApiException {
-                throw new BadRequestException("bad request exception");
-            }
-            public String POST(URI uri, List<NameValuePair> nameValuePair, File file) throws IOException, IndixApiException {
-                return null;
-            }
-            public void close() throws IOException { }
-        };
+        MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
+        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.exception_name.INTERNAL_SERVER);
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
@@ -179,23 +110,10 @@ public class IndixApiClientHandleExceptionsTest {
         }
     }
 
-    @Test(expected= BadRequestException.class)
+    @Test(expected = BadRequestException.class)
     public void handleBadRequestException() throws IOException, IndixApiException {
-        HttpClient mockHttpClient = new HttpClient() {
-            public String GET(URI uri) throws IOException, IndixApiException {
-                throw new BadRequestException("bad request exception");
-            }
-            public InputStream GETStream(URI uri) throws IOException, IndixApiException {
-                throw new UnauthorizedException("unauthorized exception");
-            }
-            public String POST(URI uri, List<NameValuePair> nameValuePair) throws IOException, IndixApiException {
-                throw new BadRequestException("bad request exception");
-            }
-            public String POST(URI uri, List<NameValuePair> nameValuePair, File file) throws IOException, IndixApiException {
-                return null;
-            }
-            public void close() throws IOException { }
-        };
+        MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
+        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.exception_name.BAD_REQUEST);
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 

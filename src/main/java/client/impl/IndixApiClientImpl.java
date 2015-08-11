@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Indix Api Client
@@ -42,6 +44,9 @@ class IndixApiClientImpl implements IndixApiClient {
     // converts json to class instances
     //
     ObjectMapper jsonMapper;
+
+
+    final static Logger logger = LoggerFactory.getLogger(IndixApiClientImpl.class);
 
     private IndixApiClientImpl(HttpClient _httpClient, ObjectMapper _jsonMapper) {
         httpClient = _httpClient;
@@ -97,7 +102,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getProductsSummary failed: " + e.getMessage());
+            logger.error("getProductsSummary failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -110,7 +115,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getProductsOffersStandard failed: " + e.getMessage());
+            logger.error("getProductsOffersStandard failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -123,7 +128,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getProductsOffersPremium failed: " + e.getMessage());
+            logger.error("getProductsOffersPremium failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -136,7 +141,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getProductsCatalogStandard failed: " + e.getMessage());
+            logger.error("getProductsCatalogStandard failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -149,7 +154,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getProductsCatalogPremium failed: " + e.getMessage());
+            logger.error("getProductsCatalogPremium failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -162,7 +167,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getProductsUniversal failed: " + e.getMessage());
+            logger.error("getProductsUniversal failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -184,7 +189,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getProductDetailsSummary failed: " + e.getMessage());
+            logger.error("getProductDetailsSummary failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -206,7 +211,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getProductDetailsOffersStandard failed: " + e.getMessage());
+            logger.error("getProductDetailsOffersStandard failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -229,7 +234,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getProductDetailsOffersPremium failed: " + e.getMessage());
+            logger.error("getProductDetailsOffersPremium failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -252,13 +257,13 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getProductDetailsCatalogStandard failed: " + e.getMessage());
+            logger.error("getProductDetailsCatalogStandard failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
 
     public CatalogPremiumProductDetailsResult getProductDetailsCatalogPremium(ProductDetailsQuery query)
-            throws IndixApiException {
+            throws IndixApiException{
 
         String resource = IndixApiConstants.buildProductDetailsPath(
                 IndixApiConstants.CATALOG_PREMIUM_PRODUCT_DETAILS_RESOURCE,
@@ -275,7 +280,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getProductDetailsCatalogPremium failed: " + e.getMessage());
+            logger.error("getProductDetailsCatalogPremium failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -297,7 +302,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getProductDetailsUniversal failed: " + e.getMessage());
+            logger.error("getProductDetailsUniversal failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -311,7 +316,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getStores failed: " + e.getMessage());
+            logger.error("getStores failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -325,7 +330,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getBrands failed: " + e.getMessage());
+            logger.error("getBrands failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -339,7 +344,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getCategories failed: " + e.getMessage());
+            logger.error("getCategories failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -353,7 +358,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getSuggestions failed: " + e.getMessage());
+            logger.error("getSuggestions failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -370,7 +375,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getProductHistory failed: " + e.getMessage());
+            logger.error("getProductHistory failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -383,7 +388,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getBulkQueryJob failed: " + e.getMessage());
+            logger.error("getBulkQueryJob failed: " + e.getMessage());
             throw new InternalServerException(e);
 
         }
@@ -397,7 +402,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getBulkQueryJob failed: " + e.getMessage());
+            logger.error("getBulkQueryJob failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
@@ -415,7 +420,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getJobStatus failed: " + e.getMessage());
+            logger.error("getJobStatus failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
 
@@ -432,7 +437,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            System.out.println("getJobStatus failed: " + e.getMessage());
+            logger.error("getJobStatus failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }

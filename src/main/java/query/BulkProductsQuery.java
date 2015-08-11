@@ -2,23 +2,7 @@ package query;
 
 import java.util.List;
 
-public interface BulkProductsQuery extends Query {
-
-    enum Availability {
-        IN_STOCK, OUT_OF_STOCK
-    }
-
-    enum PriceChange {
-        PRICE_INCREASED, PRICE_DECREASED, EITHER
-    }
-
-    enum ApplyFiltersTo {
-        storeId, alsoSoldAt, storeIdOrAlsoSoldAt, any
-    }
-
-    enum SelectOffersFrom {
-        storeId, alsoSoldAt, storeIdAndAlsoSoldAt, all
-    }
+public interface BulkProductsQuery extends ApiParameters {
 
     public SearchQuery withAppId(String appId);
 
