@@ -16,6 +16,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static client.impl.IndixApiConstants.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -31,21 +32,27 @@ public class IndixApiClientBulkQueryTest {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
-        List<Integer> intList = new ArrayList<Integer>();
-        intList.add(68);
-        try {
-            BulkProductsQuery bulkQuery = QueryFactory.newBulkQuery()
-                    .withAppId("cb7e91b3")
-                    .withAppKey("7367fd8ed2856c6d44c4f30303963b9c")
-                    .withCountryCode("US")
-                    .withStoreId(intList);
+        String bulkResources[] = {BULK_CATALOG_PREMIUM_PRODUCTS_RESOURCE,BULK_CATALOG_STANDARD_PRODUCTS_RESOURCE,
+                BULK_OFFERS_PREMIUM_PRODUCTS_RESOURCE,BULK_OFFERS_STANDARD_PRODUCTS_RESOURCE,BULK_PRODUCT_RESOURCE,BULK_UNIVERSAL_PRODUCTS_RESOURCE};
 
-            JobInfo jr = indixApiClient.postBulkJob(bulkQuery);
-            assertEquals(1941, jr.getId());
-            assertEquals("SUBMITTED", jr.getStatus());
-        } finally {
-            indixApiClient.close();
+        List<Integer> storeIdList = new ArrayList<Integer>();
+        storeIdList.add(68);
+        for(String resource : bulkResources){
+            try {
+                BulkProductsQuery bulkQuery = QueryFactory.newBulkQuery()
+                        .withAppId("123")
+                        .withAppKey("123")
+                        .withCountryCode("US")
+                        .withStoreId(storeIdList);
+
+                JobInfo jr = indixApiClient.postBulkJob(resource,bulkQuery);
+                assertEquals(1941, jr.getId());
+                assertEquals("SUBMITTED", jr.getStatus());
+            } finally {
+                indixApiClient.close();
+            }
         }
+
     }
 
     @Test
@@ -56,22 +63,27 @@ public class IndixApiClientBulkQueryTest {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
-        try {
-            File file = new File("src/test/resources/bulkQuery-json-responses0/bulkLookupInput.jsonl");
-            BulkLookupQuery bulkLookupQuery = QueryFactory.newBulkLookupQuery()
-                    .withAppId("cb7e91b3")
-                    .withAppKey("7367fd8ed2856c6d44c4f30303963b9c")
-                    .withCountryCode("US")
-                    .withInputFile(file);
-            JobInfo job1 = indixApiClient.postBulkJob(bulkLookupQuery);
+        String bulkResources[] = {BULK_LOOKUP_CATALOG_PREMIUM_RESOURCE,BULK_LOOKUP_CATALOG_STANDARD_RESOURCE,
+                BULK_LOOKUP_OFFERS_PREMIUM_RESOURCE,BULK_LOOKUP_OFFERS_STANDARD_RESOURCE,BULK_LOOKUP_RESOURCE,BULK_LOOKUP_UNIVERSAL_RESOURCE};
 
-            assertEquals(true, bulkLookupQuery.getInputFile().exists());
-            assertEquals("SUBMITTED", job1.getStatus());
-            assertEquals(1941, job1.getId());
+        for(String resource : bulkResources) {
+            try {
+                File file = new File("src/test/resources/bulkQuery-json-responses0/bulkLookupInput.jsonl");
+                BulkLookupQuery bulkLookupQuery = QueryFactory.newBulkLookupQuery()
+                        .withAppId("123")
+                        .withAppKey("123")
+                        .withCountryCode("US")
+                        .withInputFile(file);
+                JobInfo job1 = indixApiClient.postBulkJob(resource, bulkLookupQuery);
+
+                assertEquals(true, bulkLookupQuery.getInputFile().exists());
+                assertEquals("SUBMITTED", job1.getStatus());
+                assertEquals(1941, job1.getId());
 
 
-        } finally {
-            indixApiClient.close();
+            } finally {
+                indixApiClient.close();
+            }
         }
     }
 

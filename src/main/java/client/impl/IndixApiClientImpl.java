@@ -45,6 +45,8 @@ class IndixApiClientImpl implements IndixApiClient {
     //
     ObjectMapper jsonMapper;
 
+    String scheme = IndixApiConstants.SCHEME,
+           host   = IndixApiConstants.HOST;
 
     final static Logger logger = LoggerFactory.getLogger(IndixApiClientImpl.class);
 
@@ -57,6 +59,12 @@ class IndixApiClientImpl implements IndixApiClient {
         this(HttpClientFactory.newHttpClient(), getNewObjectMapper());
     }
 
+    public IndixApiClientImpl(String scheme,String host) {
+        this(HttpClientFactory.newHttpClient(), getNewObjectMapper());
+        this.scheme = scheme;
+        this.host = host;
+    }
+
     public IndixApiClientImpl(HttpClient httpClient) {
         this(httpClient, getNewObjectMapper());
     }
@@ -67,8 +75,8 @@ class IndixApiClientImpl implements IndixApiClient {
 
     private URI uriBuilder(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
         return new URIBuilder()
-                .setScheme(IndixApiConstants.SCHEME)
-                .setHost(IndixApiConstants.HOST)
+                .setScheme(scheme)
+                .setHost(host)
                 .setPath(resource)
                 .setParameters(searchQuery.getParameters())
                 .build();
@@ -380,9 +388,9 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
-    public JobInfo postBulkJob(BulkProductsQuery query) throws IndixApiException {
+    public JobInfo postBulkJob(String resource, BulkProductsQuery query) throws IndixApiException {
         try {
-            String content = executePOST(IndixApiConstants.BULK_PRODUCT_RESOURCE, query);
+            String content = executePOST(resource, query);
             JobInfo job = jsonMapper.readValue(content, JobInfo.class);
             return job;
         } catch (IndixApiException iae) {
@@ -394,9 +402,9 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
-    public JobInfo postBulkJob(BulkLookupQuery query) throws IndixApiException {
+    public JobInfo postBulkJob(String resource, BulkLookupQuery query) throws IndixApiException {
         try {
-            String content = executePOST(IndixApiConstants.BULK_LOOKUP_RESOURCE, query, query.getInputFile());
+            String content = executePOST(resource, query, query.getInputFile());
             JobInfo job = jsonMapper.readValue(content, JobInfo.class);
             return job;
         } catch (IndixApiException iae) {

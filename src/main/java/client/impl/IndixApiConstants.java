@@ -1,6 +1,6 @@
 package client.impl;
 
-class IndixApiConstants {
+public class IndixApiConstants {
 
     static final String SCHEME = "https";
     static final String HOST = "api.indix.com";
@@ -41,8 +41,20 @@ class IndixApiConstants {
     public static final String PRODUCT_HISTORY_RESOURCE = buildPath(VERSION, HISTORY_VIEW, PRODUCTS_RESOURCE);
 
     public static final String BULK_PRODUCT_RESOURCE = buildPath(VERSION, SUMMARY_VIEW, BULK, PRODUCTS_RESOURCE);
-    public static final String BULK_JOB_RESOURCE = buildPath(VERSION, BULK, JOB_VIEW);
+    public static final String BULK_OFFERS_STANDARD_PRODUCTS_RESOURCE = buildPath(VERSION, OFFERS_STANDARD_VIEW, BULK, PRODUCTS_RESOURCE);
+    public static final String BULK_OFFERS_PREMIUM_PRODUCTS_RESOURCE = buildPath(VERSION, OFFERS_PREMIUM_VIEW, BULK, PRODUCTS_RESOURCE);
+    public static final String BULK_CATALOG_STANDARD_PRODUCTS_RESOURCE = buildPath(VERSION, CATALOG_STANDARD_VIEW, BULK, PRODUCTS_RESOURCE);
+    public static final String BULK_CATALOG_PREMIUM_PRODUCTS_RESOURCE = buildPath(VERSION, CATALOG_PREMIUM_VIEW, BULK, PRODUCTS_RESOURCE);
+    public static final String BULK_UNIVERSAL_PRODUCTS_RESOURCE = buildPath(VERSION, UNIVERSAL_VIEW, BULK, PRODUCTS_RESOURCE);
+
     public static final String BULK_LOOKUP_RESOURCE = buildPath(VERSION, SUMMARY_VIEW, BULK, LOOKUP_VIEW);
+    public static final String BULK_LOOKUP_OFFERS_STANDARD_RESOURCE = buildPath(VERSION, OFFERS_STANDARD_VIEW, BULK, LOOKUP_VIEW);
+    public static final String BULK_LOOKUP_OFFERS_PREMIUM_RESOURCE = buildPath(VERSION, OFFERS_PREMIUM_VIEW, BULK, LOOKUP_VIEW);
+    public static final String BULK_LOOKUP_CATALOG_STANDARD_RESOURCE = buildPath(VERSION, CATALOG_STANDARD_VIEW, BULK, LOOKUP_VIEW);
+    public static final String BULK_LOOKUP_CATALOG_PREMIUM_RESOURCE = buildPath(VERSION, CATALOG_PREMIUM_VIEW, BULK, LOOKUP_VIEW);
+    public static final String BULK_LOOKUP_UNIVERSAL_RESOURCE = buildPath(VERSION, UNIVERSAL_VIEW, BULK, LOOKUP_VIEW);
+
+    public static final String BULK_JOB_RESOURCE = buildPath(VERSION, BULK, JOB_VIEW);
 
     private static String buildPath(String... pathFragments) {
         StringBuilder sb = new StringBuilder();
