@@ -19,7 +19,7 @@ public class IndixApiClientFactory {
         return new IndixApiClientImpl(httpClient);
     }
 
-    public static IndixApiClient newIndixApiClient(String scheme, String host){
+    public static IndixApiClient newIndixApiClient(String scheme, String host) {
         return new IndixApiClientImpl(scheme, host);
     }
 }
