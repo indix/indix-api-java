@@ -1,6 +1,5 @@
 package client;
 
-import client.impl.ResourceType;
 import client.impl.IndixApiClientFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import exception.IndixApiException;
@@ -35,20 +34,21 @@ public class IndixApiClientBulkQueryTest {
         List<Integer> storeIdList = new ArrayList<Integer>();
         storeIdList.add(68);
 
-        for(ResourceType resource : ResourceType.values()){
-            try {
+        try {
+            for (ResourceType resource : ResourceType.values()) {
+
                 BulkProductsQuery bulkQuery = QueryFactory.newBulkQuery()
                         .withAppId("123")
                         .withAppKey("123")
                         .withCountryCode("US")
                         .withStoreId(storeIdList);
 
-                JobInfo jr = indixApiClient.postBulkJob(resource,bulkQuery);
+                JobInfo jr = indixApiClient.postBulkJob(resource, bulkQuery);
                 assertEquals(1941, jr.getId());
                 assertEquals("SUBMITTED", jr.getStatus());
-            } finally {
-                indixApiClient.close();
             }
+        } finally {
+            indixApiClient.close();
         }
 
     }
@@ -61,8 +61,8 @@ public class IndixApiClientBulkQueryTest {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
-        for(ResourceType resource : ResourceType.values()) {
-            try {
+        try {
+            for (ResourceType resource : ResourceType.values()) {
                 File file = new File("src/test/resources/bulkQuery-json-responses0/bulkLookupInput.jsonl");
                 BulkLookupQuery bulkLookupQuery = QueryFactory.newBulkLookupQuery()
                         .withAppId("123")
@@ -76,9 +76,9 @@ public class IndixApiClientBulkQueryTest {
                 assertEquals(1941, job1.getId());
 
 
-            } finally {
-                indixApiClient.close();
             }
+        } finally {
+            indixApiClient.close();
         }
     }
 

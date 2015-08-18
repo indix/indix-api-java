@@ -22,7 +22,7 @@ class IndixApiConstants {
 
     public static final String BULK_JOB_RESOURCE = buildPath(VERSION, BULK, JOB_VIEW);
 
-    private static String buildPath(String... pathFragments) {
+    static String buildPath(String... pathFragments) {
         StringBuilder sb = new StringBuilder();
 
         for (String fragment : pathFragments) {
@@ -32,33 +32,6 @@ class IndixApiConstants {
         return sb.toString();
     }
 
-    public static String buildSearchResourcePath(ResourceType resourceView) {
-        return buildPath(VERSION, String.valueOf(resourceView), PRODUCTS_RESOURCE);
-    }
 
-    public static String buildProductDetailsPath(ResourceType resourceView, String mpid) {
-        String resource = buildSearchResourcePath(resourceView);
-        return buildPath(resource, mpid);
-    }
-
-    public static String buildProductHistoryPath(String mpid) {
-        return buildPath(PRODUCT_HISTORY_RESOURCE, mpid);
-    }
-
-    public static String buildBulkSearchResourcePath(ResourceType resourceView) {
-        return buildPath(VERSION, String.valueOf(resourceView), BULK, PRODUCTS_RESOURCE);
-    }
-
-    public static String buildBulkLookupResourcePath(ResourceType resourceView) {
-        return buildPath(VERSION, String.valueOf(resourceView), BULK, LOOKUP_VIEW);
-    }
-
-    public static String buildBulkJobStatusPath(String resource, String jobid) {
-        return buildPath(resource, jobid);
-    }
-
-    public static String buildBulkJobDownloadPath(String resource, String jobid) {
-        return buildPath(resource, jobid, DOWNLOAD_PATH);
-    }
 
 }

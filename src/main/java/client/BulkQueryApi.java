@@ -1,6 +1,5 @@
 package client;
 
-import client.impl.ResourceType;
 import exception.IndixApiException;
 import models.jobs.JobInfo;
 import query.BulkLookupQuery;
