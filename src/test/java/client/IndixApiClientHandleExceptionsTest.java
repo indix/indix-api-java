@@ -18,7 +18,7 @@ public class IndixApiClientHandleExceptionsTest {
     @Test(expected = UnauthorizedException.class)
     public void handleUnauthorizedException() throws IOException, IndixApiException {
         MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
-        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.exception_name.UNAUTHORIZED);
+        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.ExceptionName.UNAUTHORIZED);
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
@@ -37,7 +37,7 @@ public class IndixApiClientHandleExceptionsTest {
     @Test(expected = TooManyRequestsException.class)
     public void handleTooManyRequestsException() throws IOException, IndixApiException {
         MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
-        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.exception_name.TOO_MANY_REQUESTS);
+        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.ExceptionName.TOO_MANY_REQUESTS);
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
@@ -56,7 +56,7 @@ public class IndixApiClientHandleExceptionsTest {
     @Test(expected = PaymentRequiredException.class)
     public void handlePaymentRequiredException() throws IOException, IndixApiException {
         MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
-        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.exception_name.PAYMENT_REQUIRED);
+        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.ExceptionName.PAYMENT_REQUIRED);
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
@@ -75,7 +75,7 @@ public class IndixApiClientHandleExceptionsTest {
     @Test(expected = IndixApiException.class)
     public void handleIndixApiException() throws IOException, IndixApiException {
         MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
-        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.exception_name.INDIX_API);
+        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.ExceptionName.INDIX_API);
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
@@ -94,7 +94,7 @@ public class IndixApiClientHandleExceptionsTest {
     @Test(expected = InternalServerException.class)
     public void handleInternalServerException() throws IOException, IndixApiException {
         MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
-        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.exception_name.INTERNAL_SERVER);
+        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.ExceptionName.INTERNAL_SERVER);
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 
@@ -113,7 +113,7 @@ public class IndixApiClientHandleExceptionsTest {
     @Test(expected = BadRequestException.class)
     public void handleBadRequestException() throws IOException, IndixApiException {
         MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
-        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.exception_name.BAD_REQUEST);
+        HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.ExceptionName.BAD_REQUEST);
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
 

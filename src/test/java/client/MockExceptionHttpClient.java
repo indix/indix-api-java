@@ -14,23 +14,27 @@ import java.util.Map;
 
 public class MockExceptionHttpClient {
 
-    public enum exception_name{
-        UNAUTHORIZED,BAD_REQUEST,INDIX_API,INTERNAL_SERVER,PAYMENT_REQUIRED,TOO_MANY_REQUESTS
+    enum ExceptionName {
+        UNAUTHORIZED, BAD_REQUEST, INDIX_API, INTERNAL_SERVER, PAYMENT_REQUIRED, TOO_MANY_REQUESTS
     }
 
-    public HttpClient getMockClient(exception_name exceptionName) throws IOException, IndixApiException {
+    Map<ExceptionName, IndixApiException> mapExceptions;
 
-        final exception_name getException=exceptionName;
+    public MockExceptionHttpClient() {
+        mapExceptions = new HashMap<ExceptionName, IndixApiException>() {{
+            put(ExceptionName.BAD_REQUEST, new BadRequestException("bad request exception"));
+            put(ExceptionName.UNAUTHORIZED, new UnauthorizedException("unauthorized exception"));
+            put(ExceptionName.TOO_MANY_REQUESTS, new TooManyRequestsException("too many requests exception"));
+            put(ExceptionName.PAYMENT_REQUIRED, new PaymentRequiredException("payment required exception"));
+            put(ExceptionName.INDIX_API, new IndixApiException(999, "some unknown error code"));
+            put(ExceptionName.INTERNAL_SERVER, new InternalServerException("internal server exception"));
+        }};
 
-        final Map<exception_name, IndixApiException> mapExceptions = new HashMap<exception_name, IndixApiException>()
-        {{
-                put(exception_name.BAD_REQUEST, new BadRequestException("bad request exception"));
-                put(exception_name.UNAUTHORIZED, new UnauthorizedException("unauthorized exception"));
-                put(exception_name.TOO_MANY_REQUESTS, new TooManyRequestsException("too many requests exception"));
-                put(exception_name.PAYMENT_REQUIRED, new PaymentRequiredException("payment required exception"));
-                put(exception_name.INDIX_API, new IndixApiException(999, "some unknown error code"));
-                put(exception_name.INTERNAL_SERVER, new InternalServerException("internal server exception"));
-            }};
+    }
+
+    public HttpClient getMockClient(ExceptionName exceptionName) throws IOException, IndixApiException {
+
+        final ExceptionName getException = exceptionName;
 
         return new HttpClient() {
 
@@ -38,7 +42,7 @@ public class MockExceptionHttpClient {
 
                 //throw corresponding exception as per the situation
                 //
-                 throw mapExceptions.get(getException);
+                throw mapExceptions.get(getException);
             }
 
             public InputStream GETStream(URI uri) throws IOException, IndixApiException {
