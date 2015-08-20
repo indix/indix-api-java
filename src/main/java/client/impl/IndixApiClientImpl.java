@@ -1,6 +1,7 @@
 package client.impl;
 
 import client.IndixApiClient;
+import client.ResourceType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import exception.IndixApiException;
 import exception.InternalServerException;
@@ -23,7 +24,6 @@ import models.suggestions.SuggestionsResponse;
 import models.suggestions.SuggestionsResult;
 import org.apache.http.client.utils.URIBuilder;
 import query.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +31,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import static client.impl.IndixApiConstants.*;
+import static client.impl.IndixApiConstants.buildPath;
+import static client.ResourceType.*;
 
 /**
  * Indix Api Client
@@ -45,58 +48,114 @@ class IndixApiClientImpl implements IndixApiClient {
     //
     ObjectMapper jsonMapper;
 
+    //for defining the scheme and host of api
+    //
+    String scheme;
+    String host;
 
     final static Logger logger = LoggerFactory.getLogger(IndixApiClientImpl.class);
 
-    private IndixApiClientImpl(HttpClient _httpClient, ObjectMapper _jsonMapper) {
-        httpClient = _httpClient;
-        jsonMapper = _jsonMapper;
+    //constructors
+    //
+    private IndixApiClientImpl(HttpClient httpClient, ObjectMapper jsonMapper, String scheme, String host) {
+        this.httpClient = httpClient;
+        this.jsonMapper = jsonMapper;
+        this.scheme = scheme;
+        this.host = host;
     }
 
     public IndixApiClientImpl() {
-        this(HttpClientFactory.newHttpClient(), getNewObjectMapper());
+        this(HttpClientFactory.newHttpClient(), getNewObjectMapper(), SCHEME, HOST);
+    }
+
+    public IndixApiClientImpl(String scheme, String host) {
+        this(HttpClientFactory.newHttpClient(), getNewObjectMapper(), scheme, host);
     }
 
     public IndixApiClientImpl(HttpClient httpClient) {
-        this(httpClient, getNewObjectMapper());
+        this(httpClient, getNewObjectMapper(), SCHEME, HOST);
     }
 
+    //getter methods
+    //
     private static ObjectMapper getNewObjectMapper() {
         return new ObjectMapper();
     }
 
-    private URI uriBuilder(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
+    //utility functions
+    //
+    private URI uriBuilder(String resource, Query searchQuery)
+            throws URISyntaxException, IOException, IndixApiException {
         return new URIBuilder()
-                .setScheme(IndixApiConstants.SCHEME)
-                .setHost(IndixApiConstants.HOST)
+                .setScheme(scheme)
+                .setHost(host)
                 .setPath(resource)
                 .setParameters(searchQuery.getParameters())
                 .build();
     }
 
-    private String executeGET(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
+    private String executeGET(String resource, Query searchQuery)
+            throws URISyntaxException, IOException, IndixApiException {
         URI uri = uriBuilder(resource, searchQuery);
         return httpClient.GET(uri);
     }
 
-    private InputStream executeGETStream(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
+    private InputStream executeGETStream(String resource, Query searchQuery)
+            throws URISyntaxException, IOException, IndixApiException {
         URI uri = uriBuilder(resource, searchQuery);
         return httpClient.GETStream(uri);
     }
 
-    private String executePOST(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
+    private String executePOST(String resource, Query searchQuery)
+            throws URISyntaxException, IOException, IndixApiException {
         URI uri = uriBuilder(resource, searchQuery);
         return httpClient.POST(uri, searchQuery.getParameters());
     }
 
-    private String executePOST(String resource, Query searchQuery, File file) throws URISyntaxException, IOException, IndixApiException {
+    private String executePOST(String resource, Query searchQuery, File file)
+            throws URISyntaxException, IOException, IndixApiException {
         URI uri = uriBuilder(resource, searchQuery);
         return httpClient.POST(uri, searchQuery.getParameters(), file);
     }
 
+    private String buildSearchResourcePath(ResourceType resourceView) {
+        return buildPath(VERSION, String.valueOf(resourceView), PRODUCTS_RESOURCE);
+    }
+
+    private String buildProductDetailsPath(ResourceType resourceView, String mpid) {
+        String resource = buildSearchResourcePath(resourceView);
+        return buildPath(resource, mpid);
+    }
+
+    private String buildProductHistoryPath(String mpid) {
+        return buildPath(PRODUCT_HISTORY_RESOURCE, mpid);
+    }
+
+    private String buildBulkSearchResourcePath(ResourceType resourceView) {
+        return buildPath(VERSION, String.valueOf(resourceView), BULK, PRODUCTS_RESOURCE);
+    }
+
+    private String buildBulkLookupResourcePath(ResourceType resourceView) {
+        return buildPath(VERSION, String.valueOf(resourceView), BULK, LOOKUP_VIEW);
+    }
+
+    private String buildBulkJobStatusPath(String resource, String jobid) {
+        return buildPath(resource, jobid);
+    }
+
+    private static String buildBulkJobDownloadPath(String resource, String jobid) {
+        return buildPath(resource, jobid, DOWNLOAD_PATH);
+    }
+
+
+
+    //response handlers
+    //
     public SummarySearchResult getProductsSummary(Query query) throws IndixApiException {
+
+        String resource = buildSearchResourcePath(SUMMARY);
         try {
-            String content = executeGET(IndixApiConstants.SUMMARY_PRODUCTS_RESOURCE, query);
+            String content = executeGET(resource, query);
             SummarySearchResponse searchResponse = jsonMapper.readValue(content, SummarySearchResponse.class);
             return searchResponse.getResult();
         } catch (IndixApiException iae) {
@@ -108,8 +167,10 @@ class IndixApiClientImpl implements IndixApiClient {
     }
 
     public OffersSearchResult getProductsOffersStandard(Query query) throws IndixApiException {
+
+        String resource = buildSearchResourcePath(OFFERS_STANDARD);
         try {
-            String content = executeGET(IndixApiConstants.OFFERS_STANDARD_PRODUCTS_RESOURCE, query);
+            String content = executeGET(resource, query);
             OffersSearchResponse searchResponse = jsonMapper.readValue(content, OffersSearchResponse.class);
             return searchResponse.getResult();
         } catch (IndixApiException iae) {
@@ -121,8 +182,10 @@ class IndixApiClientImpl implements IndixApiClient {
     }
 
     public OffersSearchResult getProductsOffersPremium(Query query) throws IndixApiException {
+
+        String resource = buildSearchResourcePath(OFFERS_PREMIUM);
         try {
-            String content = executeGET(IndixApiConstants.OFFERS_PREMIUM_PRODUCTS_RESOURCE, query);
+            String content = executeGET(resource, query);
             OffersSearchResponse searchResponse = jsonMapper.readValue(content, OffersSearchResponse.class);
             return searchResponse.getResult();
         } catch (IndixApiException iae) {
@@ -134,9 +197,13 @@ class IndixApiClientImpl implements IndixApiClient {
     }
 
     public CatalogStandardSearchResult getProductsCatalogStandard(Query query) throws IndixApiException {
+
+        String resource = buildSearchResourcePath(CATALOG_STANDARD);
         try {
-            String content = executeGET(IndixApiConstants.CATALOG_STANDARD_PRODUCTS_RESOURCE, query);
-            CatalogStandardSearchResponse searchResponse = jsonMapper.readValue(content, CatalogStandardSearchResponse.class);
+            String content = executeGET(resource, query);
+            CatalogStandardSearchResponse searchResponse = jsonMapper.readValue(
+                    content,
+                    CatalogStandardSearchResponse.class);
             return searchResponse.getResult();
         } catch (IndixApiException iae) {
             throw iae;
@@ -147,9 +214,13 @@ class IndixApiClientImpl implements IndixApiClient {
     }
 
     public CatalogPremiumSearchResult getProductsCatalogPremium(Query query) throws IndixApiException {
+
+        String resource = buildSearchResourcePath(CATALOG_PREMIUM);
         try {
-            String content = executeGET(IndixApiConstants.CATALOG_PREMIUM_PRODUCTS_RESOURCE, query);
-            CatalogPremiumSearchResponse searchResponse = jsonMapper.readValue(content, CatalogPremiumSearchResponse.class);
+            String content = executeGET(resource, query);
+            CatalogPremiumSearchResponse searchResponse = jsonMapper.readValue(
+                    content,
+                    CatalogPremiumSearchResponse.class);
             return searchResponse.getResult();
         } catch (IndixApiException iae) {
             throw iae;
@@ -160,8 +231,10 @@ class IndixApiClientImpl implements IndixApiClient {
     }
 
     public UniversalSearchResult getProductsUniversal(Query query) throws IndixApiException {
+
+        String resource = buildSearchResourcePath(UNIVERSAL);
         try {
-            String content = executeGET(IndixApiConstants.UNIVERSAL_PRODUCTS_RESOURCE, query);
+            String content = executeGET(resource, query);
             UniversalSearchResponse searchResponse = jsonMapper.readValue(content, UniversalSearchResponse.class);
             return searchResponse.getResult();
         } catch (IndixApiException iae) {
@@ -172,13 +245,9 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
-    public SummaryProductDetailsResult getProductDetailsSummary(ProductDetailsQuery query)
-            throws IndixApiException {
-        String resource = IndixApiConstants.buildProductDetailsPath(
-                IndixApiConstants.SUMMARY_PRODUCT_DETAILS_RESOURCE,
-                query.getMpid()
-        );
+    public SummaryProductDetailsResult getProductDetailsSummary(ProductDetailsQuery query) throws IndixApiException {
 
+        String resource = buildProductDetailsPath(SUMMARY, query.getMpid());
         try {
             String content = executeGET(resource, query);
             SummaryProductDetailsResponse productDetailsResponse = jsonMapper.readValue(
@@ -196,11 +265,8 @@ class IndixApiClientImpl implements IndixApiClient {
 
     public OffersProductDetailsResult getProductDetailsOffersStandard(ProductDetailsQuery query)
             throws IndixApiException {
-        String resource = IndixApiConstants.buildProductDetailsPath(
-                IndixApiConstants.OFFERS_STANDARD_PRODUCT_DETAILS_RESOURCE,
-                query.getMpid()
-        );
 
+        String resource = buildProductDetailsPath(OFFERS_STANDARD, query.getMpid());
         try {
             String content = executeGET(resource, query);
             OffersProductDetailsResponse productDetailsResponse = jsonMapper.readValue(
@@ -219,11 +285,7 @@ class IndixApiClientImpl implements IndixApiClient {
     public OffersProductDetailsResult getProductDetailsOffersPremium(ProductDetailsQuery query)
             throws IndixApiException {
 
-        String resource = IndixApiConstants.buildProductDetailsPath(
-                IndixApiConstants.OFFERS_PREMIUM_PRODUCT_DETAILS_RESOURCE,
-                query.getMpid()
-        );
-
+        String resource = buildProductDetailsPath(OFFERS_PREMIUM, query.getMpid());
         try {
             String content = executeGET(resource, query);
             OffersProductDetailsResponse productDetailsResponse = jsonMapper.readValue(
@@ -242,11 +304,7 @@ class IndixApiClientImpl implements IndixApiClient {
     public CatalogStandardProductDetailsResult getProductDetailsCatalogStandard(ProductDetailsQuery query)
             throws IndixApiException {
 
-        String resource = IndixApiConstants.buildProductDetailsPath(
-                IndixApiConstants.CATALOG_STANDARD_PRODUCT_DETAILS_RESOURCE,
-                query.getMpid()
-        );
-
+        String resource = buildProductDetailsPath(CATALOG_STANDARD, query.getMpid());
         try {
             String content = executeGET(resource, query);
             CatalogStandardProductDetailsResponse productDetailsResponse = jsonMapper.readValue(
@@ -263,13 +321,9 @@ class IndixApiClientImpl implements IndixApiClient {
     }
 
     public CatalogPremiumProductDetailsResult getProductDetailsCatalogPremium(ProductDetailsQuery query)
-            throws IndixApiException{
+            throws IndixApiException {
 
-        String resource = IndixApiConstants.buildProductDetailsPath(
-                IndixApiConstants.CATALOG_PREMIUM_PRODUCT_DETAILS_RESOURCE,
-                query.getMpid()
-        );
-
+        String resource = buildProductDetailsPath(CATALOG_PREMIUM, query.getMpid());
         try {
             String content = executeGET(resource, query);
             CatalogPremiumProductDetailsResponse productDetailsResponse = jsonMapper.readValue(
@@ -287,11 +341,8 @@ class IndixApiClientImpl implements IndixApiClient {
 
     public UniversalProductDetailsResult getProductDetailsUniversal(ProductDetailsQuery query)
             throws IndixApiException {
-        String resource = IndixApiConstants.buildProductDetailsPath(
-                IndixApiConstants.UNIVERSAL_PRODUCT_DETAILS_RESOURCE,
-                query.getMpid()
-        );
 
+        String resource = buildProductDetailsPath(UNIVERSAL, query.getMpid());
         try {
             String content = executeGET(resource, query);
             UniversalProductDetailsResponse productDetailsResponse = jsonMapper.readValue(
@@ -310,7 +361,7 @@ class IndixApiClientImpl implements IndixApiClient {
     public StoresResult getStores(Query query) throws IndixApiException {
 
         try {
-            String content = executeGET(IndixApiConstants.STORES_RESOURCE, query);
+            String content = executeGET(STORES_RESOURCE, query);
             StoresResponse storesResponse = jsonMapper.readValue(content, StoresResponse.class);
             return storesResponse.getResult();
         } catch (IndixApiException iae) {
@@ -324,7 +375,7 @@ class IndixApiClientImpl implements IndixApiClient {
     public BrandsResult getBrands(Query query) throws IndixApiException {
 
         try {
-            String content = executeGET(IndixApiConstants.BRANDS_RESOURCE, query);
+            String content = executeGET(BRANDS_RESOURCE, query);
             BrandsResponse brandsResponse = jsonMapper.readValue(content, BrandsResponse.class);
             return brandsResponse.getResult();
         } catch (IndixApiException iae) {
@@ -338,7 +389,7 @@ class IndixApiClientImpl implements IndixApiClient {
     public CategoriesResult getCategories(Query query) throws IndixApiException {
 
         try {
-            String content = executeGET(IndixApiConstants.CATEGORIES_RESOURCE, query);
+            String content = executeGET(CATEGORIES_RESOURCE, query);
             CategoriesResponse categoriesResponse = jsonMapper.readValue(content, CategoriesResponse.class);
             return categoriesResponse.getResult();
         } catch (IndixApiException iae) {
@@ -352,7 +403,7 @@ class IndixApiClientImpl implements IndixApiClient {
     public SuggestionsResult getSuggestions(Query query) throws IndixApiException {
 
         try {
-            String content = executeGET(IndixApiConstants.SUGGESTIONS_RESOURCE, query);
+            String content = executeGET(SUGGESTIONS_RESOURCE, query);
             SuggestionsResponse suggestionsResponse = jsonMapper.readValue(content, SuggestionsResponse.class);
             return suggestionsResponse.getResult();
         } catch (IndixApiException iae) {
@@ -364,10 +415,8 @@ class IndixApiClientImpl implements IndixApiClient {
     }
 
     public ProductHistoryResult getProductHistory(ProductHistoryQuery query) throws IndixApiException {
-        String resource = IndixApiConstants.buildProductDetailsPath(
-                IndixApiConstants.PRODUCT_HISTORY_RESOURCE,
-                query.getMpid()
-        );
+
+        String resource = buildProductHistoryPath(query.getMpid());
         try {
             String content = executeGET(resource, query);
             ProductHistoryResponse productHistoryResponse = jsonMapper.readValue(content, ProductHistoryResponse.class);
@@ -380,9 +429,11 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
-    public JobInfo postBulkJob(BulkProductsQuery query) throws IndixApiException {
+    public JobInfo postBulkJob(ResourceType resourceType, BulkProductsQuery query) throws IndixApiException {
+
+        String resource = buildBulkSearchResourcePath(resourceType);
         try {
-            String content = executePOST(IndixApiConstants.BULK_PRODUCT_RESOURCE, query);
+            String content = executePOST(resource, query);
             JobInfo job = jsonMapper.readValue(content, JobInfo.class);
             return job;
         } catch (IndixApiException iae) {
@@ -394,9 +445,11 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
-    public JobInfo postBulkJob(BulkLookupQuery query) throws IndixApiException {
+    public JobInfo postBulkJob(ResourceType resourceType, BulkLookupQuery query) throws IndixApiException {
+
+        String resource = buildBulkLookupResourcePath(resourceType);
         try {
-            String content = executePOST(IndixApiConstants.BULK_LOOKUP_RESOURCE, query, query.getInputFile());
+            String content = executePOST(resource, query, query.getInputFile());
             JobInfo job = jsonMapper.readValue(content, JobInfo.class);
             return job;
         } catch (IndixApiException iae) {
@@ -409,8 +462,8 @@ class IndixApiClientImpl implements IndixApiClient {
 
     public JobInfo getBulkJobStatus(JobStatusQuery query) throws IndixApiException {
 
-        String resource = IndixApiConstants.buildBulkJobStatusPath(
-                IndixApiConstants.BULK_JOB_RESOURCE,
+        String resource = buildBulkJobStatusPath(
+                BULK_JOB_RESOURCE,
                 String.valueOf(query.getJobId())
         );
         try {
@@ -428,8 +481,8 @@ class IndixApiClientImpl implements IndixApiClient {
 
     public InputStream getBulkJobOutput(JobStatusQuery query) throws IndixApiException {
 
-        String resource = IndixApiConstants.buildBulkJobDownloadPath(
-                IndixApiConstants.BULK_JOB_RESOURCE,
+        String resource = buildBulkJobDownloadPath(
+                BULK_JOB_RESOURCE,
                 String.valueOf(query.getJobId())
         );
         try {
