@@ -13,4 +13,9 @@ public enum ResourceType {
     private ResourceType(final String resource) {
         this.resource = resource;
     }
+
+    @Override
+    public String toString() {
+        return resource;
+    }
 }
