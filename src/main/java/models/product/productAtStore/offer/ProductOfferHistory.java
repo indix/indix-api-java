@@ -8,6 +8,7 @@ public class ProductOfferHistory {
     private List<Double> salePriceHistory;
     private List<Double> listPriceHistory;
     private String pid;
+    private String seller;
 
     public String getPid(){
         return pid;
@@ -23,5 +24,9 @@ public class ProductOfferHistory {
 
     public List<Double> getListPriceHistory(){
         return listPriceHistory;
+    }
+
+    public String getSeller(){
+        return seller;
     }
 }

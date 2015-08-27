@@ -31,18 +31,21 @@ public class IndixApiClientHistoryTest {
                     .withAppId("123")
                     .withAppKey("123")
                     .withCountryCode("US")
-                    .withStoreId(78)
-                    .withMpid("01758f");
-            ProductHistoryAtStore productHistoryRecord = indixApiClient.getProductHistory(productHistoryQuery).getProduct().getStores().get("111");
+                    .withStoreId(271)
+                    .withMpid("mpid1");
+            ProductHistoryAtStore productHistoryRecord = indixApiClient.getProductHistory(productHistoryQuery).getProduct().getStores().get("271");
             ProductOfferHistory productOfferHistory = productHistoryRecord.getOffers().get(0);
 
-            assertThat(productOfferHistory.getSalePriceHistory(), hasItems(8.99, 9.99, 12.99));
-            assertThat(productOfferHistory.getListPriceHistory(), hasItems(9.99, 10.99, 13.99));
+            assertThat(productOfferHistory.getListPriceHistory(), hasItems(18.98, 19.98, 20.98));
+            assertThat(productOfferHistory.getSalePriceHistory(), hasItems(18.00, 19.00, 20.00));
             assertThat(productOfferHistory.getPid(), is("pid1"));
-            assertThat(productOfferHistory.getTimestampHistory(), hasItems(1436918399999L, 1436399999999L, 1434585599999L));
+            assertThat(productOfferHistory.getSeller(), is("seller"));
+            assertThat(productOfferHistory.getTimestampHistory(), hasItems(1395644011000L, 1395415299000L, 1394371160000L));
 
             assertThat(productHistoryRecord.getStoreId(), is(111));
-            assertThat(productHistoryRecord.getStoreName(), is("storeName"));
+            assertThat(productHistoryRecord.getStoreName(), is("storename"));
+            assertThat(indixApiClient.getProductHistory(productHistoryQuery).getProduct().getBrandId(), is(1547));
+            assertThat(indixApiClient.getProductHistory(productHistoryQuery).getProduct().getCategoryId(), is(12345));
 
 
         } finally {

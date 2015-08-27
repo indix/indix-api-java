@@ -22,4 +22,5 @@ public class ProductHistoryAtStore {
     public String getStoreName(){
         return storeName;
     }
+
 }

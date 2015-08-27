@@ -2,32 +2,35 @@
   "message": "ok",
   "result": {
     "product": {
+      "categoryId": 12345,
       "stores": {
-        "111": {
+        "271": {
+          "storeId": 111,
           "offers": [
             {
-              "timestampHistory": [
-                1436918399999,
-                1436399999999,
-                1434585599999
-              ],
               "pid": "pid1",
-              "salePriceHistory": [
-                8.99,
-                9.99,
-                12.99
-              ],
               "listPriceHistory": [
-                9.99,
-                10.99,
-                13.99
-              ]
+                18.98,
+                19.98,
+                20.98
+              ],
+              "salePriceHistory": [
+                18.00,
+                19.00,
+                20.00
+              ],
+              "timestampHistory": [
+                1395644011000,
+                1395415299000,
+                1394371160000
+              ],
+              "seller": "seller"
             }
           ],
-          "storeId": "111",
-          "storeName": "storeName"
+          "storeName": "storename"
         }
-      }
+      },
+      "brandId": 1547
     }
   }
 }
