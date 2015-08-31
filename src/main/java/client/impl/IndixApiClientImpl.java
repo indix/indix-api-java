@@ -97,9 +97,9 @@ class IndixApiClientImpl implements IndixApiClient {
                 .setScheme(scheme)
                 .setHost(host)
                 .setPath(resource)
+                .setParameters(searchQuery.getParameters())
                 .addParameter("app_id", appId)
                 .addParameter("app_key", appKey)
-                .setParameters(searchQuery.getParameters())
                 .build();
     }
 
