@@ -14,15 +14,11 @@ public class ProductDetailsQueryTest {
     @Test
     public void testBasicQuery() {
         List<NameValuePair> expectedValue = new ArrayList<NameValuePair>();
-        expectedValue.add(new BasicNameValuePair("app_id", "123"));
-        expectedValue.add(new BasicNameValuePair("app_key", "123"));
         expectedValue.add(new BasicNameValuePair("countryCode", "US"));
         expectedValue.add(new BasicNameValuePair("storeId", "2345"));
         expectedValue.add(new BasicNameValuePair("pageNumber", "5"));
 
         ProductDetailsQuery productDetailsQuery = QueryFactory.newProductDetailsQuery()
-                .withAppId("123")
-                .withAppKey("123")
                 .withCountryCode("US")
                 .withMpid("mpid1")
                 .withStoreId(2345)

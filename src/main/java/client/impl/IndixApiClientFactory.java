@@ -8,18 +8,21 @@ import httpClient.HttpClient;
  */
 public class IndixApiClientFactory {
 
-    public static IndixApiClient newIndixApiClient() {
-        return new IndixApiClientImpl();
+    public static IndixApiClient newIndixApiClient(String appId, String appKey) {
+        return new IndixApiClientImpl(appId, appKey);
     }
 
     /*
      * Used for mocking http client for testing purpose.
      */
-    public static IndixApiClient newIndixApiClient(HttpClient httpClient) {
-        return new IndixApiClientImpl(httpClient);
+    public static IndixApiClient newIndixApiClient(String appId, String appKey, HttpClient httpClient) {
+        return new IndixApiClientImpl(appId, appKey, httpClient);
     }
 
-    public static IndixApiClient newIndixApiClient(String scheme, String host) {
-        return new IndixApiClientImpl(scheme, host);
+    /*
+     * Used for setting server scheme and host for testing purpose.
+     */
+    public static IndixApiClient newIndixApiClient(String appId, String appKey, String scheme, String host) {
+        return new IndixApiClientImpl(appId, appKey, scheme, host);
     }
 }

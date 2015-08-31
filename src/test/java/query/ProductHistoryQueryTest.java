@@ -15,14 +15,10 @@ public class ProductHistoryQueryTest {
     @Test
     public void testBasicQuery() {
         List<NameValuePair> expectedValue = new ArrayList<NameValuePair>();
-        expectedValue.add(new BasicNameValuePair("app_id", "111"));
-        expectedValue.add(new BasicNameValuePair("app_key", "111"));
         expectedValue.add(new BasicNameValuePair("countryCode", "US"));
         expectedValue.add(new BasicNameValuePair("storeId", "2345"));
 
         ProductHistoryQuery productHistoryQuery = QueryFactory.newProductHistoryQuery()
-                .withAppId("111")
-                .withAppKey("111")
                 .withCountryCode("US")
                 .withStoreId(2345)
                 .withMpid("mpid1");

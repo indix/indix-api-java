@@ -18,12 +18,10 @@ public class IndixApiClientSuggestionsTest {
     public void getSuggestions() throws IOException, IndixApiException {
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("suggestions-json-responses0/suggestionsResponse.json");
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
 
         try {
             SuggestionsQuery suggestionsQuery = QueryFactory.newSuggestionsQuery()
-                    .withAppId("123")
-                    .withAppKey("123")
                     .withCountryCode("US")
                     .withQ("ni");
             SuggestionsResult sr = indixApiClient.getSuggestions(suggestionsQuery);

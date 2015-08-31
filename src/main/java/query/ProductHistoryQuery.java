@@ -10,16 +10,6 @@ public class ProductHistoryQuery extends QueryBase {
         mpid = "";
     }
 
-    public ProductHistoryQuery withAppId(String app_id) {
-        parameters.add(new BasicNameValuePair("app_id", app_id));
-        return this;
-    }
-
-    public ProductHistoryQuery withAppKey(String app_key) {
-        parameters.add(new BasicNameValuePair("app_key", app_key));
-        return this;
-    }
-
     public ProductHistoryQuery withCountryCode(String cc) {
         parameters.add(new BasicNameValuePair("countryCode", cc));
         return this;

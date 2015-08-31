@@ -29,7 +29,7 @@ public class IndixApiClientBulkQueryTest {
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("bulkQuery-json-responses0/bulkQueryResponse.json");
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
 
         List<Integer> storeIdList = new ArrayList<Integer>();
         storeIdList.add(68);
@@ -38,8 +38,6 @@ public class IndixApiClientBulkQueryTest {
             for (ResourceType resource : ResourceType.values()) {
 
                 BulkProductsQuery bulkQuery = QueryFactory.newBulkQuery()
-                        .withAppId("123")
-                        .withAppKey("123")
                         .withCountryCode("US")
                         .withStoreId(storeIdList);
 
@@ -59,14 +57,12 @@ public class IndixApiClientBulkQueryTest {
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("bulkQuery-json-responses0/bulkQueryResponse.json");
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
 
         try {
             for (ResourceType resource : ResourceType.values()) {
                 File file = new File("src/test/resources/bulkQuery-json-responses0/bulkLookupInput.jsonl");
                 BulkLookupQuery bulkLookupQuery = QueryFactory.newBulkLookupQuery()
-                        .withAppId("123")
-                        .withAppKey("123")
                         .withCountryCode("US")
                         .withInputFile(file);
                 JobInfo job1 = indixApiClient.postBulkJob(resource, bulkLookupQuery);
@@ -88,7 +84,7 @@ public class IndixApiClientBulkQueryTest {
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("bulkQuery-json-responses0/bulkQueryJobStatus.json");
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
 
         try {
             JobStatusQuery jobStatusQuery = QueryFactory.newJobStatusQuery()
@@ -109,7 +105,7 @@ public class IndixApiClientBulkQueryTest {
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("bulkQuery-json-responses0/bulkQueryJobOutput.jsonl");
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
 
         try {
             JobStatusQuery jobStatusQuery = QueryFactory.newJobStatusQuery()

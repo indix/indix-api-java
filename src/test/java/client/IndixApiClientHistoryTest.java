@@ -24,12 +24,10 @@ public class IndixApiClientHistoryTest {
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("productHistory-json-responses0/productHistory.json");
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
 
         try {
             ProductHistoryQuery productHistoryQuery = QueryFactory.newProductHistoryQuery()
-                    .withAppId("123")
-                    .withAppKey("123")
                     .withCountryCode("US")
                     .withStoreId(271)
                     .withMpid("mpid1");

@@ -13,16 +13,6 @@ public class ProductDetailsQuery extends QueryBase {
         mpid = "";
     }
     
-    public ProductDetailsQuery withAppId(String _app_id) {
-        parameters.add(new BasicNameValuePair("app_id", _app_id));
-        return this;
-    }
-
-    public ProductDetailsQuery withAppKey(String _app_key) {
-        parameters.add(new BasicNameValuePair("app_key", _app_key));
-        return this;
-    }
-
     public ProductDetailsQuery withCountryCode(String _cc) {
         parameters.add(new BasicNameValuePair("countryCode", _cc));
         return this;

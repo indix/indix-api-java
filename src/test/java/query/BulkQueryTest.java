@@ -18,8 +18,6 @@ public class BulkQueryTest {
     @Test
     public void testBasicBulkQuery() {
         List<NameValuePair> expectedValue = new ArrayList<NameValuePair>();
-        expectedValue.add(new BasicNameValuePair("app_id", "123"));
-        expectedValue.add(new BasicNameValuePair("app_key", "123"));
         expectedValue.add(new BasicNameValuePair("countryCode", "US"));
         expectedValue.add(new BasicNameValuePair("storeId", "270"));
         expectedValue.add(new BasicNameValuePair("storeId", "275"));
@@ -40,8 +38,6 @@ public class BulkQueryTest {
         expectedValue.add(new BasicNameValuePair("selectOffersFrom", "storeIdAndAlsoSoldAt"));
 
         Query bulkQuery = QueryFactory.newBulkQuery()
-                .withAppId("123")
-                .withAppKey("123")
                 .withCountryCode("US")
                 .withStoreId(Arrays.asList(270, 275))
                 .withAlsoSoldAt(Arrays.asList(24))
@@ -78,14 +74,10 @@ public class BulkQueryTest {
                 "{\"mpn\":\"1C60NV\",\"brandId\":37600}";
 
         BulkLookupQuery bulkLookupQuery = QueryFactory.newBulkLookupQuery()
-                .withAppId("123")
-                .withAppKey("123")
                 .withCountryCode("US")
                 .withInputFile(file);
 
         List<NameValuePair> expectedValue = new ArrayList<NameValuePair>();
-        expectedValue.add(new BasicNameValuePair("app_id", "123"));
-        expectedValue.add(new BasicNameValuePair("app_key", "123"));
         expectedValue.add(new BasicNameValuePair("countryCode", "US"));
 
         List<NameValuePair> actualParameters = bulkLookupQuery.getParameters();
@@ -95,10 +87,7 @@ public class BulkQueryTest {
 
     @Test
     public void testJobStatusQuery() throws IOException {
-
-        JobStatusQuery jobStatusQuery = QueryFactory.newJobStatusQuery()
-                .withJobId(123);
-
+        JobStatusQuery jobStatusQuery = QueryFactory.newJobStatusQuery().withJobId(123);
         assertEquals(123, jobStatusQuery.getJobId());
     }
 

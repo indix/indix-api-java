@@ -7,14 +7,14 @@ Usage
 ```
     // search for products.
 
-    IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient();
+    String appId = "__app_id__";
+    String appKey = "__app_key__";
+    IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(appId, appKey);
 
     try {
         Query searchQuery = QueryFactory.newSearchQuery()
                 .withQ("nike")
-                .withCountryCode("US")
-                .withAppId("123")
-                .withAppKey("123");
+                .withCountryCode("US");
 
         UniversalSearchResult sr = indixApiClient.getProductsUniversal(searchQuery);
         System.out.println(sr.getCount());

@@ -12,14 +12,10 @@ public class SuggestionsQueryTest {
     @Test
     public void testBasicQuery() {
         List<NameValuePair> expectedValue = new ArrayList<NameValuePair>();
-        expectedValue.add(new BasicNameValuePair("app_id", "123"));
-        expectedValue.add(new BasicNameValuePair("app_key", "123"));
         expectedValue.add(new BasicNameValuePair("q", "ad"));
         expectedValue.add(new BasicNameValuePair("countryCode", "IN"));
 
         SuggestionsQuery productDetailsQuery = QueryFactory.newSuggestionsQuery()
-                .withAppId("123")
-                .withAppKey("123")
                 .withQ("ad")
                 .withCountryCode("IN");
         List<NameValuePair> actualParameters = productDetailsQuery.getParameters();

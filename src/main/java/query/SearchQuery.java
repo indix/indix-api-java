@@ -10,16 +10,6 @@ public class SearchQuery extends QueryBase implements BulkProductsQuery {
         super();
     }
 
-    public SearchQuery withAppId(String appId) {
-        parameters.add(new BasicNameValuePair("app_id", appId));
-        return this;
-    }
-
-    public SearchQuery withAppKey(String appKey) {
-        parameters.add(new BasicNameValuePair("app_key", appKey));
-        return this;
-    }
-
     public SearchQuery withStoreId(List<Integer> storeId) {
         for (Integer sid : storeId) {
             parameters.add(new BasicNameValuePair("storeId", sid.toString()));

@@ -4,10 +4,6 @@ import java.util.List;
 
 public interface BulkProductsQuery extends ApiParameters {
 
-    public SearchQuery withAppId(String appId);
-
-    public SearchQuery withAppKey(String appKey);
-
     public SearchQuery withStoreId(List<Integer> storeId);
 
     public SearchQuery withAlsoSoldAt(List<Integer> alsoSoldAt);

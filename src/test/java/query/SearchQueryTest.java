@@ -15,8 +15,6 @@ public class SearchQueryTest {
     @Test
     public void testBasicQuery() {
         List<NameValuePair> expectedValue = new ArrayList<NameValuePair>();
-        expectedValue.add(new BasicNameValuePair("app_id", "123"));
-        expectedValue.add(new BasicNameValuePair("app_key", "123"));
         expectedValue.add(new BasicNameValuePair("countryCode", "US"));
         expectedValue.add(new BasicNameValuePair("q", "nike"));
         expectedValue.add(new BasicNameValuePair("storeId", "270"));
@@ -56,8 +54,6 @@ public class SearchQueryTest {
                 .withFacetBy(Arrays.asList("storeId", "brandId"))
                 .withPageNumber(5)
                 .withPageSize(55)
-                .withAppId("123")
-                .withAppKey("123")
                 .withCountryCode("US")
                 .withStoreId(Arrays.asList(270, 275))
                 .withAlsoSoldAt(Arrays.asList(24))

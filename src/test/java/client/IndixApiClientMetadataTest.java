@@ -25,13 +25,11 @@ public class IndixApiClientMetadataTest {
     @Test
     public void getStores() throws IOException, IndixApiException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("metadata-json-responses0/storesResponse.json"));
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+                getMockHttpClient("metadata-json-responses0/storesResponse.json"));
 
         try {
             MetadataQuery metadataQuery = QueryFactory.newMetadataQuery()
-                    .withAppId("cb7e91b3")
-                    .withAppKey("7367fd8ed2856c6d44c4f30303963b9c")
                     .withQ("ama");
             StoresResult sr = indixApiClient.getStores(metadataQuery);
 
@@ -46,13 +44,11 @@ public class IndixApiClientMetadataTest {
     @Test
     public void getBrands() throws IOException, IndixApiException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("metadata-json-responses0/brandsResponse.json"));
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+                getMockHttpClient("metadata-json-responses0/brandsResponse.json"));
 
         try {
             MetadataQuery metadataQuery = QueryFactory.newMetadataQuery()
-                    .withAppId("123")
-                    .withAppKey("123")
                     .withQ("ama");
             BrandsResult sr = indixApiClient.getBrands(metadataQuery);
 
@@ -66,13 +62,11 @@ public class IndixApiClientMetadataTest {
     @Test
     public void getCategories() throws IOException, IndixApiException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(
-                                            getMockHttpClient("metadata-json-responses0/categoriesResponse.json"));
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+                getMockHttpClient("metadata-json-responses0/categoriesResponse.json"));
 
         try {
-            MetadataQuery metadataQuery = QueryFactory.newMetadataQuery()
-                    .withAppId("123")
-                    .withAppKey("123");
+            MetadataQuery metadataQuery = QueryFactory.newMetadataQuery();
             CategoriesResult sr = indixApiClient.getCategories(metadataQuery);
 
             assertEquals(10161, sr.getCategories().get(0).getId());

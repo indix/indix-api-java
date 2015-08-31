@@ -48,73 +48,82 @@ class IndixApiClientImpl implements IndixApiClient {
     //
     ObjectMapper jsonMapper;
 
-    //for defining the scheme and host of api
+    // for defining the scheme and host of api
     //
     String scheme;
     String host;
 
+    // Authorization parameters
+    //
+    String appId;
+    String appKey;
+
     final static Logger logger = LoggerFactory.getLogger(IndixApiClientImpl.class);
 
-    //constructors
+    // constructors
     //
-    private IndixApiClientImpl(HttpClient httpClient, ObjectMapper jsonMapper, String scheme, String host) {
+    private IndixApiClientImpl(String appId, String appKey, HttpClient httpClient, ObjectMapper jsonMapper,
+                               String scheme, String host) {
+        this.appId = appId;
+        this.appKey = appKey;
         this.httpClient = httpClient;
         this.jsonMapper = jsonMapper;
         this.scheme = scheme;
         this.host = host;
     }
 
-    public IndixApiClientImpl() {
-        this(HttpClientFactory.newHttpClient(), getNewObjectMapper(), SCHEME, HOST);
+    public IndixApiClientImpl(String appId, String appKey) {
+        this(appId, appKey, HttpClientFactory.newHttpClient(), getNewObjectMapper(), SCHEME, HOST);
     }
 
-    public IndixApiClientImpl(String scheme, String host) {
-        this(HttpClientFactory.newHttpClient(), getNewObjectMapper(), scheme, host);
+    public IndixApiClientImpl(String appId, String appKey, String scheme, String host) {
+        this(appId, appKey, HttpClientFactory.newHttpClient(), getNewObjectMapper(), scheme, host);
     }
 
-    public IndixApiClientImpl(HttpClient httpClient) {
-        this(httpClient, getNewObjectMapper(), SCHEME, HOST);
+    public IndixApiClientImpl(String appId, String appKey, HttpClient httpClient) {
+        this(appId, appKey, httpClient, getNewObjectMapper(), SCHEME, HOST);
     }
 
-    //getter methods
+    // getter methods
     //
     private static ObjectMapper getNewObjectMapper() {
         return new ObjectMapper();
     }
 
-    //utility functions
+    // utility functions
     //
-    private URI uriBuilder(String resource, Query searchQuery)
-            throws URISyntaxException, IOException, IndixApiException {
+    private URI buildURI(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
         return new URIBuilder()
                 .setScheme(scheme)
                 .setHost(host)
                 .setPath(resource)
+                .addParameter("app_id", appId)
+                .addParameter("app_key", appKey)
                 .setParameters(searchQuery.getParameters())
                 .build();
     }
 
     private String executeGET(String resource, Query searchQuery)
             throws URISyntaxException, IOException, IndixApiException {
-        URI uri = uriBuilder(resource, searchQuery);
+        URI uri = buildURI(resource, searchQuery);
         return httpClient.GET(uri);
     }
 
     private InputStream executeGETStream(String resource, Query searchQuery)
             throws URISyntaxException, IOException, IndixApiException {
-        URI uri = uriBuilder(resource, searchQuery);
+        URI uri = buildURI(resource, searchQuery);
         return httpClient.GETStream(uri);
     }
 
     private String executePOST(String resource, Query searchQuery)
             throws URISyntaxException, IOException, IndixApiException {
-        URI uri = uriBuilder(resource, searchQuery);
+        URI uri = buildURI(resource, searchQuery);
         return httpClient.POST(uri, searchQuery.getParameters());
     }
 
     private String executePOST(String resource, Query searchQuery, File file)
             throws URISyntaxException, IOException, IndixApiException {
-        URI uri = uriBuilder(resource, searchQuery);
+        URI uri = buildURI(resource, searchQuery);
         return httpClient.POST(uri, searchQuery.getParameters(), file);
     }
 
@@ -123,8 +132,7 @@ class IndixApiClientImpl implements IndixApiClient {
     }
 
     private String buildProductDetailsPath(ResourceType resourceView, String mpid) {
-        String resource = buildSearchResourcePath(resourceView);
-        return buildPath(resource, mpid);
+        return buildPath(buildSearchResourcePath(resourceView), mpid);
     }
 
     private String buildProductHistoryPath(String mpid) {
@@ -139,17 +147,15 @@ class IndixApiClientImpl implements IndixApiClient {
         return buildPath(VERSION, String.valueOf(resourceView), BULK, LOOKUP_VIEW);
     }
 
-    private String buildBulkJobStatusPath(String resource, String jobid) {
-        return buildPath(resource, jobid);
+    private String buildBulkJobStatusPath(String resource, String jobId) {
+        return buildPath(resource, jobId);
     }
 
-    private static String buildBulkJobDownloadPath(String resource, String jobid) {
-        return buildPath(resource, jobid, DOWNLOAD_PATH);
+    private static String buildBulkJobDownloadPath(String resource, String jobId) {
+        return buildPath(resource, jobId, DOWNLOAD_PATH);
     }
 
-
-
-    //response handlers
+    // response handlers
     //
     public SummarySearchResult getProductsSummary(Query query) throws IndixApiException {
 
