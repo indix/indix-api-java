@@ -8,25 +8,40 @@ import query.JobStatusQuery;
 
 import java.io.InputStream;
 
+//params
 public interface BulkQueryApi {
 
-    /*
-     * Retrieve response for a bulk search query
+    /**
+     * Posts a bulk job for the appropriate resource type for search cases
+     * @param resourceType {@link ResourceType}
+     * @param query Instance of {@link BulkProductsQuery} with appropriate parameters
+     * @return {@link JobInfo}
+     * @throws {@link IndixApiException}
      */
-    JobInfo postBulkJob(ResourceType resource, BulkProductsQuery query) throws IndixApiException;
+    JobInfo postBulkJob(ResourceType resourceType, BulkProductsQuery query) throws IndixApiException;
 
-    /*
-     * Retrieve response for a bulk lookup query
+    /**
+     * Posts a bulk job for the appropriate resource type for lookup cases
+     * @param resourceType {@link ResourceType}
+     * @param query Instance of {@link BulkLookupQuery} with appropriate parameters
+     * @return {@link JobInfo}
+     * @throws {@link IndixApiException}
      */
-    JobInfo postBulkJob(ResourceType resource, BulkLookupQuery query) throws IndixApiException;
+    JobInfo postBulkJob(ResourceType resourceType, BulkLookupQuery query) throws IndixApiException;
 
-    /*
-     * Retrieve job status for any bulk query
+    /**
+     * get status of job returned against bulk query
+     * @param query Instance of {@link JobStatusQuery} with appropriate jobId
+     * @return {@link JobInfo}
+     * @throws {@link IndixApiException}
      */
     JobInfo getBulkJobStatus(JobStatusQuery query) throws IndixApiException;
 
-    /*
-     * Retrieve output file for a bulk job
+    /**
+     * get output of job returned against bulk query
+     * @param query Instance of {@link JobStatusQuery} with appropriate jobId
+     * @return stream of data obtained as response from the bulk job
+     * @throws {@link IndixApiException}
      */
     InputStream getBulkJobOutput(JobStatusQuery query) throws IndixApiException;
 }

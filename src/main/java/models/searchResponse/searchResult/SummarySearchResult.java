@@ -7,7 +7,7 @@ import java.util.List;
 public class SummarySearchResult extends SearchResult {
     private List<SummaryProduct> products;
 
-    public List<SummaryProduct> getProducts() {
+    public List<SummaryProduct> getSummaryProducts() {
         return products;
     }
 }

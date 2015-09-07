@@ -1,6 +1,6 @@
 package models.product.productAtStore.offer;
 
-public class ProductOfferPricing extends ProductOfferBase {
+ public class ProductOfferPricing extends ProductOfferBase {
 
     // Offer pricing fields
     //

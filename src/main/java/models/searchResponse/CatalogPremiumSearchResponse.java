@@ -6,7 +6,7 @@ import models.searchResponse.searchResult.CatalogPremiumSearchResult;
 public class CatalogPremiumSearchResponse extends ResponseBase {
     private CatalogPremiumSearchResult result;
 
-    public CatalogPremiumSearchResult getResult() {
+    public CatalogPremiumSearchResult getSearchResult() {
         return result;
     }
 }

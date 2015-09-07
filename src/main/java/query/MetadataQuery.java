@@ -10,9 +10,12 @@ public class MetadataQuery extends QueryBase {
     public MetadataQuery() {
         super();
     }
-    
-    public MetadataQuery withQ(String _q) {
-        parameters.add(new BasicNameValuePair("q", _q));
+
+    /**
+     * Search term to match against metadata query. Partial match. Case insensitive.
+     */
+    public MetadataQuery withQ(String q) {
+        parameters.add(new BasicNameValuePair("q", q));
         return this;
     }
 }

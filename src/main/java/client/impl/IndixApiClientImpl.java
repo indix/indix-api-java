@@ -36,7 +36,7 @@ import static client.impl.IndixApiConstants.buildPath;
 import static client.ResourceType.*;
 
 /**
- * Indix Api Client
+ * Indix Api Client implementation
  */
 class IndixApiClientImpl implements IndixApiClient {
 
@@ -72,14 +72,26 @@ class IndixApiClientImpl implements IndixApiClient {
         this.host = host;
     }
 
+    /**
+     * @param appId application id
+     * @param appKey application key
+     */
     public IndixApiClientImpl(String appId, String appKey) {
         this(appId, appKey, HttpClientFactory.newHttpClient(), getNewObjectMapper(), SCHEME, HOST);
     }
 
+    /**
+     * @param appId application id
+     * @param appKey application key
+     */
     public IndixApiClientImpl(String appId, String appKey, String scheme, String host) {
         this(appId, appKey, HttpClientFactory.newHttpClient(), getNewObjectMapper(), scheme, host);
     }
 
+    /**
+     * @param appId application id
+     * @param appKey application key
+     */
     public IndixApiClientImpl(String appId, String appKey, HttpClient httpClient) {
         this(appId, appKey, httpClient, getNewObjectMapper(), SCHEME, HOST);
     }
@@ -157,13 +169,20 @@ class IndixApiClientImpl implements IndixApiClient {
 
     // response handlers
     //
+
+    /**
+     * Search Products - Retrieves a list of products matching a variety of query parameters with their summary info
+     * @param query Instance of {@link SearchQuery} with appropriate parameters
+     * @return {@link SummarySearchResult}
+     * @throws {@link IndixApiException}
+     */
     public SummarySearchResult getProductsSummary(Query query) throws IndixApiException {
 
         String resource = buildSearchResourcePath(SUMMARY);
         try {
             String content = executeGET(resource, query);
             SummarySearchResponse searchResponse = jsonMapper.readValue(content, SummarySearchResponse.class);
-            return searchResponse.getResult();
+            return searchResponse.getSearchResult();
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
@@ -172,13 +191,20 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Search Products - Retrieves a list of products matching a variety of query parameters with offers info from a
+     * store
+     * @param query Instance of {@link SearchQuery} with appropriate parameters
+     * @return {@link OffersSearchResult}
+     * @throws {@link IndixApiException}
+     */
     public OffersSearchResult getProductsOffersStandard(Query query) throws IndixApiException {
 
         String resource = buildSearchResourcePath(OFFERS_STANDARD);
         try {
             String content = executeGET(resource, query);
             OffersSearchResponse searchResponse = jsonMapper.readValue(content, OffersSearchResponse.class);
-            return searchResponse.getResult();
+            return searchResponse.getSearchResult();
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
@@ -187,13 +213,20 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Search Products - Retrieves a list of products matching a variety of query parameters with offers info from a
+     * store
+     * @param query Instance of {@link SearchQuery} with appropriate parameters
+     * @return {@link OffersSearchResult}
+     * @throws {@link IndixApiException}
+     */
     public OffersSearchResult getProductsOffersPremium(Query query) throws IndixApiException {
 
         String resource = buildSearchResourcePath(OFFERS_PREMIUM);
         try {
             String content = executeGET(resource, query);
             OffersSearchResponse searchResponse = jsonMapper.readValue(content, OffersSearchResponse.class);
-            return searchResponse.getResult();
+            return searchResponse.getSearchResult();
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
@@ -202,6 +235,13 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Search Products - Retrieves a list of products matching a variety of query parameters with their
+     * aggregated catalog info
+     * @param query Instance of {@link SearchQuery} with appropriate parameters
+     * @return {@link CatalogStandardSearchResult}
+     * @throws {@link IndixApiException}
+     */
     public CatalogStandardSearchResult getProductsCatalogStandard(Query query) throws IndixApiException {
 
         String resource = buildSearchResourcePath(CATALOG_STANDARD);
@@ -210,7 +250,7 @@ class IndixApiClientImpl implements IndixApiClient {
             CatalogStandardSearchResponse searchResponse = jsonMapper.readValue(
                     content,
                     CatalogStandardSearchResponse.class);
-            return searchResponse.getResult();
+            return searchResponse.getSearchResult();
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
@@ -219,6 +259,13 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Search Products - Retrieves a list of products matching a variety of query parameters with their
+     * catalog info across stores
+     * @param query Instance of {@link SearchQuery} with appropriate parameters
+     * @return {@link CatalogPremiumSearchResult}
+     * @throws {@link IndixApiException}
+     */
     public CatalogPremiumSearchResult getProductsCatalogPremium(Query query) throws IndixApiException {
 
         String resource = buildSearchResourcePath(CATALOG_PREMIUM);
@@ -227,7 +274,7 @@ class IndixApiClientImpl implements IndixApiClient {
             CatalogPremiumSearchResponse searchResponse = jsonMapper.readValue(
                     content,
                     CatalogPremiumSearchResponse.class);
-            return searchResponse.getResult();
+            return searchResponse.getSearchResult();
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
@@ -236,13 +283,20 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Search Products - Retrieves a list of products matching a variety of query parameters with their offers and
+     * catalog info across stores
+     * @param query Instance of {@link SearchQuery} with appropriate parameters
+     * @return {@link UniversalSearchResult}
+     * @throws {@link IndixApiException}
+     */
     public UniversalSearchResult getProductsUniversal(Query query) throws IndixApiException {
 
         String resource = buildSearchResourcePath(UNIVERSAL);
         try {
             String content = executeGET(resource, query);
             UniversalSearchResponse searchResponse = jsonMapper.readValue(content, UniversalSearchResponse.class);
-            return searchResponse.getResult();
+            return searchResponse.getSearchResult();
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
@@ -251,6 +305,12 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Product Details - Returns summary information for a product
+     * @param query Instance of {@link ProductDetailsQuery} with appropriate parameters
+     * @return {@link SummaryProductDetailsResult}
+     * @throws {@link IndixApiException}
+     */
     public SummaryProductDetailsResult getProductDetailsSummary(ProductDetailsQuery query) throws IndixApiException {
 
         String resource = buildProductDetailsPath(SUMMARY, query.getMpid());
@@ -260,7 +320,7 @@ class IndixApiClientImpl implements IndixApiClient {
                     content,
                     SummaryProductDetailsResponse.class
             );
-            return productDetailsResponse.getResult();
+            return productDetailsResponse.getProductDetailsResult();
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
@@ -269,6 +329,12 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Product Details - Returns offers standard information for a product from a single storeId
+     * @param query Instance of {@link ProductDetailsQuery} with appropriate parameters
+     * @return {@link OffersProductDetailsResult}
+     * @throws {@link IndixApiException}
+     */
     public OffersProductDetailsResult getProductDetailsOffersStandard(ProductDetailsQuery query)
             throws IndixApiException {
 
@@ -279,7 +345,7 @@ class IndixApiClientImpl implements IndixApiClient {
                     content,
                     OffersProductDetailsResponse.class
             );
-            return productDetailsResponse.getResult();
+            return productDetailsResponse.getProductDetailsResult();
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
@@ -288,6 +354,12 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Product Details - Returns offers premium information for a product
+     * @param query Instance of {@link ProductDetailsQuery} with appropriate parameters
+     * @return {@link OffersProductDetailsResult}
+     * @throws {@link IndixApiException}
+     */
     public OffersProductDetailsResult getProductDetailsOffersPremium(ProductDetailsQuery query)
             throws IndixApiException {
 
@@ -298,7 +370,7 @@ class IndixApiClientImpl implements IndixApiClient {
                     content,
                     OffersProductDetailsResponse.class
             );
-            return productDetailsResponse.getResult();
+            return productDetailsResponse.getProductDetailsResult();
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
@@ -307,6 +379,12 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Product Details - Returns catalog standard information for a product
+     * @param query Instance of {@link ProductDetailsQuery} with appropriate parameters
+     * @return {@link CatalogPremiumProductDetailsResult}
+     * @throws {@link IndixApiException}
+     */
     public CatalogStandardProductDetailsResult getProductDetailsCatalogStandard(ProductDetailsQuery query)
             throws IndixApiException {
 
@@ -317,7 +395,7 @@ class IndixApiClientImpl implements IndixApiClient {
                     content,
                     CatalogStandardProductDetailsResponse.class
             );
-            return productDetailsResponse.getResult();
+            return productDetailsResponse.getProductDetailsResult();
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
@@ -326,6 +404,12 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Product Details - Returns catalog premium information for a product
+     * @param query Instance of {@link ProductDetailsQuery} with appropriate parameters
+     * @return {@link CatalogPremiumProductDetailsResult}
+     * @throws {@link IndixApiException}
+     */
     public CatalogPremiumProductDetailsResult getProductDetailsCatalogPremium(ProductDetailsQuery query)
             throws IndixApiException {
 
@@ -336,7 +420,7 @@ class IndixApiClientImpl implements IndixApiClient {
                     content,
                     CatalogPremiumProductDetailsResponse.class
             );
-            return productDetailsResponse.getResult();
+            return productDetailsResponse.getProductDetailsResult();
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
@@ -345,6 +429,12 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Product Details - Returns complete information for a product
+     * @param query Instance of {@link ProductDetailsQuery} with appropriate parameters
+     * @return {@link UniversalProductDetailsResult}
+     * @throws {@link IndixApiException}
+     */
     public UniversalProductDetailsResult getProductDetailsUniversal(ProductDetailsQuery query)
             throws IndixApiException {
 
@@ -355,7 +445,7 @@ class IndixApiClientImpl implements IndixApiClient {
                     content,
                     UniversalProductDetailsResponse.class
             );
-            return productDetailsResponse.getResult();
+            return productDetailsResponse.getProductDetailsResult();
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
@@ -364,6 +454,12 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Search Stores - Lists all stores along with their IDs
+     * @param query Instance of {@link MetadataQuery} with appropriate parameters
+     * @return {@link StoresResult}
+     * @throws {@link IndixApiException}
+     */
     public StoresResult getStores(Query query) throws IndixApiException {
 
         try {
@@ -378,6 +474,12 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Search Brands - Lists all brands along with their IDs
+     * @param query Instance of {@link MetadataQuery} with appropriate parameters
+     * @return {@link BrandsResult}
+     * @throws {@link IndixApiException}
+     */
     public BrandsResult getBrands(Query query) throws IndixApiException {
 
         try {
@@ -392,6 +494,12 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Export Categories - Lists all categories along with their IDs and path
+     * @param query Instance of {@link MetadataQuery} with appropriate parameters
+     * @return {@link CategoriesResult}
+     * @throws {@link IndixApiException}
+     */
     public CategoriesResult getCategories(Query query) throws IndixApiException {
 
         try {
@@ -406,6 +514,12 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Search Suggestions - Lists all product search suggestions
+     * @param query Instance of {@link SearchQuery} with appropriate parameters
+     * @return {@link SuggestionsResult}
+     * @throws {@link IndixApiException}
+     */
     public SuggestionsResult getSuggestions(Query query) throws IndixApiException {
 
         try {
@@ -420,6 +534,12 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Product History - Returns the historical price information recorded for the product
+     * @param query Instance of {@link ProductHistoryQuery} with appropriate parameters
+     * @return {@link ProductHistoryResult}
+     * @throws {@link IndixApiException}
+     */
     public ProductHistoryResult getProductHistory(ProductHistoryQuery query) throws IndixApiException {
 
         String resource = buildProductHistoryPath(query.getMpid());
@@ -435,6 +555,13 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Posts a bulk job for the appropriate resource type for search cases
+     * @param resourceType {@link ResourceType}
+     * @param query Instance of {@link BulkProductsQuery} with appropriate parameters
+     * @return {@link JobInfo}
+     * @throws {@link IndixApiException}
+     */
     public JobInfo postBulkJob(ResourceType resourceType, BulkProductsQuery query) throws IndixApiException {
 
         String resource = buildBulkSearchResourcePath(resourceType);
@@ -451,6 +578,13 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * Posts a bulk job for the appropriate resource type for lookup cases
+     * @param resourceType {@link ResourceType}
+     * @param query Instance of {@link BulkLookupQuery} with appropriate parameters
+     * @return {@link JobInfo}
+     * @throws {@link IndixApiException}
+     */
     public JobInfo postBulkJob(ResourceType resourceType, BulkLookupQuery query) throws IndixApiException {
 
         String resource = buildBulkLookupResourcePath(resourceType);
@@ -466,6 +600,12 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    /**
+     * get status of job returned against bulk query
+     * @param query Instance of {@link JobStatusQuery} with appropriate jobId
+     * @return {@link JobInfo}
+     * @throws {@link IndixApiException}
+     */
     public JobInfo getBulkJobStatus(JobStatusQuery query) throws IndixApiException {
 
         String resource = buildBulkJobStatusPath(
@@ -485,6 +625,12 @@ class IndixApiClientImpl implements IndixApiClient {
 
     }
 
+    /**
+     * get output of job returned against bulk query
+     * @param query Instance of {@link JobStatusQuery} with appropriate jobId
+     * @return stream of data obtained as response from the bulk job
+     * @throws {@link IndixApiException}
+     */
     public InputStream getBulkJobOutput(JobStatusQuery query) throws IndixApiException {
 
         String resource = buildBulkJobDownloadPath(
@@ -502,6 +648,10 @@ class IndixApiClientImpl implements IndixApiClient {
     }
 
 
+    /**
+     * close the http client involved with the api client
+     * @throws IOException
+     */
     public void close() throws IOException {
         httpClient.close();
     }

@@ -5,7 +5,7 @@ import models.product.SummaryProduct;
 public class SummaryProductDetailsResult {
     private SummaryProduct product;
 
-    public SummaryProduct getProduct() {
+    public SummaryProduct getSummaryProduct() {
         return product;
     }
 }

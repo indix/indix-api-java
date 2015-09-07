@@ -8,6 +8,10 @@ public class JobStatusQuery extends QueryBase {
         super();
     }
 
+    /**
+     * Job Id to search for
+     * @param jobId - Id of job returned against bulk query
+     */
     public JobStatusQuery withJobId(int jobId) {
         this.jobId = jobId;
         return this;

@@ -5,7 +5,7 @@ import models.product.UniversalProduct;
 public class UniversalProductDetailsResult {
     private UniversalProduct product;
 
-    public UniversalProduct getProduct() {
+    public UniversalProduct getUniversalProduct() {
         return product;
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 public class UniversalSearchResult extends SearchResult {
     private List<UniversalProduct> products;
 
-    public List<UniversalProduct> getProducts() {
+    public List<UniversalProduct> getUniversalProducts() {
         return products;
     }
 }

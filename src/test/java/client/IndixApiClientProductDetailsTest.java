@@ -33,8 +33,8 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf");
             SummaryProductDetailsResult sr = indixApiClient.getProductDetailsSummary(productDetailsQuery);
 
-            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
-            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
+            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getSummaryProduct().getMpid());
+            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getSummaryProduct().getTitle());
         } finally {
             indixApiClient.close();
         }
@@ -53,8 +53,8 @@ public class IndixApiClientProductDetailsTest {
                     .withStoreId(2817);
             OffersProductDetailsResult sr = indixApiClient.getProductDetailsOffersStandard(productDetailsQuery);
 
-            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
-            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
+            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getOffersProduct().getMpid());
+            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getOffersProduct().getTitle());
         } finally {
             indixApiClient.close();
         }
@@ -72,8 +72,8 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf");
             OffersProductDetailsResult sr = indixApiClient.getProductDetailsOffersPremium(productDetailsQuery);
 
-            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
-            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
+            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getOffersProduct().getMpid());
+            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getOffersProduct().getTitle());
         } finally {
             indixApiClient.close();
         }
@@ -91,8 +91,8 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf");
             CatalogStandardProductDetailsResult sr = indixApiClient.getProductDetailsCatalogStandard(productDetailsQuery);
 
-            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
-            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
+            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getCatalogStandardProduct().getMpid());
+            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getCatalogStandardProduct().getTitle());
         } finally {
             indixApiClient.close();
         }
@@ -110,8 +110,8 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf");
             CatalogPremiumProductDetailsResult sr = indixApiClient.getProductDetailsCatalogPremium(productDetailsQuery);
 
-            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
-            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
+            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getCatalogPremiumProduct().getMpid());
+            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getCatalogPremiumProduct().getTitle());
         } finally {
             indixApiClient.close();
         }
@@ -129,8 +129,8 @@ public class IndixApiClientProductDetailsTest {
                     .withMpid("c3c766f0b5fa6bfb9a6f5e2921779dcf");
             UniversalProductDetailsResult sr = indixApiClient.getProductDetailsUniversal(productDetailsQuery);
 
-            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
-            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
+            assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getUniversalProduct().getMpid());
+            assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getUniversalProduct().getTitle());
         } finally {
             indixApiClient.close();
         }

@@ -40,9 +40,9 @@ public class IndixApiClientSearchTest {
 
             UniversalSearchResult sr = indixApiClient.getProductsUniversal(searchQuery);
             assertEquals(18672, sr.getCount());
-            assertEquals(10, sr.getProducts().size());
+            assertEquals(10, sr.getUniversalProducts().size());
             assertEquals(0, sr.getFacets().size());
-            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getUniversalProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }
@@ -62,9 +62,9 @@ public class IndixApiClientSearchTest {
 
             OffersSearchResult sr = indixApiClient.getProductsOffersPremium(searchQuery);
             assertEquals(18672, sr.getCount());
-            assertEquals(10, sr.getProducts().size());
+            assertEquals(10, sr.getOffersProducts().size());
             assertEquals(0, sr.getFacets().size());
-            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getOffersProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }
@@ -85,9 +85,9 @@ public class IndixApiClientSearchTest {
 
             OffersSearchResult sr = indixApiClient.getProductsOffersStandard(searchQuery);
             assertEquals(11624, sr.getCount());
-            assertEquals(10, sr.getProducts().size());
+            assertEquals(10, sr.getOffersProducts().size());
             assertEquals(0, sr.getFacets().size());
-            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getOffersProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }
@@ -107,9 +107,9 @@ public class IndixApiClientSearchTest {
 
             CatalogStandardSearchResult sr = indixApiClient.getProductsCatalogStandard(searchQuery);
             assertEquals(18672, sr.getCount());
-            assertEquals(10, sr.getProducts().size());
+            assertEquals(10, sr.getCatalogStandardProducts().size());
             assertEquals(0, sr.getFacets().size());
-            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getCatalogStandardProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }
@@ -129,9 +129,9 @@ public class IndixApiClientSearchTest {
 
             CatalogPremiumSearchResult sr = indixApiClient.getProductsCatalogPremium(searchQuery);
             assertEquals(18672, sr.getCount());
-            assertEquals(10, sr.getProducts().size());
+            assertEquals(10, sr.getCatalogPremiumProducts().size());
             assertEquals(0, sr.getFacets().size());
-            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getCatalogPremiumProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }
@@ -151,9 +151,9 @@ public class IndixApiClientSearchTest {
 
             SummarySearchResult sr = indixApiClient.getProductsSummary(searchQuery);
             assertEquals(18672, sr.getCount());
-            assertEquals(10, sr.getProducts().size());
+            assertEquals(10, sr.getSummaryProducts().size());
             assertEquals(0, sr.getFacets().size());
-            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getSummaryProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }

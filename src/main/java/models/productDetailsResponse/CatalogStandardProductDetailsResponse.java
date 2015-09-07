@@ -6,7 +6,7 @@ import models.productDetailsResponse.productDetailsResult.CatalogStandardProduct
 public class CatalogStandardProductDetailsResponse extends ResponseBase {
     private CatalogStandardProductDetailsResult result;
 
-    public CatalogStandardProductDetailsResult getResult() {
+    public CatalogStandardProductDetailsResult getProductDetailsResult() {
         return result;
     }
 }

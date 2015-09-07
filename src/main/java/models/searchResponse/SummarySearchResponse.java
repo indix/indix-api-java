@@ -6,7 +6,7 @@ import models.searchResponse.searchResult.SummarySearchResult;
 public class SummarySearchResponse extends ResponseBase {
     private SummarySearchResult result;
 
-    public SummarySearchResult getResult() {
+    public SummarySearchResult getSearchResult() {
         return result;
     }
 }

@@ -6,7 +6,7 @@ import models.searchResponse.searchResult.UniversalSearchResult;
 public class UniversalSearchResponse extends ResponseBase {
     private UniversalSearchResult result;
 
-    public UniversalSearchResult getResult() {
+    public UniversalSearchResult getSearchResult() {
         return result;
     }
 }

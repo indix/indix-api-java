@@ -5,7 +5,7 @@ import models.product.CatalogPremiumProduct;
 public class CatalogPremiumProductDetailsResult {
     private CatalogPremiumProduct product;
 
-    public CatalogPremiumProduct getProduct() {
+    public CatalogPremiumProduct getCatalogPremiumProduct() {
         return product;
     }
 }

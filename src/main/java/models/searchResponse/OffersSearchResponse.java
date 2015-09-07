@@ -6,7 +6,7 @@ import models.searchResponse.searchResult.OffersSearchResult;
 public class OffersSearchResponse extends ResponseBase {
     private OffersSearchResult result;
 
-    public OffersSearchResult getResult() {
+    public OffersSearchResult getSearchResult() {
         return result;
     }
 }

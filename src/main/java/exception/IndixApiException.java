@@ -1,6 +1,6 @@
 package exception;
 
-/*
+/**
  * Base Indix API exception
  */
 public class IndixApiException extends Exception {

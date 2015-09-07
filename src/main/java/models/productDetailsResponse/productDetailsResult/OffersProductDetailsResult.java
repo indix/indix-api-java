@@ -5,7 +5,7 @@ import models.product.OffersProduct;
 public class OffersProductDetailsResult {
     private OffersProduct product;
 
-    public OffersProduct getProduct() {
+    public OffersProduct getOffersProduct() {
         return product;
     }
 }

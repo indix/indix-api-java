@@ -2,7 +2,7 @@ package httpClient.impl;
 
 import httpClient.HttpClient;
 
-/*
+/**
  * Instantiates http client instances
  */
 public class HttpClientFactory {
