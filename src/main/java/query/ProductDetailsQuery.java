@@ -12,24 +12,37 @@ public class ProductDetailsQuery extends QueryBase {
         super();
         mpid = "";
     }
-    
-    public ProductDetailsQuery withCountryCode(String _cc) {
-        parameters.add(new BasicNameValuePair("countryCode", _cc));
+
+    /**
+     * Limits results to products of the geography with this code. Example: 'US', 'GB', etc.
+     * If the user doesn’t pass a value, the default option returns the US countryCode data
+     */
+    public ProductDetailsQuery withCountryCode(String cc) {
+        parameters.add(new BasicNameValuePair("countryCode", cc));
         return this;
     }
 
-    public ProductDetailsQuery withMpid(String _mpid) {
-        mpid = _mpid;
+    /**
+     * The Indix product identifier - should be a 32-digit HEX value retrieved via the Product Search API
+     */
+    public ProductDetailsQuery withMpid(String mpid) {
+        this.mpid = mpid;
         return this;
     }
 
-    public ProductDetailsQuery withStoreId(int _storeId) {
-        parameters.add(new BasicNameValuePair("storeId", String.valueOf(_storeId)));
+    /**
+     * Limits results to offers from this store
+     */
+    public ProductDetailsQuery withStoreId(int storeId) {
+        parameters.add(new BasicNameValuePair("storeId", String.valueOf(storeId)));
         return this;
     }
 
-    public ProductDetailsQuery withPageNumber(int _pageNumber) {
-        parameters.add(new BasicNameValuePair("pageNumber", String.valueOf(_pageNumber)));
+    /**
+     * The page number of the result set to return. 50 results per page, plus similar items
+     */
+    public ProductDetailsQuery withPageNumber(int pageNumber) {
+        parameters.add(new BasicNameValuePair("pageNumber", String.valueOf(pageNumber)));
         return this;
     }
 

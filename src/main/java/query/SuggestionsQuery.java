@@ -8,13 +8,21 @@ public class SuggestionsQuery extends QueryBase {
         super();
     }
 
-    public SuggestionsQuery withQ(String _q) {
-        parameters.add(new BasicNameValuePair("q", _q));
+    /**
+     * Accepts query term for which suggestions are to be provided
+     */
+    public SuggestionsQuery withQ(String q) {
+        parameters.add(new BasicNameValuePair("q", q));
         return this;
     }
 
-    public SuggestionsQuery withCountryCode(String _cc) {
-        parameters.add(new BasicNameValuePair("countryCode", _cc));
+    /**
+     * Limits results to products of the geography with this code. Example 'US', 'GB', etc
+     * If the user doesn’t pass a value, the default option returns the US countryCode data
+     * @param cc String value specifying countrycode
+     */
+    public SuggestionsQuery withCountryCode(String cc) {
+        parameters.add(new BasicNameValuePair("countryCode", cc));
         return this;
     }
 }

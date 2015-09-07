@@ -1,6 +1,6 @@
 package exception;
 
-/*
+/**
  * Indix exception corresponding to HTTP 429 error code
  */
 public class TooManyRequestsException extends IndixApiException {

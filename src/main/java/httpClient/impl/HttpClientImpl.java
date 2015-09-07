@@ -21,16 +21,27 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.List;
 
-/*
+/**
  * Wrapper over apache http client
  */
 class HttpClientImpl implements HttpClient {
     CloseableHttpClient closeableHttpClient;
 
+    /**
+     * Creates a {@link CloseableHttpClient} instance with default
+     * configuration.
+     */
     public HttpClientImpl() {
         closeableHttpClient = HttpClients.createDefault();
     }
 
+    /**
+     * Executes a HTTP request and checks for any invalid responses that might have been returned
+     * @param httpRequest - The http request object containing all the request details/entities
+     * @return the response, if obtained from the request
+     * @throws {@link IndixApiException}
+     * @throws IOException
+     */
     private CloseableHttpResponse getResponse(HttpRequestBase httpRequest) throws IndixApiException, IOException {
 
         CloseableHttpResponse response = closeableHttpClient.execute(httpRequest);
@@ -63,6 +74,13 @@ class HttpClientImpl implements HttpClient {
         return response;
     }
 
+    /**
+     * Executes HTTP GET request for which a String value is returned as response.
+     * @param uri - The URI against which the request is to be sent
+     * @return the response to the request
+     * @throws IOException
+     * @throws {@link IndixApiException}
+     */
     public String GET(URI uri) throws IOException, IndixApiException {
 
         HttpGet httpGet = new HttpGet(uri);
@@ -72,6 +90,13 @@ class HttpClientImpl implements HttpClient {
         }
     }
 
+    /**
+     * Executes HTTP GET request for which a large stream is received as response
+     * @param uri - The URI against which the request is to be sent
+     * @return the response to the request
+     * @throws IOException
+     * @throws {@link IndixApiException}
+     */
     public InputStream GETStream(URI uri) throws IOException, IndixApiException {
 
         HttpGet httpGet = new HttpGet(uri);
@@ -81,6 +106,14 @@ class HttpClientImpl implements HttpClient {
         }
     }
 
+    /**
+     * Executes HTTP POST request, accepting parameters in the form-urlencoded format
+     * @param uri - The URI against which the request is to be sent
+     * @param params - The list of parameters to be sent as a part of the request
+     * @return the response to the request
+     * @throws {@link IndixApiException}
+     * @throws IOException
+     */
     public String POST(URI uri, List<NameValuePair> params) throws IndixApiException, IOException {
 
         HttpPost httpPost = new HttpPost(uri);
@@ -90,6 +123,16 @@ class HttpClientImpl implements HttpClient {
         }
     }
 
+    /**
+     * Executes HTTP POST request, accepting file as multi part entity
+     *
+     * @param uri - The URI against which the request is to be sent
+     * @param params - The list of parameters to be sent as a part of the request
+     * @param file - The file to be sent as the HTTP multipart entity
+     * @return the response to the request
+     * @throws IOException
+     * @throws {@link IndixApiException}
+     */
     public String POST(URI uri, List<NameValuePair> params, File file) throws IOException, IndixApiException {
 
         // build multi-part entity
@@ -115,6 +158,9 @@ class HttpClientImpl implements HttpClient {
         }
     }
 
+    /**
+     * Close the particular http client instance
+     */
     public void close() throws IOException {
         closeableHttpClient.close();
     }

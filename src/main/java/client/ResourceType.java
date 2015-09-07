@@ -1,5 +1,8 @@
 package client;
 
+/**
+ * Defines all the views that the API supports. It defines the output view of the responses obtained from the queries
+ */
 public enum ResourceType {
     SUMMARY("summary"),
     OFFERS_STANDARD("offersStandard"),

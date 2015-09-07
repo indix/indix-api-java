@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ProductOfferBase {
 
-    // Offer basic fields
+    // Offers basic fields
     //
     private String pid;
     private String title;
