@@ -1,5 +1,7 @@
 package client.impl;
 
+import static client.impl.IndixApiClientImpl.buildPath;
+
 class IndixApiConstants {
 
     static final String SCHEME = "https";
@@ -21,17 +23,5 @@ class IndixApiConstants {
     public static final String PRODUCT_HISTORY_RESOURCE = buildPath(VERSION, HISTORY_VIEW, PRODUCTS_RESOURCE);
 
     public static final String BULK_JOB_RESOURCE = buildPath(VERSION, BULK, JOB_VIEW);
-
-    static String buildPath(String... pathFragments) {
-        StringBuilder sb = new StringBuilder();
-
-        for (String fragment : pathFragments) {
-            sb.append("/");
-            sb.append(fragment);
-        }
-        return sb.toString();
-    }
-
-
 
 }

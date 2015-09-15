@@ -52,9 +52,9 @@ public class QueryFactory {
     }
 
     /**
-     * @return {@link JobStatusQuery}
+     * @return {@link JobQuery}
      */
-    public static JobStatusQuery newJobStatusQuery() {
-        return new JobStatusQuery();
+    public static JobQuery newJobQuery() {
+        return new JobQuery();
     }
 }

@@ -3,7 +3,7 @@ package client;
 /**
  * Defines all the views that the API supports. It defines the output view of the responses obtained from the queries
  */
-public enum ResourceType {
+public enum ProductsViewType {
     SUMMARY("summary"),
     OFFERS_STANDARD("offersStandard"),
     OFFERS_PREMIUM("offersPremium"),
@@ -13,7 +13,7 @@ public enum ResourceType {
 
     private final String resource;
 
-    private ResourceType(final String resource) {
+    private ProductsViewType(final String resource) {
         this.resource = resource;
     }
 

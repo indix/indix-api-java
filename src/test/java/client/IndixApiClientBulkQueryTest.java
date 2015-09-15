@@ -9,7 +9,7 @@ import models.jobs.JobInfo;
 import org.junit.Test;
 import query.BulkLookupQuery;
 import query.BulkProductsQuery;
-import query.JobStatusQuery;
+import query.JobQuery;
 import query.QueryFactory;
 
 import java.io.*;
@@ -35,7 +35,7 @@ public class IndixApiClientBulkQueryTest {
         storeIdList.add(68);
 
         try {
-            for (ResourceType resource : ResourceType.values()) {
+            for (ProductsViewType resource : ProductsViewType.values()) {
 
                 BulkProductsQuery bulkQuery = QueryFactory.newBulkQuery()
                         .withCountryCode("US")
@@ -60,7 +60,7 @@ public class IndixApiClientBulkQueryTest {
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
 
         try {
-            for (ResourceType resource : ResourceType.values()) {
+            for (ProductsViewType resource : ProductsViewType.values()) {
                 File file = new File("src/test/resources/bulkQuery-json-responses0/bulkLookupInput.jsonl");
                 BulkLookupQuery bulkLookupQuery = QueryFactory.newBulkLookupQuery()
                         .withCountryCode("US")
@@ -87,11 +87,11 @@ public class IndixApiClientBulkQueryTest {
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
 
         try {
-            JobStatusQuery jobStatusQuery = QueryFactory.newJobStatusQuery()
+            JobQuery jobQuery = QueryFactory.newJobQuery()
                     .withJobId(1941);
-            JobInfo job = indixApiClient.getBulkJobStatus(jobStatusQuery);
+            JobInfo job = indixApiClient.getBulkJobStatus(jobQuery);
 
-            assertEquals(jobStatusQuery.getJobId(), job.getId());
+            assertEquals(jobQuery.getJobId(), job.getId());
             assertEquals("SUBMITTED", job.getStatus());
             assertEquals(11, job.getCount());
         } finally {
@@ -108,9 +108,9 @@ public class IndixApiClientBulkQueryTest {
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
 
         try {
-            JobStatusQuery jobStatusQuery = QueryFactory.newJobStatusQuery()
+            JobQuery jobQuery = QueryFactory.newJobQuery()
                     .withJobId(123);
-            InputStream stream = indixApiClient.getBulkJobOutput(jobStatusQuery);
+            InputStream stream = indixApiClient.getBulkJobOutput(jobQuery);
 
             //serialise the stream of data being obtained as bulk job output
             //

@@ -1,7 +1,7 @@
 package client.impl;
 
 import client.IndixApiClient;
-import client.ResourceType;
+import client.ProductsViewType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import exception.IndixApiException;
 import exception.InternalServerException;
@@ -32,8 +32,7 @@ import java.net.URISyntaxException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import static client.impl.IndixApiConstants.*;
-import static client.impl.IndixApiConstants.buildPath;
-import static client.ResourceType.*;
+import static client.ProductsViewType.*;
 
 /**
  * Indix Api Client implementation
@@ -139,11 +138,21 @@ class IndixApiClientImpl implements IndixApiClient {
         return httpClient.POST(uri, searchQuery.getParameters(), file);
     }
 
-    private String buildSearchResourcePath(ResourceType resourceView) {
+    static String buildPath(String... pathFragments) {
+        StringBuilder sb = new StringBuilder();
+
+        for (String fragment : pathFragments) {
+            sb.append("/");
+            sb.append(fragment);
+        }
+        return sb.toString();
+    }
+
+    private String buildSearchResourcePath(ProductsViewType resourceView) {
         return buildPath(VERSION, String.valueOf(resourceView), PRODUCTS_RESOURCE);
     }
 
-    private String buildProductDetailsPath(ResourceType resourceView, String mpid) {
+    private String buildProductDetailsPath(ProductsViewType resourceView, String mpid) {
         return buildPath(buildSearchResourcePath(resourceView), mpid);
     }
 
@@ -151,11 +160,11 @@ class IndixApiClientImpl implements IndixApiClient {
         return buildPath(PRODUCT_HISTORY_RESOURCE, mpid);
     }
 
-    private String buildBulkSearchResourcePath(ResourceType resourceView) {
+    private String buildBulkSearchResourcePath(ProductsViewType resourceView) {
         return buildPath(VERSION, String.valueOf(resourceView), BULK, PRODUCTS_RESOURCE);
     }
 
-    private String buildBulkLookupResourcePath(ResourceType resourceView) {
+    private String buildBulkLookupResourcePath(ProductsViewType resourceView) {
         return buildPath(VERSION, String.valueOf(resourceView), BULK, LOOKUP_VIEW);
     }
 
@@ -557,14 +566,14 @@ class IndixApiClientImpl implements IndixApiClient {
 
     /**
      * Posts a bulk job for the appropriate resource type for search cases
-     * @param resourceType {@link ResourceType}
+     * @param productsViewType {@link ProductsViewType}
      * @param query Instance of {@link BulkProductsQuery} with appropriate parameters
      * @return {@link JobInfo}
      * @throws {@link IndixApiException}
      */
-    public JobInfo postBulkJob(ResourceType resourceType, BulkProductsQuery query) throws IndixApiException {
+    public JobInfo postBulkJob(ProductsViewType productsViewType, BulkProductsQuery query) throws IndixApiException {
 
-        String resource = buildBulkSearchResourcePath(resourceType);
+        String resource = buildBulkSearchResourcePath(productsViewType);
         try {
             String content = executePOST(resource, query);
             JobInfo job = jsonMapper.readValue(content, JobInfo.class);
@@ -580,14 +589,14 @@ class IndixApiClientImpl implements IndixApiClient {
 
     /**
      * Posts a bulk job for the appropriate resource type for lookup cases
-     * @param resourceType {@link ResourceType}
+     * @param productsViewType {@link ProductsViewType}
      * @param query Instance of {@link BulkLookupQuery} with appropriate parameters
      * @return {@link JobInfo}
      * @throws {@link IndixApiException}
      */
-    public JobInfo postBulkJob(ResourceType resourceType, BulkLookupQuery query) throws IndixApiException {
+    public JobInfo postBulkJob(ProductsViewType productsViewType, BulkLookupQuery query) throws IndixApiException {
 
-        String resource = buildBulkLookupResourcePath(resourceType);
+        String resource = buildBulkLookupResourcePath(productsViewType);
         try {
             String content = executePOST(resource, query, query.getInputFile());
             JobInfo job = jsonMapper.readValue(content, JobInfo.class);
@@ -602,11 +611,11 @@ class IndixApiClientImpl implements IndixApiClient {
 
     /**
      * get status of job returned against bulk query
-     * @param query Instance of {@link JobStatusQuery} with appropriate jobId
+     * @param query Instance of {@link JobQuery} with appropriate jobId
      * @return {@link JobInfo}
      * @throws {@link IndixApiException}
      */
-    public JobInfo getBulkJobStatus(JobStatusQuery query) throws IndixApiException {
+    public JobInfo getBulkJobStatus(JobQuery query) throws IndixApiException {
 
         String resource = buildBulkJobStatusPath(
                 BULK_JOB_RESOURCE,
@@ -619,7 +628,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            logger.error("getJobStatus failed: " + e.getMessage());
+            logger.error("getBulkJobStatus failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
 
@@ -627,11 +636,11 @@ class IndixApiClientImpl implements IndixApiClient {
 
     /**
      * get output of job returned against bulk query
-     * @param query Instance of {@link JobStatusQuery} with appropriate jobId
+     * @param query Instance of {@link JobQuery} with appropriate jobId
      * @return stream of data obtained as response from the bulk job
      * @throws {@link IndixApiException}
      */
-    public InputStream getBulkJobOutput(JobStatusQuery query) throws IndixApiException {
+    public InputStream getBulkJobOutput(JobQuery query) throws IndixApiException {
 
         String resource = buildBulkJobDownloadPath(
                 BULK_JOB_RESOURCE,
@@ -642,7 +651,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            logger.error("getJobStatus failed: " + e.getMessage());
+            logger.error("getBulkJobOutput failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }

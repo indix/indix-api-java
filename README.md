@@ -1,4 +1,4 @@
-# scarlet-client
+# Apiv2-Java-Client
 Indix API Java client
 
 ##Usage :
@@ -93,7 +93,7 @@ It returns summary information for a product.
         indixApiClient.close();
     }
 ```
-### Bulk Search Query
+### Bulk Products Query
 
 The following example shows how to request for a bulk search query which finds products against a list
 of storeIds. It submits a job against the query and returns corresponding job id and status.
@@ -138,9 +138,9 @@ The following example shows how to check the status of a job submitted by a bulk
 
 ```
     try {
-        JobStatusQuery jobStatusQuery = QueryFactory.newJobStatusQuery()
-                .withJobId(1941);
-        JobInfo ji = indixApiClient.getBulkJobStatus(jobStatusQuery);
+        JobQuery jobQuery = QueryFactory.newJobQuery()
+                .withJobId(jobId);
+        JobInfo ji = indixApiClient.getBulkJobStatus(jobQuery);
 
         System.out.println(ji.getId());
         System.out.println(ji.getStatus());
@@ -154,9 +154,9 @@ The following example shows how to obtain the output of a bulk job, as requested
 
 ```
     try {
-        JobStatusQuery jobStatusQuery = QueryFactory.newJobStatusQuery()
-                            .withJobId(123);
-        InputStream stream = indixApiClient.getBulkJobOutput(jobStatusQuery);
+        JobSQuery jobQuery = QueryFactory.newJobQuery()
+                            .withJobId(jobId);
+        InputStream stream = indixApiClient.getBulkJobOutput(jobQuery);
         //convert inputStream to file, or use as required
     } finally {
         indixApiClient.close();
