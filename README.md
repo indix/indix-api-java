@@ -5,8 +5,7 @@ Indix API Java client
 
 The client needs to be first instantiated with the appropriate application id and key to be able to use
 the different api endpoints. It can be done as follows:
-```
-
+```java
     String appId = "__app_id__";
     String appKey = "__app_key__";
     IndixApiClient indixApiClient = IndixApiClientFactory
@@ -20,7 +19,7 @@ of queries are available for different scenarios. Illustrations of each are spec
 
 The following example shows how to list all stores, along with their IDs, matching the query term
 
-```
+```java
     try {
         MetadataQuery metadataQuery = QueryFactory.newMetadataQuery()
                                       .withQ("nike");
@@ -38,7 +37,7 @@ The following example shows how to list all stores, along with their IDs, matchi
 
 The following example shows how to list all product search suggestions matching the query term.
 
-```
+```java
     try {
         SuggestionsQuery suggestionsQuery = QueryFactory.newSuggestionsQuery()
                 .withCountryCode("US")
@@ -56,7 +55,7 @@ The following example shows how to list all product search suggestions matching 
 The following example shows how to search for products. It retrieves a list of products matching a variety of
 query parameters with their offers and catalog info across stores
 
-```
+```java
     try {
         Query searchQuery = QueryFactory.newSearchQuery()
                 .withQ("nike")
@@ -77,7 +76,7 @@ query parameters with their offers and catalog info across stores
 The following example shows how to search for product details of a particular product with given mpid.
 It returns summary information for a product.
 
-```
+```java
     try {
         ProductDetailsQuery productDetailsQuery =
          QueryFactory.newProductDetailsQuery()
@@ -98,7 +97,7 @@ It returns summary information for a product.
 The following example shows how to request for a bulk search query which finds products against a list
 of storeIds. It submits a job against the query and returns corresponding job id and status.
 
-```
+```java
     try {
         BulkProductsQuery bulkQuery = QueryFactory.newBulkQuery()
                 .withCountryCode("US")
@@ -117,7 +116,7 @@ The following example shows how to request for a bulk lookup query which finds p
 of attributes. A list of lookup queries, each with specific attributes as a json object, may be submitted as
 a jsonlines file. It submits a job against the query and returns corresponding job id and status.
 
-```
+```java
     try {    
         File file = new File("filename.jsonl");
         BulkLookupQuery bulkLookupQuery = QueryFactory.newBulkLookupQuery()
@@ -136,7 +135,7 @@ a jsonlines file. It submits a job against the query and returns corresponding j
 
 The following example shows how to check the status of a job submitted by a bulk query.
 
-```
+```java
     try {
         JobQuery jobQuery = QueryFactory.newJobQuery()
                 .withJobId(jobId);
@@ -152,7 +151,7 @@ The following example shows how to check the status of a job submitted by a bulk
 
 The following example shows how to obtain the output of a bulk job, as requested against a job id.
 
-```
+```java
     try {
         JobSQuery jobQuery = QueryFactory.newJobQuery()
                             .withJobId(jobId);
