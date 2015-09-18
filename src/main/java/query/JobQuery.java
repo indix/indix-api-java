@@ -1,10 +1,10 @@
 package query;
 
-public class JobStatusQuery extends QueryBase {
+public class JobQuery extends QueryBase {
 
     private int jobId;
 
-    public JobStatusQuery() {
+    public JobQuery() {
         super();
     }
 
@@ -12,7 +12,7 @@ public class JobStatusQuery extends QueryBase {
      * Job Id to search for
      * @param jobId - Id of job returned against bulk query
      */
-    public JobStatusQuery withJobId(int jobId) {
+    public JobQuery withJobId(int jobId) {
         this.jobId = jobId;
         return this;
     }

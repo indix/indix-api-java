@@ -1,26 +1,22 @@
 package client.impl;
 
 import client.IndixApiClient;
-import client.ResourceType;
+import client.ProductsViewType;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import exception.IndixApiException;
 import exception.InternalServerException;
 import httpClient.HttpClient;
 import httpClient.impl.HttpClientFactory;
+import models.ResponseBase;
 import models.jobs.JobInfo;
-import models.metadataResponse.BrandsResponse;
-import models.metadataResponse.CategoriesResponse;
-import models.metadataResponse.StoresResponse;
 import models.metadataResponse.metadataResult.BrandsResult;
 import models.metadataResponse.metadataResult.CategoriesResult;
 import models.metadataResponse.metadataResult.StoresResult;
-import models.productDetailsResponse.*;
 import models.productDetailsResponse.productDetailsResult.*;
-import models.productHistoryResponse.ProductHistoryResponse;
 import models.productHistoryResponse.ProductHistoryResult;
-import models.searchResponse.*;
 import models.searchResponse.searchResult.*;
-import models.suggestions.SuggestionsResponse;
 import models.suggestions.SuggestionsResult;
 import org.apache.http.client.utils.URIBuilder;
 import query.*;
@@ -32,8 +28,7 @@ import java.net.URISyntaxException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import static client.impl.IndixApiConstants.*;
-import static client.impl.IndixApiConstants.buildPath;
-import static client.ResourceType.*;
+import static client.ProductsViewType.*;
 
 /**
  * Indix Api Client implementation
@@ -139,11 +134,21 @@ class IndixApiClientImpl implements IndixApiClient {
         return httpClient.POST(uri, searchQuery.getParameters(), file);
     }
 
-    private String buildSearchResourcePath(ResourceType resourceView) {
+    static String buildPath(String... pathFragments) {
+        StringBuilder sb = new StringBuilder();
+
+        for (String fragment : pathFragments) {
+            sb.append("/");
+            sb.append(fragment);
+        }
+        return sb.toString();
+    }
+
+    private String buildSearchResourcePath(ProductsViewType resourceView) {
         return buildPath(VERSION, String.valueOf(resourceView), PRODUCTS_RESOURCE);
     }
 
-    private String buildProductDetailsPath(ResourceType resourceView, String mpid) {
+    private String buildProductDetailsPath(ProductsViewType resourceView, String mpid) {
         return buildPath(buildSearchResourcePath(resourceView), mpid);
     }
 
@@ -151,11 +156,11 @@ class IndixApiClientImpl implements IndixApiClient {
         return buildPath(PRODUCT_HISTORY_RESOURCE, mpid);
     }
 
-    private String buildBulkSearchResourcePath(ResourceType resourceView) {
+    private String buildBulkSearchResourcePath(ProductsViewType resourceView) {
         return buildPath(VERSION, String.valueOf(resourceView), BULK, PRODUCTS_RESOURCE);
     }
 
-    private String buildBulkLookupResourcePath(ResourceType resourceView) {
+    private String buildBulkLookupResourcePath(ProductsViewType resourceView) {
         return buildPath(VERSION, String.valueOf(resourceView), BULK, LOOKUP_VIEW);
     }
 
@@ -170,6 +175,14 @@ class IndixApiClientImpl implements IndixApiClient {
     // response handlers
     //
 
+    static class SummarySearchResponse extends ResponseBase {
+        private SummarySearchResult result;
+
+        public SummarySearchResult getResult() {
+            return result;
+        }
+    }
+
     /**
      * Search Products - Retrieves a list of products matching a variety of query parameters with their summary info
      * @param query Instance of {@link SearchQuery} with appropriate parameters
@@ -181,13 +194,21 @@ class IndixApiClientImpl implements IndixApiClient {
         String resource = buildSearchResourcePath(SUMMARY);
         try {
             String content = executeGET(resource, query);
-            SummarySearchResponse searchResponse = jsonMapper.readValue(content, SummarySearchResponse.class);
+            SummarySearchResponse searchResponse = jsonMapper.readValue(content, IndixApiClientImpl.SummarySearchResponse.class);
             return searchResponse.getResult();
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
             logger.error("getProductsSummary failed: " + e.getMessage());
             throw new InternalServerException(e);
+        }
+    }
+
+    static class OffersSearchResponse extends ResponseBase {
+        private OffersSearchResult result;
+
+        public OffersSearchResult getResult() {
+            return result;
         }
     }
 
@@ -235,6 +256,15 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+
+    static class CatalogStandardSearchResponse extends ResponseBase {
+        private CatalogStandardSearchResult result;
+
+        public CatalogStandardSearchResult getResult() {
+            return result;
+        }
+    }
+
     /**
      * Search Products - Retrieves a list of products matching a variety of query parameters with their
      * aggregated catalog info
@@ -247,8 +277,7 @@ class IndixApiClientImpl implements IndixApiClient {
         String resource = buildSearchResourcePath(CATALOG_STANDARD);
         try {
             String content = executeGET(resource, query);
-            CatalogStandardSearchResponse searchResponse = jsonMapper.readValue(
-                    content,
+            CatalogStandardSearchResponse searchResponse = jsonMapper.readValue(content,
                     CatalogStandardSearchResponse.class);
             return searchResponse.getResult();
         } catch (IndixApiException iae) {
@@ -259,6 +288,13 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    static class CatalogPremiumSearchResponse extends ResponseBase {
+        private CatalogPremiumSearchResult result;
+
+        public CatalogPremiumSearchResult getResult() {
+            return result;
+        }
+    }
     /**
      * Search Products - Retrieves a list of products matching a variety of query parameters with their
      * catalog info across stores
@@ -271,8 +307,7 @@ class IndixApiClientImpl implements IndixApiClient {
         String resource = buildSearchResourcePath(CATALOG_PREMIUM);
         try {
             String content = executeGET(resource, query);
-            CatalogPremiumSearchResponse searchResponse = jsonMapper.readValue(
-                    content,
+            CatalogPremiumSearchResponse searchResponse = jsonMapper.readValue(content,
                     CatalogPremiumSearchResponse.class);
             return searchResponse.getResult();
         } catch (IndixApiException iae) {
@@ -283,6 +318,14 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+
+    static class UniversalSearchResponse extends ResponseBase {
+        private UniversalSearchResult result;
+
+        public UniversalSearchResult getResult() {
+            return result;
+        }
+    }
     /**
      * Search Products - Retrieves a list of products matching a variety of query parameters with their offers and
      * catalog info across stores
@@ -302,6 +345,14 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (Exception e) {
             logger.error("getProductsUniversal failed: " + e.getMessage());
             throw new InternalServerException(e);
+        }
+    }
+
+    static class SummaryProductDetailsResponse extends ResponseBase {
+        private SummaryProductDetailsResult result;
+
+        public SummaryProductDetailsResult getResult() {
+            return result;
         }
     }
 
@@ -326,6 +377,14 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (Exception e) {
             logger.error("getProductDetailsSummary failed: " + e.getMessage());
             throw new InternalServerException(e);
+        }
+    }
+
+    static class OffersProductDetailsResponse extends ResponseBase {
+        private OffersProductDetailsResult result;
+
+        public OffersProductDetailsResult getResult() {
+            return result;
         }
     }
 
@@ -379,6 +438,13 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    static class CatalogStandardProductDetailsResponse extends ResponseBase {
+        private CatalogStandardProductDetailsResult result;
+
+        public CatalogStandardProductDetailsResult getResult() {
+            return result;
+        }
+    }
     /**
      * Product Details - Returns catalog standard information for a product
      * @param query Instance of {@link ProductDetailsQuery} with appropriate parameters
@@ -404,12 +470,21 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    static class CatalogPremiumProductDetailsResponse extends ResponseBase {
+        private CatalogPremiumProductDetailsResult result;
+
+        public CatalogPremiumProductDetailsResult getResult() {
+            return result;
+        }
+    }
+
     /**
      * Product Details - Returns catalog premium information for a product
      * @param query Instance of {@link ProductDetailsQuery} with appropriate parameters
      * @return {@link CatalogPremiumProductDetailsResult}
      * @throws {@link IndixApiException}
      */
+
     public CatalogPremiumProductDetailsResult getProductDetailsCatalogPremium(ProductDetailsQuery query)
             throws IndixApiException {
 
@@ -426,6 +501,14 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (Exception e) {
             logger.error("getProductDetailsCatalogPremium failed: " + e.getMessage());
             throw new InternalServerException(e);
+        }
+    }
+
+    static class UniversalProductDetailsResponse extends ResponseBase {
+        private UniversalProductDetailsResult result;
+
+        public UniversalProductDetailsResult getResult() {
+            return result;
         }
     }
 
@@ -454,6 +537,13 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    static class StoresResponse extends ResponseBase {
+        private StoresResult result;
+
+        public StoresResult getResult() {
+            return result;
+        }
+    }
     /**
      * Search Stores - Lists all stores along with their IDs
      * @param query Instance of {@link MetadataQuery} with appropriate parameters
@@ -471,6 +561,15 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (Exception e) {
             logger.error("getStores failed: " + e.getMessage());
             throw new InternalServerException(e);
+        }
+    }
+
+
+    static class BrandsResponse extends ResponseBase {
+        private BrandsResult result;
+
+        public BrandsResult getResult() {
+            return result;
         }
     }
 
@@ -494,6 +593,14 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    static class CategoriesResponse extends ResponseBase {
+        private CategoriesResult result;
+
+        public CategoriesResult getResult() {
+            return result;
+        }
+    }
+
     /**
      * Export Categories - Lists all categories along with their IDs and path
      * @param query Instance of {@link MetadataQuery} with appropriate parameters
@@ -511,6 +618,14 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (Exception e) {
             logger.error("getCategories failed: " + e.getMessage());
             throw new InternalServerException(e);
+        }
+    }
+
+    static class SuggestionsResponse extends ResponseBase {
+        private SuggestionsResult result;
+
+        public SuggestionsResult getResult() {
+            return result;
         }
     }
 
@@ -534,6 +649,13 @@ class IndixApiClientImpl implements IndixApiClient {
         }
     }
 
+    static class ProductHistoryResponse extends ResponseBase {
+        private ProductHistoryResult result;
+
+        public ProductHistoryResult getResult() {
+            return result;
+        }
+    }
     /**
      * Product History - Returns the historical price information recorded for the product
      * @param query Instance of {@link ProductHistoryQuery} with appropriate parameters
@@ -557,14 +679,14 @@ class IndixApiClientImpl implements IndixApiClient {
 
     /**
      * Posts a bulk job for the appropriate resource type for search cases
-     * @param resourceType {@link ResourceType}
+     * @param productsViewType {@link ProductsViewType}
      * @param query Instance of {@link BulkProductsQuery} with appropriate parameters
      * @return {@link JobInfo}
      * @throws {@link IndixApiException}
      */
-    public JobInfo postBulkJob(ResourceType resourceType, BulkProductsQuery query) throws IndixApiException {
+    public JobInfo postBulkJob(ProductsViewType productsViewType, BulkProductsQuery query) throws IndixApiException {
 
-        String resource = buildBulkSearchResourcePath(resourceType);
+        String resource = buildBulkSearchResourcePath(productsViewType);
         try {
             String content = executePOST(resource, query);
             JobInfo job = jsonMapper.readValue(content, JobInfo.class);
@@ -580,14 +702,14 @@ class IndixApiClientImpl implements IndixApiClient {
 
     /**
      * Posts a bulk job for the appropriate resource type for lookup cases
-     * @param resourceType {@link ResourceType}
+     * @param productsViewType {@link ProductsViewType}
      * @param query Instance of {@link BulkLookupQuery} with appropriate parameters
      * @return {@link JobInfo}
      * @throws {@link IndixApiException}
      */
-    public JobInfo postBulkJob(ResourceType resourceType, BulkLookupQuery query) throws IndixApiException {
+    public JobInfo postBulkJob(ProductsViewType productsViewType, BulkLookupQuery query) throws IndixApiException {
 
-        String resource = buildBulkLookupResourcePath(resourceType);
+        String resource = buildBulkLookupResourcePath(productsViewType);
         try {
             String content = executePOST(resource, query, query.getInputFile());
             JobInfo job = jsonMapper.readValue(content, JobInfo.class);
@@ -602,11 +724,11 @@ class IndixApiClientImpl implements IndixApiClient {
 
     /**
      * get status of job returned against bulk query
-     * @param query Instance of {@link JobStatusQuery} with appropriate jobId
+     * @param query Instance of {@link JobQuery} with appropriate jobId
      * @return {@link JobInfo}
      * @throws {@link IndixApiException}
      */
-    public JobInfo getBulkJobStatus(JobStatusQuery query) throws IndixApiException {
+    public JobInfo getBulkJobStatus(JobQuery query) throws IndixApiException {
 
         String resource = buildBulkJobStatusPath(
                 BULK_JOB_RESOURCE,
@@ -619,7 +741,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            logger.error("getJobStatus failed: " + e.getMessage());
+            logger.error("getBulkJobStatus failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
 
@@ -627,11 +749,11 @@ class IndixApiClientImpl implements IndixApiClient {
 
     /**
      * get output of job returned against bulk query
-     * @param query Instance of {@link JobStatusQuery} with appropriate jobId
+     * @param query Instance of {@link JobQuery} with appropriate jobId
      * @return stream of data obtained as response from the bulk job
      * @throws {@link IndixApiException}
      */
-    public InputStream getBulkJobOutput(JobStatusQuery query) throws IndixApiException {
+    public InputStream getBulkJobOutput(JobQuery query) throws IndixApiException {
 
         String resource = buildBulkJobDownloadPath(
                 BULK_JOB_RESOURCE,
@@ -642,7 +764,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             throw iae;
         } catch (Exception e) {
-            logger.error("getJobStatus failed: " + e.getMessage());
+            logger.error("getBulkJobOutput failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }

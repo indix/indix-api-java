@@ -87,8 +87,8 @@ public class BulkQueryTest {
 
     @Test
     public void testJobStatusQuery() throws IOException {
-        JobStatusQuery jobStatusQuery = QueryFactory.newJobStatusQuery().withJobId(123);
-        assertEquals(123, jobStatusQuery.getJobId());
+        JobQuery jobQuery = QueryFactory.newJobQuery().withJobId(123);
+        assertEquals(123, jobQuery.getJobId());
     }
 
 }
