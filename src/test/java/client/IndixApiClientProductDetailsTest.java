@@ -111,6 +111,8 @@ public class IndixApiClientProductDetailsTest {
 
             assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
             assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
+            assertEquals("brandText1", sr.getProduct().getStores().get("2817").getOffers().get(0).getBrandText());
+            assertEquals("breadCrumbs1", sr.getProduct().getStores().get("2817").getOffers().get(0).getBreadCrumbs());
         } finally {
             indixApiClient.close();
         }
@@ -130,6 +132,8 @@ public class IndixApiClientProductDetailsTest {
 
             assertEquals("c3c766f0b5fa6bfb9a6f5e2921779dcf", sr.getProduct().getMpid());
             assertEquals("Kraft Vegemite Jar 380g, 150c", sr.getProduct().getTitle());
+            assertEquals("brandText1", sr.getProduct().getStores().get("2817").getOffers().get(0).getBrandText());
+            assertEquals("breadCrumbs1", sr.getProduct().getStores().get("2817").getOffers().get(0).getBreadCrumbs());
         } finally {
             indixApiClient.close();
         }

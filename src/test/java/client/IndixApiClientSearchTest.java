@@ -43,6 +43,8 @@ public class IndixApiClientSearchTest {
             assertEquals(10, sr.getProducts().size());
             assertEquals(0, sr.getFacets().size());
             assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
+            assertEquals("brandText1", sr.getProducts().get(0).getStores().get("270").getOffers().get(0).getBrandText());
+            assertEquals("breadCrumbs1", sr.getProducts().get(0).getStores().get("270").getOffers().get(0).getBreadCrumbs());
         } finally {
             indixApiClient.close();
         }
@@ -132,6 +134,8 @@ public class IndixApiClientSearchTest {
             assertEquals(10, sr.getProducts().size());
             assertEquals(0, sr.getFacets().size());
             assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
+            assertEquals("brandText1", sr.getProducts().get(0).getStores().get("270").getOffers().get(0).getBrandText());
+            assertEquals("breadCrumbs1", sr.getProducts().get(0).getStores().get("270").getOffers().get(0).getBreadCrumbs());
         } finally {
             indixApiClient.close();
         }

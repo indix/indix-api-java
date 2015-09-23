@@ -7,6 +7,8 @@ public class ProductOfferUniversal extends ProductOfferPricing {
     private Map<String, List<String>> attributes;
     private List<String> tags;
     private Map<String, List<String>> facetAttributes;
+    private String brandText;
+    private String breadCrumbs;
 
     /**
      * The attributes element is a special case. It is an object that contains key to array of string values that
@@ -33,5 +35,19 @@ public class ProductOfferUniversal extends ProductOfferPricing {
      */
     public Map<String, List<String>> getFacetAttributes() {
         return facetAttributes;
+    }
+
+    /**
+     * @return Brand text of the product
+     */
+    public String getBrandText() {
+        return brandText;
+    }
+
+    /**
+     * @return Breadcrumbs of the product
+     */
+    public String getBreadCrumbs() {
+        return breadCrumbs;
     }
 }
