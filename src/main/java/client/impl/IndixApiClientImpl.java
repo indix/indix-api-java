@@ -2,9 +2,8 @@ package client.impl;
 
 import client.IndixApiClient;
 import client.ProductsViewType;
-import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 import exception.IndixApiException;
 import exception.InternalServerException;
 import httpClient.HttpClient;
@@ -19,16 +18,18 @@ import models.productHistoryResponse.ProductHistoryResult;
 import models.searchResponse.searchResult.*;
 import models.suggestions.SuggestionsResult;
 import org.apache.http.client.utils.URIBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import query.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import static client.impl.IndixApiConstants.*;
+
 import static client.ProductsViewType.*;
+import static client.impl.IndixApiConstants.*;
 
 /**
  * Indix Api Client implementation
@@ -94,7 +95,9 @@ class IndixApiClientImpl implements IndixApiClient {
     // getter methods
     //
     private static ObjectMapper getNewObjectMapper() {
-        return new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return objectMapper;
     }
 
     // utility functions

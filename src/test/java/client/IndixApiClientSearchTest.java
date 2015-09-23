@@ -159,8 +159,8 @@ public class IndixApiClientSearchTest {
         }
     }
 
-    @Test(expected = InternalServerException.class)
-    public void getProductsCatalogPremiumFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
+    @Test
+    public void getProductsCatalogPremiumShouldNotFailIfInputHasAdditionalFields() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
@@ -170,52 +170,18 @@ public class IndixApiClientSearchTest {
                     .withCountryCode("US")
                     .withStoresCount(3);
 
-            indixApiClient.getProductsCatalogPremium(searchQuery);
-
+            CatalogPremiumSearchResult sr = indixApiClient.getProductsCatalogPremium(searchQuery);
+            assertEquals(18672, sr.getCount());
+            assertEquals(10, sr.getProducts().size());
+            assertEquals(0, sr.getFacets().size());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected = InternalServerException.class)
-    public void getProductsCatalogPremiumFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
-                getMockHttpClient("search-json-responses0/offersPremiumSearchResponse.json"));
-        try {
-            Query searchQuery = QueryFactory.newSearchQuery()
-                    .withQ("nike")
-                    .withCountryCode("US")
-                    .withStoresCount(3);
-
-            indixApiClient.getProductsCatalogPremium(searchQuery);
-
-        } finally {
-            indixApiClient.close();
-        }
-    }
-
-    @Test(expected = InternalServerException.class)
-    public void getProductsCatalogPremiumFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
-                getMockHttpClient("search-json-responses0/offersStandardSearchResponse.json"));
-
-        try {
-            Query searchQuery = QueryFactory.newSearchQuery()
-                    .withQ("nike")
-                    .withCountryCode("US")
-                    .withStoresCount(3);
-
-            indixApiClient.getProductsCatalogPremium(searchQuery);
-
-        } finally {
-            indixApiClient.close();
-        }
-    }
-
-    @Test(expected = InternalServerException.class)
-    public void getProductsCatalogStandardFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
+    @Test
+    public void getProductsCatalogStandardShouldNotFailIfInputHasAdditionalFields() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
@@ -226,72 +192,18 @@ public class IndixApiClientSearchTest {
                     .withCountryCode("US")
                     .withStoresCount(3);
 
-            indixApiClient.getProductsCatalogStandard(searchQuery);
-
+            CatalogStandardSearchResult sr = indixApiClient.getProductsCatalogStandard(searchQuery);
+            assertEquals(18672, sr.getCount());
+            assertEquals(10, sr.getProducts().size());
+            assertEquals(0, sr.getFacets().size());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected = InternalServerException.class)
-    public void getProductsCatalogStandardFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
-                getMockHttpClient("search-json-responses0/catalogPremiumSearchResponse.json"));
-
-        try {
-            Query searchQuery = QueryFactory.newSearchQuery()
-                    .withQ("nike")
-                    .withCountryCode("US")
-                    .withStoresCount(3);
-
-            indixApiClient.getProductsCatalogStandard(searchQuery);
-
-        } finally {
-            indixApiClient.close();
-        }
-    }
-
-    @Test(expected = InternalServerException.class)
-    public void getProductsCatalogStandardFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
-                getMockHttpClient("search-json-responses0/offersPremiumSearchResponse.json"));
-
-        try {
-            Query searchQuery = QueryFactory.newSearchQuery()
-                    .withQ("nike")
-                    .withCountryCode("US")
-                    .withStoresCount(3);
-
-            indixApiClient.getProductsCatalogStandard(searchQuery);
-
-        } finally {
-            indixApiClient.close();
-        }
-    }
-
-    @Test(expected = InternalServerException.class)
-    public void getProductsCatalogStandardFailsIfInputResponseIsMalformed3() throws IOException, IndixApiException {
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
-                getMockHttpClient("search-json-responses0/offersStandardSearchResponse.json"));
-
-        try {
-            Query searchQuery = QueryFactory.newSearchQuery()
-                    .withQ("nike")
-                    .withCountryCode("US")
-                    .withStoresCount(3);
-
-            indixApiClient.getProductsCatalogStandard(searchQuery);
-
-        } finally {
-            indixApiClient.close();
-        }
-    }
-
-    @Test(expected = InternalServerException.class)
-    public void getProductsOffersPremiumFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
+    @Test
+    public void getProductsOffersPremiumShouldNotFailIfInputHasAdditionalFields() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
@@ -302,53 +214,18 @@ public class IndixApiClientSearchTest {
                     .withCountryCode("US")
                     .withStoresCount(3);
 
-            indixApiClient.getProductsOffersPremium(searchQuery);
-
+            OffersSearchResult sr = indixApiClient.getProductsOffersPremium(searchQuery);
+            assertEquals(18672, sr.getCount());
+            assertEquals(10, sr.getProducts().size());
+            assertEquals(0, sr.getFacets().size());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected = InternalServerException.class)
-    public void getProductsOffersPremiumFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
-                getMockHttpClient("search-json-responses0/catalogPremiumSearchResponse.json"));
-
-        try {
-            Query searchQuery = QueryFactory.newSearchQuery()
-                    .withQ("nike")
-                    .withCountryCode("US")
-                    .withStoresCount(3);
-
-            indixApiClient.getProductsOffersPremium(searchQuery);
-
-        } finally {
-            indixApiClient.close();
-        }
-    }
-
-    @Test(expected = InternalServerException.class)
-    public void getProductsOffersPremiumFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
-                getMockHttpClient("search-json-responses0/catalogStandardSearchResponse.json"));
-
-        try {
-            Query searchQuery = QueryFactory.newSearchQuery()
-                    .withQ("nike")
-                    .withCountryCode("US")
-                    .withStoresCount(3);
-
-            indixApiClient.getProductsOffersPremium(searchQuery);
-
-        } finally {
-            indixApiClient.close();
-        }
-    }
-
-    @Test(expected = InternalServerException.class)
-    public void getProductsOffersStandardFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
+    @Test
+    public void getProductsOffersStandardShouldNotFailIfInputHasAdditionalFields() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
@@ -359,53 +236,18 @@ public class IndixApiClientSearchTest {
                     .withCountryCode("US")
                     .withStoresCount(3);
 
-            indixApiClient.getProductsOffersStandard(searchQuery);
-
+            OffersSearchResult sr = indixApiClient.getProductsOffersStandard(searchQuery);
+            assertEquals(18672, sr.getCount());
+            assertEquals(10, sr.getProducts().size());
+            assertEquals(0, sr.getFacets().size());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }
     }
 
-    @Test(expected = InternalServerException.class)
-    public void getProductsOffersStandardFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
-                getMockHttpClient("search-json-responses0/catalogPremiumSearchResponse.json"));
-
-        try {
-            Query searchQuery = QueryFactory.newSearchQuery()
-                    .withQ("nike")
-                    .withCountryCode("US")
-                    .withStoresCount(3);
-
-            indixApiClient.getProductsOffersStandard(searchQuery);
-
-        } finally {
-            indixApiClient.close();
-        }
-    }
-
-    @Test(expected = InternalServerException.class)
-    public void getProductsOffersStandardFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
-                getMockHttpClient("search-json-responses0/catalogStandardSearchResponse.json"));
-
-        try {
-            Query searchQuery = QueryFactory.newSearchQuery()
-                    .withQ("nike")
-                    .withCountryCode("US")
-                    .withStoresCount(3);
-
-            indixApiClient.getProductsOffersStandard(searchQuery);
-
-        } finally {
-            indixApiClient.close();
-        }
-    }
-
-    @Test(expected = InternalServerException.class)
-    public void getProductsSummaryFailsIfInputResponseIsMalformed0() throws IOException, IndixApiException {
+    @Test
+    public void getProductsSummaryShouldNotFailIfInputHasAdditionalFields() throws IOException, IndixApiException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
@@ -416,84 +258,11 @@ public class IndixApiClientSearchTest {
                     .withCountryCode("US")
                     .withStoresCount(3);
 
-            indixApiClient.getProductsSummary(searchQuery);
-
-        } finally {
-            indixApiClient.close();
-        }
-    }
-
-    @Test(expected = InternalServerException.class)
-    public void getProductsSummaryFailsIfInputResponseIsMalformed1() throws IOException, IndixApiException {
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
-                getMockHttpClient("search-json-responses0/catalogPremiumSearchResponse.json"));
-
-        try {
-            Query searchQuery = QueryFactory.newSearchQuery()
-                    .withQ("nike")
-                    .withCountryCode("US")
-                    .withStoresCount(3);
-
-            indixApiClient.getProductsSummary(searchQuery);
-
-        } finally {
-            indixApiClient.close();
-        }
-    }
-
-    @Test(expected = InternalServerException.class)
-    public void getProductsSummaryFailsIfInputResponseIsMalformed2() throws IOException, IndixApiException {
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
-                getMockHttpClient("search-json-responses0/catalogStandardSearchResponse.json"));
-
-        try {
-            Query searchQuery = QueryFactory.newSearchQuery()
-                    .withQ("nike")
-                    .withCountryCode("US")
-                    .withStoresCount(3);
-
-            indixApiClient.getProductsSummary(searchQuery);
-
-        } finally {
-            indixApiClient.close();
-        }
-    }
-
-    @Test(expected = InternalServerException.class)
-    public void getProductsSummaryFailsIfInputResponseIsMalformed3() throws IOException, IndixApiException {
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
-                getMockHttpClient("search-json-responses0/offersPremiumSearchResponse.json"));
-
-        try {
-            Query searchQuery = QueryFactory.newSearchQuery()
-                    .withQ("nike")
-                    .withCountryCode("US")
-                    .withStoresCount(3);
-
-            indixApiClient.getProductsSummary(searchQuery);
-
-        } finally {
-            indixApiClient.close();
-        }
-    }
-
-    @Test(expected = InternalServerException.class)
-    public void getProductsSummaryFailsIfInputResponseIsMalformed4() throws IOException, IndixApiException {
-
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
-                getMockHttpClient("search-json-responses0/offersStandardSearchResponse.json"));
-
-        try {
-            Query searchQuery = QueryFactory.newSearchQuery()
-                    .withQ("nike")
-                    .withCountryCode("US")
-                    .withStoresCount(3);
-
-            indixApiClient.getProductsSummary(searchQuery);
-
+            SummarySearchResult sr = indixApiClient.getProductsSummary(searchQuery);
+            assertEquals(18672, sr.getCount());
+            assertEquals(10, sr.getProducts().size());
+            assertEquals(0, sr.getFacets().size());
+            assertEquals("31c2300c8e33393cbe62762dbca01751", sr.getProducts().get(0).getMpid());
         } finally {
             indixApiClient.close();
         }
