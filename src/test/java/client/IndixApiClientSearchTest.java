@@ -2,9 +2,8 @@ package client;
 
 import client.impl.IndixApiClientFactory;
 import exception.IndixApiException;
-import exception.InternalServerException;
 import httpClient.HttpClient;
-import models.searchResponse.searchResult.*;
+import models.searchResult.*;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

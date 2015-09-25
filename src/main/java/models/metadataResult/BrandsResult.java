@@ -1,4 +1,4 @@
-package models.metadataResponse.metadataResult;
+package models.metadataResult;
 
 
 import models.metadata.Brand;

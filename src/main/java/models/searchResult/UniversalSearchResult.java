@@ -1,4 +1,4 @@
-package models.searchResponse.searchResult;
+package models.searchResult;
 
 import models.product.UniversalProduct;
 

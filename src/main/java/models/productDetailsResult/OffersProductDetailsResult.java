@@ -1,4 +1,4 @@
-package models.productDetailsResponse.productDetailsResult;
+package models.productDetailsResult;
 
 import models.product.OffersProduct;
 

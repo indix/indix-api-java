@@ -1,4 +1,4 @@
-package models.searchResponse.searchResult;
+package models.searchResult;
 
 public class Facet {
     private int id;
