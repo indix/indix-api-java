@@ -10,11 +10,6 @@ public class ProductHistory {
     private int brandId;
     private Map<String, ProductHistoryAtStore> stores;
 
-
-    /**
-     *
-     * @return
-     */
     public int getCategoryId(){
         return categoryId;
     }

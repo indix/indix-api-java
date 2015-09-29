@@ -1,9 +1,9 @@
 package client;
 
 import exception.IndixApiException;
-import models.metadataResponse.metadataResult.BrandsResult;
-import models.metadataResponse.metadataResult.CategoriesResult;
-import models.metadataResponse.metadataResult.StoresResult;
+import models.metadataResult.BrandsResult;
+import models.metadataResult.CategoriesResult;
+import models.metadataResult.StoresResult;
 import query.MetadataQuery;
 import query.Query;
 

@@ -3,7 +3,7 @@ package client;
 import client.impl.IndixApiClientFactory;
 import exception.IndixApiException;
 import httpClient.HttpClient;
-import models.productDetailsResponse.productDetailsResult.*;
+import models.productDetailsResult.*;
 import org.junit.Test;
 import query.ProductDetailsQuery;
 import query.QueryFactory;

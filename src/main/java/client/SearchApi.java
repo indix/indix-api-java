@@ -1,7 +1,7 @@
 package client;
 
 import exception.IndixApiException;
-import models.searchResponse.searchResult.*;
+import models.searchResult.*;
 import query.Query;
 import query.SearchQuery;
 

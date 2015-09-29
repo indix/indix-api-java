@@ -11,3 +11,4 @@ public class CatalogPremiumProduct extends CatalogStandardProduct {
         return stores;
     }
 }
+

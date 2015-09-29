@@ -1,4 +1,4 @@
-package models.searchResponse.searchResult;
+package models.searchResult;
 
 import java.util.List;
 import java.util.Map;

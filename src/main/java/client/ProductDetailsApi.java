@@ -1,7 +1,7 @@
 package client;
 
 import exception.IndixApiException;
-import models.productDetailsResponse.productDetailsResult.*;
+import models.productDetailsResult.*;
 import query.ProductDetailsQuery;
 
 public interface ProductDetailsApi {
