@@ -9,7 +9,7 @@
     </properties>
 
     <groupId>com.indix.api</groupId>
-    <artifactId>api-java-client</artifactId>
+    <artifactId>apiv2-java-client</artifactId>
     <version>${version.id}</version>
 
     <dependencies>

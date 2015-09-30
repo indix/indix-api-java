@@ -1,4 +1,4 @@
-# Apiv2-Java-Client
+# Apiv2-Java-Client [![Build Status](https://travis-ci.org/ind9/apiv2-java-client.svg?branch=master)](https://travis-ci.org/ind9/apiv2-java-client)
 Indix API Java client
 
 ##Usage :
