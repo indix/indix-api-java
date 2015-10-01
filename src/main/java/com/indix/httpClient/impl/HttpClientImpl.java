@@ -100,11 +100,9 @@ class HttpClientImpl implements HttpClient {
     public InputStream GETStream(URI uri) throws IOException, IndixApiException {
 
         HttpGet httpGet = new HttpGet(uri);
-
-        try(CloseableHttpResponse response = getResponse(httpGet)) {
-            return response.getEntity().getContent();
+        CloseableHttpResponse response = getResponse(httpGet);
+        return response.getEntity().getContent();
         }
-    }
 
     /**
      * Executes HTTP POST request, accepting parameters in the form-urlencoded format
