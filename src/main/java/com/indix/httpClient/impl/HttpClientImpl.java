@@ -1,5 +1,7 @@
 package com.indix.httpClient.impl;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.indix.exception.*;
 import com.indix.httpClient.HttpClient;
 import org.apache.http.*;
@@ -24,6 +26,7 @@ import java.util.List;
 /**
  * Wrapper over apache http client
  */
+
 class HttpClientImpl implements HttpClient {
     CloseableHttpClient closeableHttpClient;
 
@@ -42,14 +45,22 @@ class HttpClientImpl implements HttpClient {
      * @throws {@link IndixApiException}
      * @throws IOException
      */
-    private CloseableHttpResponse getResponse(HttpRequestBase httpRequest) throws IndixApiException, IOException {
+    private CloseableHttpResponse getResponse(HttpRequestBase httpRequest) throws IndixApiException, IOException{
 
         CloseableHttpResponse response = closeableHttpClient.execute(httpRequest);
-
-        String message = response.getStatusLine().getReasonPhrase();
         int status = response.getStatusLine().getStatusCode();
 
+
         if (HttpStatus.SC_OK != status) {
+
+            String content = EntityUtils.toString(response.getEntity());
+
+            //deserialize exception if raised from query errors
+            //
+            ObjectMapper responseJsonMapper = new ObjectMapper();
+            responseJsonMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            ExceptionMessage msg = responseJsonMapper.readValue(content, ExceptionMessage.class);
+            String message = msg.getMessage();
 
             // we need to close the resources before we throw an exception
             //
