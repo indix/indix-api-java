@@ -3,12 +3,10 @@ package com.indix.httpClient;
 import com.indix.exception.IndixApiException;
 import org.apache.http.NameValuePair;
 
-import java.io.Closeable;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URI;
 import java.util.List;
+import java.util.zip.GZIPInputStream;
 
 /**
  * Interface defining the expected contract for http clients
