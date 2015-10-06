@@ -1,12 +1,11 @@
 package com.indix.common;
 
+import com.sun.corba.se.spi.orbutil.fsm.Input;
 import org.apache.commons.io.IOUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
+import java.io.*;
 import java.net.URL;
+import java.util.zip.GZIPInputStream;
 
 public class ResourceUtils {
 
@@ -34,6 +33,14 @@ public class ResourceUtils {
         String fileName = url.getFile();
         File file = new File(fileName) ;
         return file;
+    }
+
+    public static InputStream getTestStream(ClassLoader classLoader, String pathToResource) throws IOException {
+        InputStream is = classLoader.getResourceAsStream(pathToResource);
+        if (null == is) {
+            throw new IOException("resource not found: " + pathToResource);
+        }
+        return is;
     }
 
 

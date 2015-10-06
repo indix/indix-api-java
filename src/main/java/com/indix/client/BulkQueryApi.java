@@ -7,6 +7,7 @@ import com.indix.query.BulkProductsQuery;
 import com.indix.query.JobQuery;
 
 import java.io.InputStream;
+import java.util.zip.GZIPInputStream;
 
 //params
 public interface BulkQueryApi {

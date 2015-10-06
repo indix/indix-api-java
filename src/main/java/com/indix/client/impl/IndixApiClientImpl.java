@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.zip.GZIPInputStream;
 
 import static com.indix.client.ProductsViewType.*;
 import static com.indix.client.impl.IndixApiConstants.*;
