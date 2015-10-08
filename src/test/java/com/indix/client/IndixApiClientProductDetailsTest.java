@@ -9,19 +9,22 @@ import com.indix.query.ProductDetailsQuery;
 import com.indix.query.QueryFactory;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static org.junit.Assert.assertEquals;
 
 public class IndixApiClientProductDetailsTest {
 
-    public HttpClient getMockHttpClient(String resource) throws IOException, IndixApiException {
+    public HttpClient getMockHttpClient(String resource)
+            throws IndixApiException, IOException, URISyntaxException {
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient(resource);
         return mockHttpClient;
     }
 
     @Test
-    public void getProductDetailsSummary() throws IOException, IndixApiException {
+    public void getProductDetailsSummary()
+            throws IndixApiException, IOException, URISyntaxException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("productDetails-json-responses0/summaryProductDetailsResponse.json"));
@@ -40,7 +43,8 @@ public class IndixApiClientProductDetailsTest {
     }
 
     @Test
-    public void getProductDetailsOffersStandard() throws IOException, IndixApiException {
+    public void getProductDetailsOffersStandard()
+            throws IndixApiException, IOException, URISyntaxException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("productDetails-json-responses0/offersStandardProductDetailsResponse.json"));
@@ -60,7 +64,8 @@ public class IndixApiClientProductDetailsTest {
     }
 
     @Test
-    public void getProductDetailsOffersPremium() throws IOException, IndixApiException {
+    public void getProductDetailsOffersPremium()
+            throws IndixApiException, IOException, URISyntaxException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("productDetails-json-responses0/offersPremiumProductDetailsResponse.json"));
@@ -79,7 +84,8 @@ public class IndixApiClientProductDetailsTest {
     }
 
     @Test
-    public void getProductDetailsCatalogStandard() throws IOException, IndixApiException {
+    public void getProductDetailsCatalogStandard()
+            throws IndixApiException, IOException, URISyntaxException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("productDetails-json-responses0/catalogStandardProductDetailsResponse.json"));
@@ -98,7 +104,8 @@ public class IndixApiClientProductDetailsTest {
     }
 
     @Test
-    public void getProductDetailsCatalogPremium() throws IOException, IndixApiException {
+    public void getProductDetailsCatalogPremium()
+            throws IndixApiException, IOException, URISyntaxException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("productDetails-json-responses0/catalogPremiumProductDetailsResponse.json"));
@@ -119,7 +126,8 @@ public class IndixApiClientProductDetailsTest {
     }
 
     @Test
-    public void getProductDetailsUniversal() throws IOException, IndixApiException {
+    public void getProductDetailsUniversal()
+            throws IndixApiException, IOException, URISyntaxException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
@@ -140,7 +148,8 @@ public class IndixApiClientProductDetailsTest {
     }
 
     @Test
-    public void getProductDetailsSummaryShouldNotFailIfInputHasAdditionalFields() throws IOException, IndixApiException {
+    public void getProductDetailsSummaryShouldNotFailIfInputHasAdditionalFields()
+            throws IndixApiException, IOException, URISyntaxException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
@@ -159,7 +168,8 @@ public class IndixApiClientProductDetailsTest {
     }
 
     @Test
-    public void getProductDetailsOffersStandardShouldNotFailIfInputHasAdditionalFields() throws IOException, IndixApiException {
+    public void getProductDetailsOffersStandardShouldNotFailIfInputHasAdditionalFields()
+            throws IndixApiException, IOException, URISyntaxException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
@@ -179,7 +189,8 @@ public class IndixApiClientProductDetailsTest {
     }
 
     @Test
-    public void getProductDetailsOffersPremiumShouldNotFailIfInputHasAdditionalFields() throws IOException, IndixApiException {
+    public void getProductDetailsOffersPremiumShouldNotFailIfInputHasAdditionalFields()
+            throws IndixApiException, IOException, URISyntaxException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
@@ -198,7 +209,8 @@ public class IndixApiClientProductDetailsTest {
     }
 
     @Test
-    public void getProductDetailsCatalogStandardShouldNotFailIfInputHasAdditionalFields() throws IOException, IndixApiException {
+    public void getProductDetailsCatalogStandardShouldNotFailIfInputHasAdditionalFields()
+            throws IndixApiException, IOException, URISyntaxException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));
@@ -217,7 +229,8 @@ public class IndixApiClientProductDetailsTest {
     }
 
     @Test
-    public void getProductDetailsCatalogPremiumShouldNotFailIfInputHasAdditionalFields() throws IOException, IndixApiException {
+    public void getProductDetailsCatalogPremiumShouldNotFailIfInputHasAdditionalFields()
+            throws IndixApiException, IOException, URISyntaxException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("productDetails-json-responses0/universalProductDetailsResponse.json"));

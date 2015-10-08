@@ -1,6 +1,6 @@
 package com.indix.httpClient.impl;
 
-class ExceptionMessage {
+class ErrorResponse {
 
     private String message;
 

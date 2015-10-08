@@ -6,8 +6,9 @@ import com.indix.query.BulkLookupQuery;
 import com.indix.query.BulkProductsQuery;
 import com.indix.query.JobQuery;
 
+import java.io.IOException;
 import java.io.InputStream;
-import java.util.zip.GZIPInputStream;
+import java.net.URISyntaxException;
 
 //params
 public interface BulkQueryApi {
@@ -19,7 +20,8 @@ public interface BulkQueryApi {
      * @return {@link JobInfo}
      * @throws {@link IndixApiException}
      */
-    JobInfo postBulkJob(ProductsViewType productsViewType, BulkProductsQuery query) throws IndixApiException;
+    JobInfo postBulkJob(ProductsViewType productsViewType, BulkProductsQuery query)
+            throws IndixApiException, IOException, URISyntaxException;
 
     /**
      * Posts a bulk job for the appropriate resource type for lookup cases
@@ -28,7 +30,8 @@ public interface BulkQueryApi {
      * @return {@link JobInfo}
      * @throws {@link IndixApiException}
      */
-    JobInfo postBulkJob(ProductsViewType productsViewType, BulkLookupQuery query) throws IndixApiException;
+    JobInfo postBulkJob(ProductsViewType productsViewType, BulkLookupQuery query)
+            throws IndixApiException, IOException, URISyntaxException;
 
     /**
      * get status of job returned against bulk query
@@ -36,7 +39,8 @@ public interface BulkQueryApi {
      * @return {@link JobInfo}
      * @throws {@link IndixApiException}
      */
-    JobInfo getBulkJobStatus(JobQuery query) throws IndixApiException;
+    JobInfo getBulkJobStatus(JobQuery query)
+            throws IndixApiException, IOException, URISyntaxException;
 
     /**
      * get output of job returned against bulk query
@@ -44,5 +48,6 @@ public interface BulkQueryApi {
      * @return stream of data obtained as response from the bulk job
      * @throws {@link IndixApiException}
      */
-    InputStream getBulkJobOutput(JobQuery query) throws IndixApiException;
+    InputStream getBulkJobOutput(JobQuery query)
+            throws IndixApiException, IOException, URISyntaxException;
 }

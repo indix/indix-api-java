@@ -5,6 +5,9 @@ import com.indix.models.searchResult.*;
 import com.indix.query.Query;
 import com.indix.query.SearchQuery;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 public interface SearchApi {
     /**
      * Search Products - Retrieves a list of products matching a variety of query parameters with their summary info
@@ -12,7 +15,8 @@ public interface SearchApi {
      * @return {@link SummarySearchResult}
      * @throws {@link IndixApiException}
      */
-    SummarySearchResult getProductsSummary(Query query) throws IndixApiException;
+    SummarySearchResult getProductsSummary(Query query)
+            throws IndixApiException, IOException, URISyntaxException;
 
     /**
      * Search Products - Retrieves a list of products matching a variety of query parameters with offers info from a
@@ -21,7 +25,8 @@ public interface SearchApi {
      * @return {@link OffersSearchResult}
      * @throws {@link IndixApiException}
      */
-    OffersSearchResult getProductsOffersStandard(Query query) throws IndixApiException;
+    OffersSearchResult getProductsOffersStandard(Query query)
+            throws IndixApiException, URISyntaxException, IOException;
 
     /**
      * Search Products - Retrieves a list of products matching a variety of query parameters with offers info from a
@@ -30,7 +35,8 @@ public interface SearchApi {
      * @return {@link OffersSearchResult}
      * @throws {@link IndixApiException}
      */
-    OffersSearchResult getProductsOffersPremium(Query query) throws IndixApiException;
+    OffersSearchResult getProductsOffersPremium(Query query)
+            throws IndixApiException, IOException, URISyntaxException;
 
     /**
      * Search Products - Retrieves a list of products matching a variety of query parameters with their
@@ -39,7 +45,8 @@ public interface SearchApi {
      * @return {@link CatalogStandardSearchResult}
      * @throws {@link IndixApiException}
      */
-    CatalogStandardSearchResult getProductsCatalogStandard(Query query) throws IndixApiException;
+    CatalogStandardSearchResult getProductsCatalogStandard(Query query)
+            throws IndixApiException, IOException, URISyntaxException;
 
     /**
      * Search Products - Retrieves a list of products matching a variety of query parameters with their
@@ -48,7 +55,8 @@ public interface SearchApi {
      * @return {@link CatalogPremiumSearchResult}
      * @throws {@link IndixApiException}
      */
-    CatalogPremiumSearchResult getProductsCatalogPremium(Query query) throws IndixApiException;
+    CatalogPremiumSearchResult getProductsCatalogPremium(Query query)
+            throws IndixApiException, IOException, URISyntaxException;
 
     /**
      * Search Products - Retrieves a list of products matching a variety of query parameters with their offers and
@@ -57,5 +65,6 @@ public interface SearchApi {
      * @return {@link UniversalSearchResult}
      * @throws {@link IndixApiException}
      */
-    UniversalSearchResult getProductsUniversal(Query query) throws IndixApiException;
+    UniversalSearchResult getProductsUniversal(Query query)
+            throws IndixApiException, IOException, URISyntaxException;
 }

@@ -11,6 +11,7 @@ import com.indix.query.ProductHistoryQuery;
 import com.indix.query.QueryFactory;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
@@ -19,7 +20,8 @@ import static org.junit.Assert.assertThat;
 public class IndixApiClientHistoryTest {
 
     @Test
-    public void getProductHistory() throws IOException, IndixApiException {
+    public void getProductHistory()
+            throws IndixApiException, IOException, URISyntaxException {
 
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("productHistory-json-responses0/productHistory.json");

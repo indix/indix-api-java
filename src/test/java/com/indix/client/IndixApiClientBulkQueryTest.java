@@ -16,6 +16,7 @@ import com.indix.query.JobQuery;
 import com.indix.query.QueryFactory;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
@@ -28,7 +29,8 @@ import static org.junit.Assert.assertThat;
 public class IndixApiClientBulkQueryTest {
 
     @Test
-    public void getBulkJobId() throws IOException, IndixApiException {
+    public void getBulkJobId()
+            throws IndixApiException, IOException, URISyntaxException {
 
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("bulkQuery-json-responses0/bulkQueryResponse.json");
@@ -56,7 +58,8 @@ public class IndixApiClientBulkQueryTest {
     }
 
     @Test
-    public void getBulkLookupJobId() throws IOException, IndixApiException {
+    public void getBulkLookupJobId()
+            throws IndixApiException, IOException, URISyntaxException {
 
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("bulkQuery-json-responses0/bulkQueryResponse.json");
@@ -83,7 +86,8 @@ public class IndixApiClientBulkQueryTest {
     }
 
     @Test
-    public void getBulkJobStatus() throws IOException, IndixApiException {
+    public void getBulkJobStatus()
+            throws IndixApiException, IOException, URISyntaxException {
 
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("bulkQuery-json-responses0/bulkQueryJobStatus.json");
@@ -106,7 +110,8 @@ public class IndixApiClientBulkQueryTest {
 
 
     @Test
-    public void getBulkJobFile() throws IOException, IndixApiException {
+    public void getBulkJobFile()
+            throws IndixApiException, IOException, URISyntaxException {
 
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("bulkQuery-json-responses0/bulkQueryJobOutput.jsonl.tar.gz");

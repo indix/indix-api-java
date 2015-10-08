@@ -9,13 +9,15 @@ import com.indix.query.QueryFactory;
 import com.indix.query.SuggestionsQuery;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static org.junit.Assert.assertEquals;
 
 public class IndixApiClientSuggestionsTest {
 
     @Test
-    public void getSuggestions() throws IOException, IndixApiException {
+    public void getSuggestions()
+            throws IndixApiException, IOException, URISyntaxException {
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("suggestions-json-responses0/suggestionsResponse.json");
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);

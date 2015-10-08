@@ -11,19 +11,22 @@ import com.indix.query.MetadataQuery;
 import com.indix.query.QueryFactory;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static org.junit.Assert.assertEquals;
 
 public class IndixApiClientMetadataTest {
 
-    public HttpClient getMockHttpClient(String resource) throws IOException, IndixApiException {
+    public HttpClient getMockHttpClient(String resource)
+            throws IndixApiException, IOException, URISyntaxException {
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient(resource);
         return mockHttpClient;
     }
 
     @Test
-    public void getStores() throws IOException, IndixApiException {
+    public void getStores()
+            throws IndixApiException, IOException, URISyntaxException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("metadata-json-responses0/storesResponse.json"));
@@ -42,7 +45,8 @@ public class IndixApiClientMetadataTest {
     }
 
     @Test
-    public void getBrands() throws IOException, IndixApiException {
+    public void getBrands()
+            throws IndixApiException, IOException, URISyntaxException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("metadata-json-responses0/brandsResponse.json"));
@@ -60,7 +64,8 @@ public class IndixApiClientMetadataTest {
     }
 
     @Test
-    public void getCategories() throws IOException, IndixApiException {
+    public void getCategories()
+            throws IndixApiException, IOException, URISyntaxException {
 
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
                 getMockHttpClient("metadata-json-responses0/categoriesResponse.json"));
