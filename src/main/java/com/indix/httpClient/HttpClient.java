@@ -6,7 +6,6 @@ import org.apache.http.NameValuePair;
 import java.io.*;
 import java.net.URI;
 import java.util.List;
-import java.util.zip.GZIPInputStream;
 
 /**
  * Interface defining the expected contract for http clients

@@ -7,6 +7,9 @@ import com.indix.models.metadataResult.StoresResult;
 import com.indix.query.MetadataQuery;
 import com.indix.query.Query;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 public interface MetadataApi {
 
     /**
@@ -15,7 +18,8 @@ public interface MetadataApi {
      * @return {@link StoresResult}
      * @throws {@link IndixApiException}
      */
-    StoresResult getStores(Query query) throws IndixApiException;
+    StoresResult getStores(Query query)
+            throws IndixApiException, IOException, URISyntaxException;
 
     /**
      * Search Brands - Lists all brands along with their IDs
@@ -23,7 +27,8 @@ public interface MetadataApi {
      * @return {@link BrandsResult}
      * @throws {@link IndixApiException}
      */
-    BrandsResult getBrands(Query query) throws IndixApiException;
+    BrandsResult getBrands(Query query)
+            throws IndixApiException, IOException, URISyntaxException;
 
     /**
      * Export Categories - Lists all categories along with their IDs and path
@@ -31,5 +36,6 @@ public interface MetadataApi {
      * @return {@link CategoriesResult}
      * @throws {@link IndixApiException}
      */
-    CategoriesResult getCategories(Query query) throws IndixApiException;
+    CategoriesResult getCategories(Query query)
+            throws IndixApiException, IOException, URISyntaxException;
 }

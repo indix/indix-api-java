@@ -1,6 +1,5 @@
 package com.indix.httpClient.impl;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.indix.exception.*;
 import com.indix.httpClient.HttpClient;
@@ -50,17 +49,15 @@ class HttpClientImpl implements HttpClient {
         CloseableHttpResponse response = closeableHttpClient.execute(httpRequest);
         int status = response.getStatusLine().getStatusCode();
 
-
         if (HttpStatus.SC_OK != status) {
 
             String content = EntityUtils.toString(response.getEntity());
 
             //deserialize exception if raised from query errors
             //
-            ObjectMapper responseJsonMapper = new ObjectMapper();
-            responseJsonMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            ExceptionMessage msg = responseJsonMapper.readValue(content, ExceptionMessage.class);
-            String message = msg.getMessage();
+            ObjectMapper objectMapper = new ObjectMapper();
+            ErrorResponse error = objectMapper.readValue(content, ErrorResponse.class);
+            String message = error.getMessage();
 
             // we need to close the resources before we throw an exception
             //

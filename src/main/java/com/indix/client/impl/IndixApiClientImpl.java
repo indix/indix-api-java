@@ -1,5 +1,6 @@
 package com.indix.client.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.indix.client.IndixApiClient;
 import com.indix.client.ProductsViewType;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -25,7 +26,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.zip.GZIPInputStream;
 
 import static com.indix.client.ProductsViewType.*;
 import static com.indix.client.impl.IndixApiConstants.*;
@@ -101,7 +101,7 @@ class IndixApiClientImpl implements IndixApiClient {
 
     // utility functions
     //
-    private URI buildURI(String resource, Query searchQuery) throws URISyntaxException, IOException, IndixApiException {
+    private URI buildURI(String resource, Query searchQuery) throws URISyntaxException {
         return new URIBuilder()
                 .setScheme(scheme)
                 .setHost(host)
@@ -184,7 +184,8 @@ class IndixApiClientImpl implements IndixApiClient {
      * @return {@link OffersSearchResult}
      * @throws {@link IndixApiException}
      */
-    public OffersSearchResult getProductsOffersStandard(Query query) throws IndixApiException {
+    public OffersSearchResult getProductsOffersStandard(Query query)
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildSearchResourcePath(OFFERS_STANDARD);
         try {
@@ -196,7 +197,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getProductsOffersStandard failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getProductsOffersStandard failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -209,7 +210,8 @@ class IndixApiClientImpl implements IndixApiClient {
      * @return {@link SummarySearchResult}
      * @throws {@link IndixApiException}
      */
-    public SummarySearchResult getProductsSummary(Query query) throws IndixApiException {
+    public SummarySearchResult getProductsSummary(Query query)
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildSearchResourcePath(SUMMARY);
         try {
@@ -221,7 +223,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getProductsSummary failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getProductsSummary failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -235,7 +237,8 @@ class IndixApiClientImpl implements IndixApiClient {
      * @return {@link OffersSearchResult}
      * @throws {@link IndixApiException}
      */
-    public OffersSearchResult getProductsOffersPremium(Query query) throws IndixApiException {
+    public OffersSearchResult getProductsOffersPremium(Query query)
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildSearchResourcePath(OFFERS_PREMIUM);
         try {
@@ -247,7 +250,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getProductsOffersPremium failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getProductsOffersPremium failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -261,7 +264,8 @@ class IndixApiClientImpl implements IndixApiClient {
      * @return {@link CatalogStandardSearchResult}
      * @throws {@link IndixApiException}
      */
-    public CatalogStandardSearchResult getProductsCatalogStandard(Query query) throws IndixApiException {
+    public CatalogStandardSearchResult getProductsCatalogStandard(Query query)
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildSearchResourcePath(CATALOG_STANDARD);
         try {
@@ -273,7 +277,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getProductsCatalogStandard failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getProductsCatalogStandard failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -287,7 +291,8 @@ class IndixApiClientImpl implements IndixApiClient {
      * @return {@link CatalogPremiumSearchResult}
      * @throws {@link IndixApiException}
      */
-    public CatalogPremiumSearchResult getProductsCatalogPremium(Query query) throws IndixApiException {
+    public CatalogPremiumSearchResult getProductsCatalogPremium(Query query)
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildSearchResourcePath(CATALOG_PREMIUM);
         try {
@@ -299,7 +304,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getProductsCatalogPremium failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getProductsCatalogPremium failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -313,7 +318,8 @@ class IndixApiClientImpl implements IndixApiClient {
      * @return {@link UniversalSearchResult}
      * @throws {@link IndixApiException}
      */
-    public UniversalSearchResult getProductsUniversal(Query query) throws IndixApiException {
+    public UniversalSearchResult getProductsUniversal(Query query)
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildSearchResourcePath(UNIVERSAL);
         try {
@@ -327,7 +333,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getProductsUniversal failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getProductsUniversal failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -340,7 +346,8 @@ class IndixApiClientImpl implements IndixApiClient {
      * @return {@link SummaryProductDetailsResult}
      * @throws {@link IndixApiException}
      */
-    public SummaryProductDetailsResult getProductDetailsSummary(ProductDetailsQuery query) throws IndixApiException {
+    public SummaryProductDetailsResult getProductDetailsSummary(ProductDetailsQuery query)
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildProductDetailsPath(SUMMARY, query.getMpid());
         try {
@@ -352,7 +359,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getProductDetailsSummary failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getProductDetailsSummary failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -366,7 +373,7 @@ class IndixApiClientImpl implements IndixApiClient {
      * @throws {@link IndixApiException}
      */
     public OffersProductDetailsResult getProductDetailsOffersStandard(ProductDetailsQuery query)
-            throws IndixApiException {
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildProductDetailsPath(OFFERS_STANDARD, query.getMpid());
         try {
@@ -378,7 +385,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getProductDetailsOffersStandard failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getProductDetailsOffersStandard failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -392,7 +399,7 @@ class IndixApiClientImpl implements IndixApiClient {
      * @throws {@link IndixApiException}
      */
     public OffersProductDetailsResult getProductDetailsOffersPremium(ProductDetailsQuery query)
-            throws IndixApiException {
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildProductDetailsPath(OFFERS_PREMIUM, query.getMpid());
         try {
@@ -404,7 +411,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getProductDetailsOffersPremium failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getProductDetailsOffersPremium failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -418,7 +425,7 @@ class IndixApiClientImpl implements IndixApiClient {
      * @throws {@link IndixApiException}
      */
     public CatalogStandardProductDetailsResult getProductDetailsCatalogStandard(ProductDetailsQuery query)
-            throws IndixApiException {
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildProductDetailsPath(CATALOG_STANDARD, query.getMpid());
         try {
@@ -430,7 +437,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getProductDetailsCatalogStandard failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getProductDetailsCatalogStandard failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -445,7 +452,7 @@ class IndixApiClientImpl implements IndixApiClient {
      */
 
     public CatalogPremiumProductDetailsResult getProductDetailsCatalogPremium(ProductDetailsQuery query)
-            throws IndixApiException {
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildProductDetailsPath(CATALOG_PREMIUM, query.getMpid());
         try {
@@ -457,7 +464,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getProductDetailsCatalogPremium failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getProductDetailsCatalogPremium failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -471,7 +478,7 @@ class IndixApiClientImpl implements IndixApiClient {
      * @throws {@link IndixApiException}
      */
     public UniversalProductDetailsResult getProductDetailsUniversal(ProductDetailsQuery query)
-            throws IndixApiException {
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildProductDetailsPath(UNIVERSAL, query.getMpid());
         try {
@@ -483,7 +490,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getProductDetailsUniversal failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getProductDetailsUniversal failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -496,7 +503,8 @@ class IndixApiClientImpl implements IndixApiClient {
      * @return {@link StoresResult}
      * @throws {@link IndixApiException}
      */
-    public StoresResult getStores(Query query) throws IndixApiException {
+    public StoresResult getStores(Query query)
+            throws IndixApiException, IOException, URISyntaxException {
 
         try {
             String content = executeGET(STORES_RESOURCE, query);
@@ -507,7 +515,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getStores failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getStores failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -520,7 +528,8 @@ class IndixApiClientImpl implements IndixApiClient {
      * @return {@link BrandsResult}
      * @throws {@link IndixApiException}
      */
-    public BrandsResult getBrands(Query query) throws IndixApiException {
+    public BrandsResult getBrands(Query query)
+            throws IndixApiException, IOException, URISyntaxException {
 
         try {
             String content = executeGET(BRANDS_RESOURCE, query);
@@ -531,7 +540,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getBrands failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getBrands failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -544,7 +553,8 @@ class IndixApiClientImpl implements IndixApiClient {
      * @return {@link CategoriesResult}
      * @throws {@link IndixApiException}
      */
-    public CategoriesResult getCategories(Query query) throws IndixApiException {
+    public CategoriesResult getCategories(Query query)
+            throws IndixApiException, IOException, URISyntaxException {
 
         try {
             String content = executeGET(CATEGORIES_RESOURCE, query);
@@ -555,7 +565,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getCategories failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getCategories failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -568,7 +578,8 @@ class IndixApiClientImpl implements IndixApiClient {
      * @return {@link SuggestionsResult}
      * @throws {@link IndixApiException}
      */
-    public SuggestionsResult getSuggestions(Query query) throws IndixApiException {
+    public SuggestionsResult getSuggestions(Query query)
+            throws IndixApiException, IOException, URISyntaxException {
 
         try {
             String content = executeGET(SUGGESTIONS_RESOURCE, query);
@@ -579,7 +590,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getSuggestions failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getSuggestions failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -592,7 +603,8 @@ class IndixApiClientImpl implements IndixApiClient {
      * @return {@link ProductHistoryResult}
      * @throws {@link IndixApiException}
      */
-    public ProductHistoryResult getProductHistory(ProductHistoryQuery query) throws IndixApiException {
+    public ProductHistoryResult getProductHistory(ProductHistoryQuery query)
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildProductHistoryPath(query.getMpid());
         try {
@@ -604,7 +616,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getProductHistory failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getProductHistory failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -618,7 +630,8 @@ class IndixApiClientImpl implements IndixApiClient {
      * @return {@link JobInfo}
      * @throws {@link IndixApiException}
      */
-    public JobInfo postBulkJob(ProductsViewType productsViewType, BulkProductsQuery query) throws IndixApiException {
+    public JobInfo postBulkJob(ProductsViewType productsViewType, BulkProductsQuery query)
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildBulkSearchResourcePath(productsViewType);
         try {
@@ -628,7 +641,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("postBulkJob failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("postBulkJob failed: " + e.getMessage());
             throw new InternalServerException(e);
 
@@ -643,7 +656,8 @@ class IndixApiClientImpl implements IndixApiClient {
      * @return {@link JobInfo}
      * @throws {@link IndixApiException}
      */
-    public JobInfo postBulkJob(ProductsViewType productsViewType, BulkLookupQuery query) throws IndixApiException {
+    public JobInfo postBulkJob(ProductsViewType productsViewType, BulkLookupQuery query)
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildBulkLookupResourcePath(productsViewType);
         try {
@@ -653,7 +667,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("postBulkJob failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("postBulkJob failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -666,7 +680,8 @@ class IndixApiClientImpl implements IndixApiClient {
      * @return {@link JobInfo}
      * @throws {@link IndixApiException}
      */
-    public JobInfo getBulkJobStatus(JobQuery query) throws IndixApiException {
+    public JobInfo getBulkJobStatus(JobQuery query)
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildBulkJobStatusPath(
                 BULK_JOB_RESOURCE,
@@ -679,7 +694,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getBulkJobStatus failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getBulkJobStatus failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
@@ -693,7 +708,8 @@ class IndixApiClientImpl implements IndixApiClient {
      * @return stream of data obtained as response from the bulk job
      * @throws {@link IndixApiException}
      */
-    public InputStream getBulkJobOutput(JobQuery query) throws IndixApiException {
+    public InputStream getBulkJobOutput(JobQuery query)
+            throws IndixApiException, IOException, URISyntaxException {
 
         String resource = buildBulkJobDownloadPath(
                 BULK_JOB_RESOURCE,
@@ -704,7 +720,7 @@ class IndixApiClientImpl implements IndixApiClient {
         } catch (IndixApiException iae) {
             logger.error("getBulkJobOutput failed: " + iae.getMessage());
             throw iae;
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             logger.error("getBulkJobOutput failed: " + e.getMessage());
             throw new InternalServerException(e);
         }

@@ -1,11 +1,9 @@
 package com.indix.common;
 
-import com.sun.corba.se.spi.orbutil.fsm.Input;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.net.URL;
-import java.util.zip.GZIPInputStream;
 
 public class ResourceUtils {
 
