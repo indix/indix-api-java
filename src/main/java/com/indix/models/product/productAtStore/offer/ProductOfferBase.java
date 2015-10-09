@@ -8,9 +8,6 @@ public class ProductOfferBase {
     // Offers basic fields
     //
     private String pid;
-    private String title;
-    private int storeId;
-    private String storeName;
     private String productUrl;
     private String imageUrl;
     private List<String> additionalImageUrls;
@@ -26,18 +23,6 @@ public class ProductOfferBase {
 
     public String getPid() {
         return pid;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public int getStoreId() {
-        return storeId;
-    }
-
-    public String getStoreName() {
-        return storeName;
     }
 
     public String getProductUrl() {

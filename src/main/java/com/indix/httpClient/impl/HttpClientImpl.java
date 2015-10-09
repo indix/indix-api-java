@@ -28,6 +28,7 @@ import java.util.List;
 
 class HttpClientImpl implements HttpClient {
     CloseableHttpClient closeableHttpClient;
+    ObjectMapper objectMapper;
 
     /**
      * Creates a {@link CloseableHttpClient} instance with default
@@ -35,6 +36,7 @@ class HttpClientImpl implements HttpClient {
      */
     public HttpClientImpl() {
         closeableHttpClient = HttpClients.createDefault();
+        objectMapper = new ObjectMapper();
     }
 
     /**
@@ -55,7 +57,6 @@ class HttpClientImpl implements HttpClient {
 
             //deserialize exception if raised from query errors
             //
-            ObjectMapper objectMapper = new ObjectMapper();
             ErrorResponse error = objectMapper.readValue(content, ErrorResponse.class);
             String message = error.getMessage();
 
