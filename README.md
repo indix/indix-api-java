@@ -156,7 +156,17 @@ The following example shows how to obtain the output of a bulk job, as requested
         JobSQuery jobQuery = QueryFactory.newJobQuery()
                             .withJobId(jobId);
         InputStream stream = indixApiClient.getBulkJobOutput(jobQuery);
-        //convert inputStream to file, or use as required
+        //convert inputStream to file, or use as required. 
+        //
+        //To deserialise each line of the jsonl output file the following lines can be referred.
+        //
+        //Read the stream into a bufferedReader, followed by :
+        String record = bufferedReader.readLine();
+        BulkJobOutput<UniversalProduct> bulkJobResponse = jsonMapper.readValue(
+                        recordOutput2,new TypeReference<BulkJobOutput<UniversalProduct>>() {
+                        });
+        System.out.println(bulkJobResponse.getResult().getProducts().get(0)
+                            .getStores().get("68").getOffers().get(0).getPid());
     } finally {
         indixApiClient.close();
     }
