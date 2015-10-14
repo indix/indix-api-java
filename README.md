@@ -1,5 +1,23 @@
-# Apiv2-Java-Client [![Build Status](https://travis-ci.org/ind9/apiv2-java-client.svg?branch=master)](https://travis-ci.org/ind9/apiv2-java-client)
+# Apiv2-Java-Client [![Build Status](https://snap-ci.com/ind9/apiv2-java-client/branch/master/build_image)](https://snap-ci.com/ind9/apiv2-java-client/branch/master)
 Indix API Java client
+
+Requirements
+=============
+
+Java 1.7 or later
+
+Installation
+=============
+
+Add the following dependency to your pom file
+
+```xml
+<dependency>
+    <groupId>com.indix.api</groupId>
+    <artifactId>apiv2-java-client</artifactId>
+    <version>1.0</version>
+</dependency>
+```
 
 ##Usage :
 
