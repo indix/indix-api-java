@@ -16,10 +16,8 @@ public class SubmitBulkLookup {
 
     public static void main(String[] args) throws IndixApiException, URISyntaxException, IOException {
 
-        // TODO: Validate args
-        //
         if (3 != args.length) {
-            throw new IllegalArgumentException("<fill it with proper usage>");
+            throw new IllegalArgumentException("Usage:java -cp <client_jar path> com.indix.tools.SubmitBulkLookup <app_id> <app_key> <lookupFile>");
         }
 
         String appId = args[0];
@@ -27,6 +25,9 @@ public class SubmitBulkLookup {
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(appId, appKey);
 
         File file = new File(args[2]);
+        if (!file.exists())
+            throw new IllegalArgumentException("No file found at specified path");
+        
         BulkLookupQuery bulkLookupQuery = QueryFactory.newBulkLookupQuery()
                 .withCountryCode("US")
                 .withInputFile(file);
