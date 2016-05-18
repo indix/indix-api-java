@@ -16,40 +16,47 @@ public class SubmitBulkLookup {
 
     public static void main(String[] args) throws IndixApiException, URISyntaxException, IOException {
 
-        if (3 != args.length) {
-            throw new IllegalArgumentException("Usage:java -cp <client_jar_path> com.indix.tools.SubmitBulkLookup " +
-                    "<endpoint> <country_code> <app_id> <app_key> <lookup_file>");
+        if (5 != args.length) {
+            throw new IllegalArgumentException(
+                "Usage: java -cp <jar_path> <class_name> <app_id> <app_key> <view_type> <country_code> <lookup_file_path>"
+            );
         }
 
-        String appId = args[2];
-        String appKey = args[3];
+        // Create Api client
+        //
+        String appId = args[0];
+        String appKey = args[1];
         IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(appId, appKey);
 
+        // Validate input file's presence
+        //
         File file = new File(args[4]);
-        if (!file.exists())
-            throw new IllegalArgumentException("No file found at specified path");
+        if (!file.exists()) throw new IllegalArgumentException("Invalid file: " + args[4]);
 
-        String countryCode = args[1];
-
-        String endpoint = args[0];
+        String countryCode = args[3];
+        String viewType = args[2];
         ProductsViewType view;
-        switch(endpoint) {
-            case "summary"             : view = ProductsViewType.SUMMARY;break;
-            case "catalog_premium"     : view = ProductsViewType.CATALOG_PREMIUM; break;
-            case "catalog_standard"    : view = ProductsViewType.CATALOG_STANDARD; break;
-            case "offers_premium"      : view = ProductsViewType.OFFERS_PREMIUM; break;
-            case "offers_standard"     : view = ProductsViewType.OFFERS_STANDARD; break;
-            default                    : throw new IllegalArgumentException("Invalid endpoint specified! " +
-                    " Allowed endpoints are :" + ProductsViewType.values());
+        switch(viewType) {
+            case "summary"          : view = ProductsViewType.SUMMARY; break;
+            case "offersStandard"   : view = ProductsViewType.OFFERS_STANDARD; break;
+            case "offersPremium"    : view = ProductsViewType.OFFERS_PREMIUM; break;
+            case "catalogStandard"  : view = ProductsViewType.CATALOG_STANDARD; break;
+            case "catalogPremium"   : view = ProductsViewType.CATALOG_PREMIUM; break;
+            case "universal"        : view = ProductsViewType.UNIVERSAL; break;
+            default                 : throw new IllegalArgumentException("Invalid view_type: " + viewType);
         }
 
+        // Create query
+        //
         BulkLookupQuery bulkLookupQuery = QueryFactory.newBulkLookupQuery()
                 .withCountryCode(countryCode)
                 .withInputFile(file);
 
+        // Submit and print job details
+        //
         JobInfo jobInfo = indixApiClient.postBulkJob(view, bulkLookupQuery);
-        System.out.println(jobInfo.getCount());
-        System.out.println(jobInfo.getId());
-        System.out.println(jobInfo.getStatus());
+        System.out.println("jobId: " + jobInfo.getId());
+        System.out.println("status: " + jobInfo.getStatus());
+        System.out.println("Count: " + jobInfo.getCount());
     }
 }
