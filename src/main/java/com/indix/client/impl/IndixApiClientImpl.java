@@ -16,7 +16,9 @@ import com.indix.models.productDetailsResult.*;
 import com.indix.models.productHistoryResponse.ProductHistoryResult;
 import com.indix.models.searchResult.*;
 import com.indix.models.suggestions.SuggestionsResult;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.indix.query.*;
@@ -26,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import static com.indix.client.ProductsViewType.*;
 import static com.indix.client.impl.IndixApiConstants.*;
@@ -34,6 +37,9 @@ import static com.indix.client.impl.IndixApiConstants.*;
  * Indix Api Client implementation
  */
 class IndixApiClientImpl implements IndixApiClient {
+
+    private static final String APP_ID = "app_id";
+    private static final String APP_KEY = "app_key";
 
     // http client
     //
@@ -107,8 +113,8 @@ class IndixApiClientImpl implements IndixApiClient {
                 .setHost(host)
                 .setPath(resource)
                 .setParameters(searchQuery.getParameters())
-                .addParameter("app_id", appId)
-                .addParameter("app_key", appKey)
+                .addParameter(APP_ID, appId)
+                .addParameter(APP_KEY, appKey)
                 .build();
     }
 
@@ -133,7 +139,14 @@ class IndixApiClientImpl implements IndixApiClient {
     private String executePOST(String resource, Query searchQuery, File file)
             throws URISyntaxException, IOException, IndixApiException {
         URI uri = buildURI(resource, searchQuery);
-        return httpClient.POST(uri, searchQuery.getParameters(), file);
+
+        // populate app_id and app_key
+        //
+        List<NameValuePair> params = searchQuery.getParameters();
+        params.add(new BasicNameValuePair(APP_ID, appId));
+        params.add(new BasicNameValuePair(APP_KEY, appKey));
+
+        return httpClient.POST(uri, params, file);
     }
 
     static String buildPath(String... pathFragments) {
