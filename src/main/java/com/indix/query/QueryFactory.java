@@ -38,13 +38,6 @@ public class QueryFactory {
     }
 
     /**
-     * @return {@link ProductHistoryQuery}
-     */
-    public static ProductHistoryQuery newProductHistoryQuery() {
-        return new ProductHistoryQuery();
-    }
-
-    /**
      * @return {@link BulkLookupQuery}
      */
     public static BulkLookupQuery newBulkLookupQuery() {
