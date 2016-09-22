@@ -35,7 +35,16 @@ class HttpClientImpl implements HttpClient {
      * configuration.
      */
     public HttpClientImpl() {
-        closeableHttpClient = HttpClients.createDefault();
+        this(HttpClients.createDefault());
+    }
+
+    /**
+     * Creates with a custom {@link CloseableHttpClient} instance.
+     *
+     * @param closableHttpClient
+     */
+    public HttpClientImpl(CloseableHttpClient closableHttpClient) {
+        closeableHttpClient = closableHttpClient;
         objectMapper = new ObjectMapper();
     }
 
