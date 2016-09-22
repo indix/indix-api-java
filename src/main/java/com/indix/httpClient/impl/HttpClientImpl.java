@@ -3,6 +3,7 @@ package com.indix.httpClient.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.indix.exception.*;
 import com.indix.httpClient.HttpClient;
+import com.indix.tools.SSLTrustCA;
 import org.apache.http.*;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -35,7 +36,7 @@ class HttpClientImpl implements HttpClient {
      * configuration.
      */
     public HttpClientImpl() {
-        this(HttpClients.createDefault());
+        this(HttpClients.custom().setSSLContext(SSLTrustCA.trustLetsEncryptRootCA()).build());
     }
 
     /**
