@@ -5,13 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.cert.Certificate;
@@ -46,8 +41,9 @@ public final class SSLTrustCA {
 
             if (loadJavaDefaultKeytore) {
                 // Load the java default keystore
-                Path ksPath = Paths.get(System.getProperty("java.home"), "lib", "security", "cacerts");
-                try (InputStream in = Files.newInputStream(ksPath)) {
+                String SEP = File.pathSeparator;
+                File ksPath = new File(System.getProperty("java.home") + SEP + "lib" + SEP + "security" + SEP + "cacerts");
+                try (InputStream in = new FileInputStream(ksPath)) {
                     keyStore.load(in, "changeit".toCharArray());
                 }
             }
