@@ -1,27 +1,28 @@
 package com.indix.client.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.indix.client.IndixApiClient;
 import com.indix.client.ProductsViewType;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.indix.exception.IndixApiException;
 import com.indix.exception.InternalServerException;
 import com.indix.httpClient.HttpClient;
 import com.indix.httpClient.impl.HttpClientFactory;
 import com.indix.models.jobs.JobInfo;
-import com.indix.models.metadataResult.*;
+import com.indix.models.metadataResult.BrandsResult;
+import com.indix.models.metadataResult.CategoriesResult;
+import com.indix.models.metadataResult.StoresResult;
 import com.indix.models.productDetailsResult.*;
-import com.indix.models.productHistoryResponse.ProductHistoryResult;
 import com.indix.models.searchResult.*;
 import com.indix.models.suggestions.SuggestionsResult;
+import com.indix.query.*;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.indix.query.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -165,10 +166,6 @@ class IndixApiClientImpl implements IndixApiClient {
 
     private String buildProductDetailsPath(ProductsViewType resourceView, String mpid) {
         return buildPath(buildSearchResourcePath(resourceView), mpid);
-    }
-
-    private String buildProductHistoryPath(String mpid) {
-        return buildPath(PRODUCT_HISTORY_RESOURCE, mpid);
     }
 
     private String buildBulkSearchResourcePath(ProductsViewType resourceView) {
@@ -605,32 +602,6 @@ class IndixApiClientImpl implements IndixApiClient {
             throw iae;
         } catch (JsonProcessingException e) {
             logger.error("getSuggestions failed: " + e.getMessage());
-            throw new InternalServerException(e);
-        }
-    }
-
-    /**
-     * Product History - Returns the historical price information recorded for the product
-     *
-     * @param query Instance of {@link ProductHistoryQuery} with appropriate parameters
-     * @return {@link ProductHistoryResult}
-     * @throws {@link IndixApiException}
-     */
-    public ProductHistoryResult getProductHistory(ProductHistoryQuery query)
-            throws IndixApiException, IOException, URISyntaxException {
-
-        String resource = buildProductHistoryPath(query.getMpid());
-        try {
-            String content = executeGET(resource, query);
-            IndixApiResponse<ProductHistoryResult> productHistoryIndixApiResponse = jsonMapper.readValue(content,
-                    new TypeReference<IndixApiResponse<ProductHistoryResult>>() {
-                    });
-            return productHistoryIndixApiResponse.getResult();
-        } catch (IndixApiException iae) {
-            logger.error("getProductHistory failed: " + iae.getMessage());
-            throw iae;
-        } catch (JsonProcessingException e) {
-            logger.error("getProductHistory failed: " + e.getMessage());
             throw new InternalServerException(e);
         }
     }
