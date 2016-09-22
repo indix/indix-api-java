@@ -41,7 +41,7 @@ public final class SSLTrustCA {
 
             if (loadJavaDefaultKeytore) {
                 // Load the java default keystore
-                String SEP = File.pathSeparator;
+                String SEP = File.separator;
                 File ksPath = new File(System.getProperty("java.home") + SEP + "lib" + SEP + "security" + SEP + "cacerts");
                 try (InputStream in = new FileInputStream(ksPath)) {
                     keyStore.load(in, "changeit".toCharArray());
