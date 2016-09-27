@@ -26,6 +26,8 @@ import java.security.cert.X509Certificate;
  */
 public final class SSLTrustCA {
 
+    private static final char[] KEYSTORE_DEFAULT_PASSWORD = "changeit".toCharArray();
+
     public static SSLContext trustLetsEncryptRootCA() {
         return trustCa(SSLTrustCA.class.getResource("/ca/DSTRootCAX3.der"));
     }
@@ -33,20 +35,13 @@ public final class SSLTrustCA {
     private static KeyStore keyStore;
     private final static Logger LOG = LoggerFactory.getLogger(SSLTrustCA.class);
 
-    private synchronized static KeyStore initialize(boolean loadJavaDefaultKeytore)
+    private synchronized static KeyStore initialize()
             throws GeneralSecurityException, IOException {
 
         if (SSLTrustCA.keyStore == null) {
             KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
 
-            if (loadJavaDefaultKeytore) {
-                // Load the java default keystore
-                String SEP = File.separator;
-                File ksPath = new File(System.getProperty("java.home") + SEP + "lib" + SEP + "security" + SEP + "cacerts");
-                try (InputStream in = new FileInputStream(ksPath)) {
-                    keyStore.load(in, "changeit".toCharArray());
-                }
-            }
+            keyStore.load(null, KEYSTORE_DEFAULT_PASSWORD);
 
             SSLTrustCA.keyStore = keyStore;
         }
@@ -64,7 +59,7 @@ public final class SSLTrustCA {
             }
 
             String certName = ((X509Certificate) crt).getSubjectDN().getName();
-            KeyStore keyStore = initialize(true);
+            KeyStore keyStore = initialize();
             keyStore.setCertificateEntry(certName, crt);
 
             // Set this as the default keystore
