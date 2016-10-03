@@ -189,3 +189,25 @@ The following example shows how to obtain the output of a bulk job, as requested
         indixApiClient.close();
     }
 ```
+
+## Known issue(s)
+If you're using the client on Android you might see the following error
+```
+java.lang.NoSuchMethodError: No virtual method setSSLContext(Ljavax/net/ssl/SSLContext;)Lorg/apache/http/impl/client/HttpClientBuilder;
+```
+
+That's because the HttpClient that comes with this client is little newer than the one that's generally used in Android. The fix is to do the following
+
+```
+import com.indix.httpClient.HttpClient;
+import com.indix.httpClient.impl.HttpClientFactory;
+import com.indix.tools.SSLTrustCA;
+
+import org.apache.http.impl.client.HttpClients;
+
+HttpClient client = HttpClientFactory.newHttpClient(HttpClients.custom()
+        .setSslcontext(SSLTrustCA.trustLetsEncryptRootCA())
+        .build());
+IndixApiClient indixApiClient = IndixApiClientFactory
+                                .newIndixApiClient(appId, appKey, client);
+```
