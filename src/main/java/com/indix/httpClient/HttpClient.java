@@ -32,5 +32,10 @@ public interface HttpClient extends Closeable {
      */
     String POST(URI uri, List<NameValuePair> params , File file) throws IOException, IndixApiException;
 
+    /**
+     * Executes a string entity (mime type as text/plain) POST request and retrieves the response body as String
+     */
+    String POST(URI uri, String content) throws IOException, IndixApiException;
+
     void close() throws IOException;
 }

@@ -14,6 +14,7 @@ import com.indix.models.jobs.JobInfo;
 import com.indix.models.metadataResult.BrandsResult;
 import com.indix.models.metadataResult.CategoriesResult;
 import com.indix.models.metadataResult.StoresResult;
+import com.indix.models.offersResult.OffersResult;
 import com.indix.models.productDetailsResult.*;
 import com.indix.models.searchResult.*;
 import com.indix.models.suggestions.SuggestionsResult;
@@ -150,6 +151,12 @@ class IndixApiClientImpl implements IndixApiClient {
         return httpClient.POST(uri, params, file);
     }
 
+    private String executePOST(String resource, SqlQuery sqlQuery)
+            throws URISyntaxException, IOException, IndixApiException {
+        URI uri = buildURI(resource, sqlQuery);
+        return httpClient.POST(uri, sqlQuery.getContent());
+    }
+
     static String buildPath(String... pathFragments) {
         StringBuilder sb = new StringBuilder();
 
@@ -182,6 +189,10 @@ class IndixApiClientImpl implements IndixApiClient {
 
     private static String buildBulkJobDownloadPath(String resource, String jobId) {
         return buildPath(resource, jobId, DOWNLOAD_PATH);
+    }
+
+    private static String buildOffersResourcePath() {
+        return buildPath(VERSION_3, OFFERS_RESOURCE);
     }
 
     // response handlers
@@ -629,6 +640,30 @@ class IndixApiClientImpl implements IndixApiClient {
             logger.error("postBulkJob failed: " + e.getMessage());
             throw new InternalServerException(e);
 
+        }
+    }
+
+    /**
+     * Posts the sql query for processing
+     *
+     * @param query Instance of {@link SqlQuery} with appropriate parameters
+     * @return {@link OffersResult}
+     * @throws {@link IndixApiException}
+     */
+    public OffersResult getOffers(SqlQuery query)
+            throws IndixApiException, IOException, URISyntaxException {
+        String resource = buildOffersResourcePath();
+        try {
+            String content = executePOST(resource, query);
+            IndixApiResponse<OffersResult> offersResponse = jsonMapper.readValue(content,
+                    new TypeReference<IndixApiResponse<OffersResult>>() {});
+            return offersResponse.getResult();
+        } catch (IndixApiException iae) {
+            logger.error("getOffers failed: " + iae.getMessage());
+            throw iae;
+        } catch (JsonProcessingException e) {
+            logger.error("getOffers failed: " + e.getMessage());
+            throw new InternalServerException(e);
         }
     }
 

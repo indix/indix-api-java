@@ -35,6 +35,10 @@ public class MockResourceHttpClient {
                 return ResourceUtils.getTestResource(getClass().getClassLoader(), resourceName);
             }
 
+            public String POST(URI uri, String content) throws IOException, IndixApiException {
+                return ResourceUtils.getTestResource(getClass().getClassLoader(), resourceName);
+            }
+
             public void close() throws IOException {
 
             }

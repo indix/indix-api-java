@@ -7,6 +7,7 @@ class IndixApiConstants {
     static final String SCHEME = "https";
     static final String HOST = "api.indix.com";
     static final String VERSION = "v2";
+    static final String VERSION_3 = "v3";
     static final String BULK = "bulk";
 
     static final String JOB_VIEW = "jobs";
@@ -14,6 +15,7 @@ class IndixApiConstants {
     static final String LOOKUP_VIEW = "lookup";
 
     static final String PRODUCTS_RESOURCE = "products";
+    static final String OFFERS_RESOURCE = "offers";
     static final String STORES_RESOURCE = buildPath(VERSION, "stores");
     static final String BRANDS_RESOURCE = buildPath(VERSION, "brands");
     static final String CATEGORIES_RESOURCE = buildPath(VERSION, "categories");

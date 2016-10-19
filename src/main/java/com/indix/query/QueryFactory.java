@@ -10,6 +10,13 @@ public class QueryFactory {
     }
 
     /**
+     * @return {@link SqlQuery}
+     */
+    public static SqlQuery newSqlQuery() {
+        return new SqlQuery();
+    }
+
+    /**
      * @return {@link ProductDetailsQuery}
      */
     public static ProductDetailsQuery newProductDetailsQuery() {

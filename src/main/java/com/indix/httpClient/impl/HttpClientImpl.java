@@ -10,6 +10,8 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
@@ -21,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -167,6 +170,29 @@ class HttpClientImpl implements HttpClient {
         HttpEntity multiPartEntiity = builder.build();
         HttpPost httpPost = new HttpPost(uri);
         httpPost.setEntity(multiPartEntiity);
+
+        // process request
+        //
+        try(CloseableHttpResponse response = getResponse(httpPost)) {
+            return EntityUtils.toString(response.getEntity());
+        }
+    }
+
+    /**
+     * Executes HTTP POST request, processing content as string entity
+     *
+     * @param uri - The URI against which the request is to be sent
+     * @param content - The body to be sent as text/plain mime type
+     * @return the response to the request
+     * @throws IOException
+     * @throws {@link IndixApiException}
+     */
+    public String POST(URI uri, String content) throws IOException, IndixApiException {
+        // build post request
+        //
+        HttpPost httpPost = new HttpPost(uri);
+        ContentType contentType = ContentType.create(ContentType.TEXT_PLAIN.getMimeType(), StandardCharsets.UTF_8);
+        httpPost.setEntity(new StringEntity(content, contentType));
 
         // process request
         //

@@ -57,6 +57,10 @@ public class MockExceptionHttpClient {
                 return null;
             }
 
+            public String POST(URI uri, String content) throws IOException, IndixApiException {
+                return null;
+            }
+
             public void close() throws IOException {
 
             }

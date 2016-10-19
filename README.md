@@ -33,6 +33,27 @@ the different api endpoints. It can be done as follows:
 This instance can then used to query the different endpoints and obtain responses. Different types
 of queries are available for different scenarios. Illustrations of each are specified below:
 
+### Offers Query (WIP)
+This is a new feature planned for API v3 and under development. As of now, it is not available for public consumption.
+If anyone is interested to understand the details please contact bala@indix.com.
+
+The following example shows how to query for offers. It retrieves a list of offers matching the given sql query.
+
+```java
+    try {
+        SqlQuery sqlQuery = QueryFactory.newSqlQuery()
+                .withSql("select salePrice from offers where salePrice > 100");
+
+        OffersResult or = indixApiClient.getOffers(sqlQuery);
+        System.out.println(or.getCount());
+        for (Offer o : or.getOffers()) {
+            System.out.println("\t" + o.getSalePrice());
+        }
+    } finally {
+        indixApiClient.close();
+    }
+```
+
 ### Metadata Query
 
 The following example shows how to list all stores, along with their IDs, matching the query term
@@ -89,7 +110,7 @@ query parameters with their offers and catalog info across stores
     }
 ```
 
-### Search Query
+### Product Details Query
 
 The following example shows how to search for product details of a particular product with given mpid.
 It returns summary information for a product.
