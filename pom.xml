@@ -30,8 +30,8 @@
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:git@github.com:indix-eng/apiv2-java-client.git</connection>
-        <developerConnection>scm:git:git@github.com:indix-eng/apiv2-java-client.git</developerConnection>
+        <connection>scm:git:git@github.com:indix/apiv2-java-client.git</connection>
+        <developerConnection>scm:git:git@github.com:indix/apiv2-java-client.git</developerConnection>
         <url>git@github.com:indix-eng/apiv2-java-client.git</url>
     </scm>
 
