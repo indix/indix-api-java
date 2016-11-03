@@ -122,24 +122,28 @@ class IndixApiClientImpl implements IndixApiClient {
     private String executeGET(String resource, Query searchQuery)
             throws URISyntaxException, IOException, IndixApiException {
         URI uri = buildURI(resource, searchQuery);
+        logger.debug(uri.toString());
         return httpClient.GET(uri);
     }
 
     private InputStream executeGETStream(String resource, Query searchQuery)
             throws URISyntaxException, IOException, IndixApiException {
         URI uri = buildURI(resource, searchQuery);
+        logger.debug(uri.toString());
         return httpClient.GETStream(uri);
     }
 
     private String executePOST(String resource, Query searchQuery)
             throws URISyntaxException, IOException, IndixApiException {
         URI uri = buildURI(resource, searchQuery);
+        logger.debug(uri.toString());
         return httpClient.POST(uri, searchQuery.getParameters());
     }
 
     private String executePOST(String resource, Query searchQuery, File file)
             throws URISyntaxException, IOException, IndixApiException {
         URI uri = buildURI(resource, searchQuery);
+        logger.debug(uri.toString());
 
         // populate app_id and app_key
         //
