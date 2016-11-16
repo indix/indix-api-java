@@ -14,8 +14,8 @@ Add the following dependency to your pom file
 ```xml
 <dependency>
     <groupId>com.indix.api</groupId>
-    <artifactId>apiv2-java-client</artifactId>
-    <version>1.1.0</version>
+    <artifactId>indix-api-java</artifactId>
+    <version>1.0.0</version>
 </dependency>
 ```
 
