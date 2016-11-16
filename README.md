@@ -15,7 +15,7 @@ Add the following dependency to your pom file
 <dependency>
     <groupId>com.indix.api</groupId>
     <artifactId>indix-api-java</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
