@@ -35,7 +35,7 @@ public class IndixApiClientBulkQueryTest {
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("bulkQuery-json-responses0/bulkQueryResponse.json");
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", mockHttpClient);
 
         List<Integer> storeIdList = new ArrayList<Integer>();
         storeIdList.add(68);
@@ -64,7 +64,7 @@ public class IndixApiClientBulkQueryTest {
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("bulkQuery-json-responses0/bulkQueryResponse.json");
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", mockHttpClient);
 
         try {
             for (ProductsViewType resource : ProductsViewType.values()) {
@@ -92,7 +92,7 @@ public class IndixApiClientBulkQueryTest {
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("bulkQuery-json-responses0/bulkQueryJobStatus.json");
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", mockHttpClient);
 
         try {
             JobQuery jobQuery = QueryFactory.newJobQuery()
@@ -116,7 +116,7 @@ public class IndixApiClientBulkQueryTest {
         MockResourceHttpClient mockHttpClientInstance = new MockResourceHttpClient();
         HttpClient mockHttpClient = mockHttpClientInstance.getMockClient("bulkQuery-json-responses0/bulkQueryJobOutput.jsonl.tar.gz");
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", mockHttpClient);
 
         try {
             JobQuery jobQuery = QueryFactory.newJobQuery()

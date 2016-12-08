@@ -22,7 +22,7 @@ public class IndixApiClientHandleExceptionsTest {
         MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
         HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.ExceptionName.UNAUTHORIZED);
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", mockHttpClient);
 
         try {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
@@ -42,7 +42,7 @@ public class IndixApiClientHandleExceptionsTest {
         MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
         HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.ExceptionName.TOO_MANY_REQUESTS);
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", mockHttpClient);
 
         try {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
@@ -62,7 +62,7 @@ public class IndixApiClientHandleExceptionsTest {
         MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
         HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.ExceptionName.PAYMENT_REQUIRED);
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", mockHttpClient);
 
         try {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
@@ -82,7 +82,7 @@ public class IndixApiClientHandleExceptionsTest {
         MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
         HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.ExceptionName.INDIX_API);
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", mockHttpClient);
 
         try {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
@@ -102,7 +102,7 @@ public class IndixApiClientHandleExceptionsTest {
         MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
         HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.ExceptionName.INTERNAL_SERVER);
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", mockHttpClient);
 
         try {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();
@@ -122,7 +122,7 @@ public class IndixApiClientHandleExceptionsTest {
         MockExceptionHttpClient mockClientInstance = new MockExceptionHttpClient();
         HttpClient mockHttpClient = mockClientInstance.getMockClient(MockExceptionHttpClient.ExceptionName.BAD_REQUEST);
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123", mockHttpClient);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", mockHttpClient);
 
         try {
             SearchQuery searchQuery = QueryFactory.newSearchQuery();

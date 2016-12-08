@@ -31,7 +31,7 @@ public class IndixApiClientSearchTest {
     public void getProductsUniversal()
             throws IndixApiException, IOException, URISyntaxException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123",
                 getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
 
         try {
@@ -56,7 +56,7 @@ public class IndixApiClientSearchTest {
     public void getProductsOffersPremium()
             throws IndixApiException, IOException, URISyntaxException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123",
                 getMockHttpClient("search-json-responses0/offersPremiumSearchResponse.json"));
 
         try {
@@ -79,7 +79,7 @@ public class IndixApiClientSearchTest {
     public void getProductsOffersStandard()
             throws IndixApiException, IOException, URISyntaxException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123",
                 getMockHttpClient("search-json-responses0/offersStandardSearchResponse.json"));
 
         try {
@@ -103,7 +103,7 @@ public class IndixApiClientSearchTest {
     public void getProductsCatalogStandard()
             throws IndixApiException, IOException, URISyntaxException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123",
                 getMockHttpClient("search-json-responses0/catalogStandardSearchResponse.json"));
 
         try {
@@ -126,7 +126,7 @@ public class IndixApiClientSearchTest {
     public void getProductsCatalogPremium()
             throws IndixApiException, IOException, URISyntaxException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123",
                 getMockHttpClient("search-json-responses0/catalogPremiumSearchResponse.json"));
 
         try {
@@ -151,7 +151,7 @@ public class IndixApiClientSearchTest {
     public void getProductsSummary()
             throws IndixApiException, IOException, URISyntaxException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123",
                 getMockHttpClient("search-json-responses0/summarySearchResponse.json"));
 
         try {
@@ -174,7 +174,7 @@ public class IndixApiClientSearchTest {
     public void getProductsCatalogPremiumShouldNotFailIfInputHasAdditionalFields()
             throws IndixApiException, IOException, URISyntaxException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123",
                 getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
         try {
             Query searchQuery = QueryFactory.newSearchQuery()
@@ -196,7 +196,7 @@ public class IndixApiClientSearchTest {
     public void getProductsCatalogStandardShouldNotFailIfInputHasAdditionalFields()
             throws IndixApiException, IOException, URISyntaxException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123",
                 getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
 
         try {
@@ -219,7 +219,7 @@ public class IndixApiClientSearchTest {
     public void getProductsOffersPremiumShouldNotFailIfInputHasAdditionalFields()
             throws IndixApiException, IOException, URISyntaxException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123",
                 getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
 
         try {
@@ -242,7 +242,7 @@ public class IndixApiClientSearchTest {
     public void getProductsOffersStandardShouldNotFailIfInputHasAdditionalFields()
             throws IndixApiException, IOException, URISyntaxException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123",
                 getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
 
         try {
@@ -265,7 +265,7 @@ public class IndixApiClientSearchTest {
     public void getProductsSummaryShouldNotFailIfInputHasAdditionalFields()
             throws IndixApiException, IOException, URISyntaxException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123",
                 getMockHttpClient("search-json-responses0/universalSearchResponse.json"));
 
         try {
