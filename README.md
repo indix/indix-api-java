@@ -24,10 +24,9 @@ Add the following dependency to your pom file
 The client needs to be first instantiated with the appropriate application id and key to be able to use
 the different api endpoints. It can be done as follows:
 ```java
-    String appId = "__app_id__";
     String appKey = "__app_key__";
     IndixApiClient indixApiClient = IndixApiClientFactory
-                                    .newIndixApiClient(appId, appKey);
+                                    .newIndixApiClient(appKey);
 ```
 
 This instance can then used to query the different endpoints and obtain responses. Different types
@@ -209,5 +208,5 @@ HttpClient client = HttpClientFactory.newHttpClient(HttpClients.custom()
         .setSslcontext(SSLTrustCA.trustLetsEncryptRootCA())
         .build());
 IndixApiClient indixApiClient = IndixApiClientFactory
-                                .newIndixApiClient(appId, appKey, client);
+                                .newIndixApiClient(appKey, client);
 ```
