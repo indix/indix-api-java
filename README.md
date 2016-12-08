@@ -21,7 +21,7 @@ Add the following dependency to your pom file
 
 ##Usage :
 
-The client needs to be first instantiated with the appropriate application id and key to be able to use
+The client needs to be first instantiated with the appropriate application key to be able to use
 the different api endpoints. It can be done as follows:
 ```java
     String appKey = "__app_key__";
