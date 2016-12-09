@@ -24,9 +24,8 @@ public class SubmitBulkLookup {
 
         // Create Api client
         //
-        String appId = args[0];
         String appKey = args[1];
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(appId, appKey);
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient(appKey);
 
         // Validate input file's presence
         //

@@ -57,16 +57,14 @@ class IndixApiClientImpl implements IndixApiClient {
 
     // Authorization parameters
     //
-    String appId;
     String appKey;
 
     final static Logger logger = LoggerFactory.getLogger(IndixApiClientImpl.class);
 
     // constructors
     //
-    private IndixApiClientImpl(String appId, String appKey, HttpClient httpClient, ObjectMapper jsonMapper,
+    private IndixApiClientImpl(String appKey, HttpClient httpClient, ObjectMapper jsonMapper,
                                String scheme, String host) {
-        this.appId = appId;
         this.appKey = appKey;
         this.httpClient = httpClient;
         this.jsonMapper = jsonMapper;
@@ -75,27 +73,24 @@ class IndixApiClientImpl implements IndixApiClient {
     }
 
     /**
-     * @param appId  application id
      * @param appKey application key
      */
-    public IndixApiClientImpl(String appId, String appKey) {
-        this(appId, appKey, HttpClientFactory.newHttpClient(), getNewObjectMapper(), SCHEME, HOST);
+    public IndixApiClientImpl(String appKey) {
+        this(appKey, HttpClientFactory.newHttpClient(), getNewObjectMapper(), SCHEME, HOST);
     }
 
     /**
-     * @param appId  application id
      * @param appKey application key
      */
-    public IndixApiClientImpl(String appId, String appKey, String scheme, String host) {
-        this(appId, appKey, HttpClientFactory.newHttpClient(), getNewObjectMapper(), scheme, host);
+    public IndixApiClientImpl(String appKey, String scheme, String host) {
+        this(appKey, HttpClientFactory.newHttpClient(), getNewObjectMapper(), scheme, host);
     }
 
     /**
-     * @param appId  application id
      * @param appKey application key
      */
-    public IndixApiClientImpl(String appId, String appKey, HttpClient httpClient) {
-        this(appId, appKey, httpClient, getNewObjectMapper(), SCHEME, HOST);
+    public IndixApiClientImpl(String appKey, HttpClient httpClient) {
+        this(appKey, httpClient, getNewObjectMapper(), SCHEME, HOST);
     }
 
     // getter methods
@@ -114,7 +109,6 @@ class IndixApiClientImpl implements IndixApiClient {
                 .setHost(host)
                 .setPath(resource)
                 .setParameters(searchQuery.getParameters())
-                .addParameter(APP_ID, appId)
                 .addParameter(APP_KEY, appKey)
                 .build();
     }
@@ -148,7 +142,6 @@ class IndixApiClientImpl implements IndixApiClient {
         // populate app_id and app_key
         //
         List<NameValuePair> params = searchQuery.getParameters();
-        params.add(new BasicNameValuePair(APP_ID, appId));
         params.add(new BasicNameValuePair(APP_KEY, appKey));
 
         return httpClient.POST(uri, params, file);

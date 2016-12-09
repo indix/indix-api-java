@@ -28,7 +28,7 @@ public class IndixApiClientMetadataTest {
     public void getStores()
             throws IndixApiException, IOException, URISyntaxException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123",
                 getMockHttpClient("metadata-json-responses0/storesResponse.json"));
 
         try {
@@ -48,7 +48,7 @@ public class IndixApiClientMetadataTest {
     public void getBrands()
             throws IndixApiException, IOException, URISyntaxException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123",
                 getMockHttpClient("metadata-json-responses0/brandsResponse.json"));
 
         try {
@@ -67,7 +67,7 @@ public class IndixApiClientMetadataTest {
     public void getCategories()
             throws IndixApiException, IOException, URISyntaxException {
 
-        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123", "123",
+        IndixApiClient indixApiClient = IndixApiClientFactory.newIndixApiClient("123",
                 getMockHttpClient("metadata-json-responses0/categoriesResponse.json"));
 
         try {
