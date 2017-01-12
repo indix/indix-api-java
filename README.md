@@ -1,4 +1,4 @@
-# Apiv2-Java-Client [![Build Status](https://snap-ci.com/indix/indix-api-java/branch/master/build_image)](https://snap-ci.com/indix/indix-api-java/branch/master)
+# Apiv2-Java-Client [![Build Status](https://snap-ci.com/indix/indix-api-java/branch/master/build_image)](https://snap-ci.com/indix/indix-api-java/branch/master) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.indix/indix-api-java/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.indix/indix-api-java)
 Indix API Java client
 
 Requirements
