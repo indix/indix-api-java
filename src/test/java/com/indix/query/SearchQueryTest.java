@@ -41,6 +41,9 @@ public class SearchQueryTest {
         expectedValue.add(new BasicNameValuePair("sortBy", "PRICE_HIGH_TO_LOW"));
         expectedValue.add(new BasicNameValuePair("facetBy", "storeId"));
         expectedValue.add(new BasicNameValuePair("facetBy", "brandId"));
+        expectedValue.add(new BasicNameValuePair("attr.color", "black"));
+        expectedValue.add(new BasicNameValuePair("attr.color", "red"));
+        expectedValue.add(new BasicNameValuePair("attr.size", "xs"));
         expectedValue.add(new BasicNameValuePair("pageNumber", "5"));
         expectedValue.add(new BasicNameValuePair("pageSize", "55"));
 
@@ -52,6 +55,8 @@ public class SearchQueryTest {
                 .withSku("sku1")
                 .withSortBy(SearchQuery.SortBy.PRICE_HIGH_TO_LOW)
                 .withFacetBy(Arrays.asList("storeId", "brandId"))
+                .withAttrFilter("attr.color", Arrays.asList("black", "red"))
+                .withAttrFilter("attr.size", Arrays.asList("xs"))
                 .withPageNumber(5)
                 .withPageSize(55)
                 .withCountryCode("US")

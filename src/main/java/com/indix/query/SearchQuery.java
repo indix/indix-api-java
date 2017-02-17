@@ -55,6 +55,16 @@ public class SearchQuery extends QueryBase implements BulkProductsQuery {
     }
 
     /**
+     * Combined with any of query/brand/category/store, limits results to products with specific attribute values
+     */
+    public SearchQuery withAttrFilter(String attrFilterKey, List<String> attrFilterValues) {
+        for (String attrValue: attrFilterValues) {
+            parameters.add(new BasicNameValuePair(attrFilterKey, attrValue));
+        }
+        return this;
+    }
+
+    /**
      * Combined with end_price, limits results to products sold by at least one store at a price between start and end
      */
     public SearchQuery withStartPrice(double startPrice) {
