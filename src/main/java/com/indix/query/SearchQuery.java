@@ -225,6 +225,16 @@ public class SearchQuery extends QueryBase implements BulkProductsQuery {
     }
 
     /**
+     * Facet by product attribute values
+     */
+    public SearchQuery withAttrFacetBy(List<String> attrFacetBy) {
+        for (String attrFacet : attrFacetBy) {
+            parameters.add(new BasicNameValuePair("attrFacetBy", attrFacet));
+        }
+        return this;
+    }
+
+    /**
      * Specifies the page number of the result set to return. 10 results per page.
      */
     public SearchQuery withPageNumber(int pageNumber) {
