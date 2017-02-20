@@ -56,10 +56,18 @@ public class SearchQuery extends QueryBase implements BulkProductsQuery {
 
     /**
      * Combined with any of query/brand/category/store, limits results to products with specific attribute values
+     * NOTE:
+     * Prepends attribute filter key with "attr.", since product attributes are identified that way.
+     * Examples of a few product attribute keys and values are:
+     *      1. color -> red / blue / green / black
+     *      2. size -> xs / s / m / l / xl
+     *      3. gender -> mens / womens
+     * A schema for the filterable keys and values isn't in place yet.
+     * When the standard schema is published, the filterable keys for a category and the list of values for the same will be available.
      */
     public SearchQuery withAttrFilter(String attrFilterKey, List<String> attrFilterValues) {
         for (String attrValue: attrFilterValues) {
-            parameters.add(new BasicNameValuePair(attrFilterKey, attrValue));
+            parameters.add(new BasicNameValuePair("attr."+attrFilterKey, attrValue));
         }
         return this;
     }
