@@ -57,6 +57,7 @@ class IndixApiClientImpl implements IndixApiClient {
 
     // Authorization parameters
     //
+    String appId;
     String appKey;
 
     final static Logger logger = LoggerFactory.getLogger(IndixApiClientImpl.class);
@@ -80,10 +81,12 @@ class IndixApiClientImpl implements IndixApiClient {
     }
 
     /**
+     * @param appId application id
      * @param appKey application key
      */
-    public IndixApiClientImpl(String appKey, String scheme, String host) {
+    public IndixApiClientImpl(String appId, String appKey, String scheme, String host) {
         this(appKey, HttpClientFactory.newHttpClient(), getNewObjectMapper(), scheme, host);
+        this.appId = appId;
     }
 
     /**
@@ -104,11 +107,15 @@ class IndixApiClientImpl implements IndixApiClient {
     // utility functions
     //
     private URI buildURI(String resource, Query searchQuery) throws URISyntaxException {
+        List<NameValuePair> params = searchQuery.getParameters();
+        if(appId != null)
+            params.add(new BasicNameValuePair(APP_ID, appId));
+
         return new URIBuilder()
                 .setScheme(scheme)
                 .setHost(host)
                 .setPath(resource)
-                .setParameters(searchQuery.getParameters())
+                .setParameters(params)
                 .addParameter(APP_KEY, appKey)
                 .build();
     }
@@ -139,7 +146,7 @@ class IndixApiClientImpl implements IndixApiClient {
         URI uri = buildURI(resource, searchQuery);
         logger.debug(uri.toString());
 
-        // populate app_id and app_key
+        // populate app_key
         //
         List<NameValuePair> params = searchQuery.getParameters();
         params.add(new BasicNameValuePair(APP_KEY, appKey));
