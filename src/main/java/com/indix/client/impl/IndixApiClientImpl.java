@@ -107,7 +107,6 @@ class IndixApiClientImpl implements IndixApiClient {
     // utility functions
     //
     private URI buildURI(String resource, Query searchQuery) throws URISyntaxException {
-
         List<NameValuePair> params = searchQuery.getParameters();
         if(appId != null)
             params.add(new BasicNameValuePair(APP_ID, appId));
