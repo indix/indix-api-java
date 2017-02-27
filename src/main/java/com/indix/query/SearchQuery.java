@@ -55,6 +55,23 @@ public class SearchQuery extends QueryBase implements BulkProductsQuery {
     }
 
     /**
+     * Combined with any of query/brand/category/store, limits results to products with specific attribute values
+     * NOTE:
+     * Examples of a few product attribute keys and values are:
+     *      1. color -> red / blue / green / black
+     *      2. size -> xs / s / m / l / xl
+     *      3. gender -> mens / womens
+     * A schema for the filterable keys and values isn't in place yet.
+     * When the standard schema is published, the filterable keys for a category and the list of values for the same will be available.
+     */
+    public SearchQuery withAttrFilter(String attrFilterKey, List<String> attrFilterValues) {
+        for (String attrValue: attrFilterValues) {
+            parameters.add(new BasicNameValuePair("attr."+attrFilterKey, attrValue));
+        }
+        return this;
+    }
+
+    /**
      * Combined with end_price, limits results to products sold by at least one store at a price between start and end
      */
     public SearchQuery withStartPrice(double startPrice) {
@@ -210,6 +227,16 @@ public class SearchQuery extends QueryBase implements BulkProductsQuery {
     public SearchQuery withFacetBy(List<String> facetBy) {
         for (String facet : facetBy) {
             parameters.add(new BasicNameValuePair("facetBy", facet));
+        }
+        return this;
+    }
+
+    /**
+     * Facet by product attribute values
+     */
+    public SearchQuery withAttrFacetBy(List<String> attrFacetBy) {
+        for (String attrFacet : attrFacetBy) {
+            parameters.add(new BasicNameValuePair("attrFacetBy", "attr."+attrFacet));
         }
         return this;
     }
