@@ -57,7 +57,7 @@ public class SearchQueryTest {
                 .withSku("sku1")
                 .withSortBy(SearchQuery.SortBy.PRICE_HIGH_TO_LOW)
                 .withFacetBy(Arrays.asList("storeId", "brandId"))
-                .withAttrFacetBy(Arrays.asList("attr.color", "attr.size"))
+                .withAttrFacetBy(Arrays.asList("color", "size"))
                 .withAttrFilter("color", Arrays.asList("black", "red"))
                 .withAttrFilter("size", Arrays.asList("xs"))
                 .withPageNumber(5)
