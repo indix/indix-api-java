@@ -15,7 +15,7 @@ Add the following dependency to your pom file
 <dependency>
     <groupId>com.indix.api</groupId>
     <artifactId>indix-api-java</artifactId>
-    <version>3.1.0</version>
+    <version>3.2.0</version>
 </dependency>
 ```
 
@@ -108,6 +108,30 @@ It returns summary information for a product.
         indixApiClient.close();
     }
 ```
+### Search Query with attribute facets and filters 
+
+The following example shows how to filter products based on attributes. It retrieves a list of products matching a variety of
+query parameters along with attributes facets with their offers and catalog info across stores
+
+```java
+    try {
+        Query searchQuery = QueryFactory.newSearchQuery()
+                .withQ("nike")
+                .withCountryCode("US")
+                .withAttrFacetBy("color");
+                .withAttrFilter("color", colorList);
+
+        UniversalSearchResult sr = indixApiClient.getProductsUniversal(searchQuery);
+        System.out.println(sr.getCount());
+        System.out.println(sr.getProducts().size());
+        System.out.println(sr.getFacets().size());
+        System.out.println(sr.getAttrFacets().size());
+        System.out.println(sr.getProducts().get(0).getMpid());
+    } finally {
+        indixApiClient.close();
+    }
+```
+
 ### Bulk Products Query
 
 The following example shows how to request for a bulk search query which finds products against a list
