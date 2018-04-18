@@ -10,7 +10,7 @@
 
     <groupId>com.indix.api</groupId>
     <artifactId>indix-api-java</artifactId>
-    <version>3.1.0</version>
+    <version>3.3.0</version>
     <packaging>jar</packaging>
     <name>Indix API-V2 Java Client</name>
     <description>Java client which is used to access API V2 endpoints</description>
