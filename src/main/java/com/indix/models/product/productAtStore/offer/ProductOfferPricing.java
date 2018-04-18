@@ -20,6 +20,7 @@ package com.indix.models.product.productAtStore.offer;
     private String shippingText;
     private int maxRating;
     private int salesRank;
+    private long lastRecordedAt;
 
 
     public double getSalePrice() {
@@ -85,4 +86,7 @@ package com.indix.models.product.productAtStore.offer;
     public int getSalesRank() {
         return salesRank;
     }
+
+    public long getLastRecordedAt() { return lastRecordedAt; }
+
 }
