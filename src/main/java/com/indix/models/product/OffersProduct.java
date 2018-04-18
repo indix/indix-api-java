@@ -7,7 +7,14 @@ import java.util.Map;
 public class OffersProduct extends SummaryProduct {
     private Map<String, OffersProductAtStore> stores;
 
-     public Map<String, OffersProductAtStore> getStores() {
+    public String getTitle() {
+        return title;
+    }
+
+    private String title;
+
+
+    public Map<String, OffersProductAtStore> getStores() {
         return stores;
     }
 }
