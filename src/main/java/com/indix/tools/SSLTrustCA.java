@@ -67,7 +67,6 @@ public final class SSLTrustCA {
             tmf.init(keyStore);
             SSLContext sslContext = SSLContext.getInstance("TLS");
             sslContext.init(null, tmf.getTrustManagers(), null);
-            SSLContext.setDefault(sslContext);
             return sslContext;
         } catch (Exception ex) {
             throw new RuntimeException(ex);
